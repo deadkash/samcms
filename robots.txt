@@ -1,3 +1,2 @@
 User-Agent: *
 Disallow: /admin/
-Sitemap: http://deadkash.ru/sitemap/xml.html
