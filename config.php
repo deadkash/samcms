@@ -34,7 +34,7 @@ class Config {
      * Имя базы данных
      * @var string
      */
-    public static $dbname = 'dbuser_samtrunk';
+    public static $dbname = 'dbuser_sam024';
 
     /**
      * Тема сборки
