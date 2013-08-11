@@ -1,0 +1,37 @@
+<div class="menu-add">
+    <h1>{{ ln.users_users }}</h1>
+    <ul class="nav nav-tabs">
+        <li><a href="{{ users }}">{{ ln.users_users }}</a></li>
+        <li class="active"><a href="#">{{ ln.users_users_group }}</a></li>
+    </ul>
+    <form action="{{ url }}" method="POST">
+        <div class="buttons">
+            <div class="btn-group">
+                <a href="{{ add }}" class="btn"><i class="icon-plus"></i>&nbsp;{{ ln.users_add }}</a>
+                <button name="task" value="delete" type="submit" class="btn"><i class="icon-trash"></i>&nbsp;{{ ln.users_delete }}</button>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="menus">
+            <table class="table table-striped">
+                <tr>
+                    <th class="th30"><input type="checkbox" class="check-all"></th>
+                    <th class="th30">ID</th>
+                    <th>{{ ln.users_name }}</th>
+                    <th class="th100"></th>
+                </tr>
+                {% for group in groups %}
+                    <tr>
+                        <td><input type="checkbox" class="check-item" name="item[]" value="{{ group.id }}"></td>
+                        <td>{{ group.id }}</td>
+                        <td><a href="{{ group.edit }}">{{ group.name }}</a></td>
+                        <td class="btnset">
+                            <a href="{{ group.edit }}" title="{{ ln.users_edit }}" type="button" class="btn"><i class="icon-pencil"></i></a>
+                            <a href="{{ group.policy }}" title="{{ ln.users_policies }}" type="button" class="btn"><i class="icon-folder-open"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </form>
+</div>

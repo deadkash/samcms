@@ -1,0 +1,71 @@
+<div>
+    <h1>{{ ln.menueditor_items }} "{{ menu.title }}"</h1>
+    <form action="{{ url }}" method="POST">
+        <div class="buttons">
+            <div class="btn-group">
+                <a href="{{ back }}" class="btn"><i class="icon-chevron-left"></i>&nbsp;{{ ln.menueditor_back }}</a>
+                {% if types %}
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-plus"></i>&nbsp;{{ ln.menueditor_add }} <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    {% for type in types %}
+                    <li><a href="{{ type.url }}">{{ type.title }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <button name="task" value="delete" type="submit" class="btn"><i class="icon-trash"></i>&nbsp;{{ ln.menueditor_delete }}</button>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="menus">
+            <table class="table table-striped">
+                <tr>
+                    <th class="th30"><input type="checkbox" class="check-all"></th>
+                    <th class="th30">ID</th>
+                    <th>{{ ln.menueditor_name }}</th>
+                    <th>{{ ln.menueditor_component }}</th>
+                    <th>{{ ln.menueditor_alias }}</th>
+                    <th>{{ ln.menueditor_active }}</th>
+                    <th>{{ ln.menueditor_visible }}</th>
+                    <th class="th80"></th>
+                    <th class="th80"></th>
+                </tr>
+                {% for item in items %}
+                <tr>
+                    <td><input type="checkbox" class="check-item" name="item[]" value="{{ item.id }}"></td>
+                    <td>{{ item.id }}</td>
+                    <td><a href="{{ item.edit }}">{{ item.title }}</a></td>
+                    <td>
+                        {% if item.component_title %}
+                        <span class="label label-info">{{ item.component_title }}</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ item.alias }}</td>
+                    <td>
+                        {% if item.active %}
+                        <i class="icon icon-ok"></i>
+                        {% else %}
+                        <i class="icon icon-remove"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if item.visible %}
+                        <i class="icon icon-ok"></i>
+                        {% else %}
+                        <i class="icon icon-remove"></i>
+                        {% endif %}
+                    </td>
+                    <td class="btnset">
+                        <a href="{{ item.edit }}" title="{{ ln.menueditor_edit }}" type="button" class="btn"><i class="icon-pencil"></i></a>
+                    </td>
+                    <td class="btnset">
+                        <div class="btn-group">
+                            <button name="moveup" value="{{ item.id }}" class="btn {% if item.disabledUp %}disabled{% endif %}" {% if item.disabledUp %}disabled="disabled"{% endif %} title="{{ ln.menueditor_up }}"><i class="icon icon-chevron-up"></i></button>
+                            <button name="movedown" value="{{ item.id }}" class="btn {% if item.disabledDown %}disabled{% endif %}" {% if item.disabledDown %}disabled="disabled"{% endif %} title="{{ ln.menueditor_down }}"><i class="icon icon-chevron-down"></i></button>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </form>
+</div>

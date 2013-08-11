@@ -1,0 +1,22 @@
+<div class="b-formbox form-recover">
+    {% if errors %}
+    <div class="alert fade in alert-danger">
+        <button class="close" data-dismiss="alert">×</button>
+        {% for error in errors %}
+        {% if error == 'dont_match' %}Введенный пароли не совпадают.<br>{% endif %}
+        {% if error == 'short_pass' %}Введенный пароль слишком короткий.<br>{% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <p>Введите новый пароль, а потом введите его еще раз, чтобы наверняка запомнить.</p>
+    <form class="well form-inline" method="POST" action="">
+        <input name="pass" type="password" class="input-medium" placeholder="Пароль">
+        <input name="pass2" type="password" class="input-medium" placeholder="Повторить пароль">
+        <input type="hidden" name="code" value="{{ code}}" />
+        <button type="submit" name="step" value="4" class="btn">Отправить</button>
+    </form>
+    <div class="login-links">
+        <a href="{{ reg }}">Регистрация</a>
+        <a href="{{ auth }}">Я вспомнил пароль!</a>
+    </div>
+</div>

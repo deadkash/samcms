@@ -1,0 +1,38 @@
+<div class="menu-add">
+    <h1>{{ ln.gallery_sessions }}</h1>
+    <form action="{{ url }}" method="POST">
+        <div class="buttons">
+            <div class="btn-group">
+                <a href="{{ add }}" class="btn"><i class="icon-plus"></i>&nbsp;{{ ln.gallery_add }}</a>
+                <button name="task" value="delete" type="submit" class="btn"><i class="icon-trash"></i>&nbsp;{{ ln.gallery_delete }}</button>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="menus">
+            {% if sessions %}
+            <table class="table table-striped">
+                <tr>
+                    <th class="th30"><input type="checkbox" class="check-all"></th>
+                    <th class="th30">ID</th>
+                    <th>{{ ln.gallery_name }}</th>
+                    <th class="th150"></th>
+                </tr>
+                {% for session in sessions %}
+                    <tr>
+                        <td><input type="checkbox" class="check-item" name="item[]" value="{{ session.id }}"></td>
+                        <td>{{ session.id }}</td>
+                        <td><a href="{{ session.edit }}">{{ session.title }}</a></td>
+                        <td class="btnset">
+                            <a href="{{ session.edit }}" title="{{ ln.gallery_edit }}" type="button" class="btn"><i class="icon-pencil"></i></a>
+                            <a href="{{ session.sizes }}" title="{{ ln.gallery_session_sizes }}" type="button" class="btn"><i class="icon-resize-full"></i></a>
+                            <a href="{{ session.photos }}" title="{{ ln.gallery_session_photos }}" type="button" class="btn"><i class="icon-list"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <p>{{ ln.gallery_no_sessions }}</p>
+            {% endif %}
+        </div>
+    </form>
+</div>

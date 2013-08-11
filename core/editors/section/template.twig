@@ -1,0 +1,6 @@
+<select name="{{ param.name }}" id="{{ param.name }}">
+    <option value="">-- {{ ln.core_not_selected }}</option>
+    {% for option in param.options %}
+        <option value="{{ option.id }}" {% if option.selected %}selected="selected"{% endif %}>{{ option.title }}</option>
+    {% endfor %}
+</select>

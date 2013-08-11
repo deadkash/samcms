@@ -1,0 +1,119 @@
+<div class="menu-add">
+    <h1>{{ ln.menueditor_editmenuitem }} "{{ menuItem.title }}"</h1>
+    <form action="{{ url }}" class="form-horizontal" method="POST">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1" data-toggle="tab">{{ ln.menueditor_main_params }}</a></li>
+            {% if section_parameters %}
+            <li><a href="#tab2" data-toggle="tab">{{ ln.menueditor_section_params }}</a></li>
+            {% endif %}
+            {% if component_parameters %}
+            <li><a href="#tab3" data-toggle="tab">{{ ln.menueditor_component_params }}</a></li>
+            {% endif %}
+            {% if sectionModules %}
+            <li><a href="#tab4" data-toggle="tab">{{ ln.menueditor_section_modules }}</a></li>
+            {% endif %}
+        </ul>
+        <div class="itemedit-controls">
+            <input type="hidden" name="main_menu_item_id" value="{{ menuItem.id }}"/>
+            <input type="hidden" name="task" value="upditem"/>
+            <button class="btn btn-info" type="submit">{{ ln.menueditor_save }}</button>
+            <button class="btn" type="button" onclick="history.back();">{{ ln.menueditor_cancel }}</button>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab1">
+                <div class="control-group">
+                    <label class="control-label"><strong>ID</strong></label>
+                    <div class="controls">
+                        <span class="input-xlarge uneditable-input">{{ menuItem.id }}</span>
+                    </div>
+                </div>
+                {% if menuItem.component_title %}
+                    <div class="control-group">
+                        <label class="control-label"><strong>{{ ln.menueditor_component }}</strong></label>
+                        <div class="controls">
+                            <span class="input-xlarge uneditable-input">{{ menuItem.component_title }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="control-group{% if messages.items_empty_menu %} error{% endif %}">
+                    <label class="control-label" for="menu_id"><strong>{{ ln.menueditor_menu }}</strong></label>
+                    <div class="controls">
+                        <select name="main_menu_id" id="menu_id">
+                            <option value="0">-- {{ ln.menueditor_empty_choice }}</option>
+                            {% for menu in menuList %}
+                                <option value="{{ menu.id }}"{% if menu.selected %} selected{% endif %}>{{ menu.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="parent_id"><strong>{{ ln.menueditor_parent }}</strong></label>
+                    <div class="controls">
+                        <select name="main_parent_id" id="parent_id">
+                            <option value="0">** {{ ln.menueditor_empty_choice }} **</option>
+                            {% for item in parentList %}
+                                <option value="{{ item.id }}"{% if item.selected %} selected="selected"{% endif %}>{{ item.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group{% if messages.items_empty_title %} error{% endif %}">
+                    <label class="control-label" for="title"><strong>{{ ln.menueditor_title }}</strong></label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="title" name="main_title" value="{{ menuItem.title }}">
+                    </div>
+                </div>
+                <div class="control-group{% if messages.items_alias_exists %} error{% endif %}">
+                    <label class="control-label" for="alias"><strong>{{ ln.menueditor_alias }}</strong></label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="alias" name="main_alias" value="{{ menuItem.alias }}">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="active"><strong>{{ ln.menueditor_active }}</strong></label>
+                    <div class="controls">
+                        <input type="checkbox" class="input-xlarge" id="active" name="main_active" value="1" {% if menuItem.active %}checked="checked"{% endif %}>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="visible"><strong>{{ ln.menueditor_visible }}</strong></label>
+                    <div class="controls">
+                        <input type="checkbox" class="input-xlarge" id="visible" name="main_visible" value="1" {% if menuItem.visible %}checked="checked"{% endif %}>
+                    </div>
+                </div>
+            </div>
+            {% if section_parameters %}
+            <div class="tab-pane" id="tab2">
+                {% for param in section_parameters %}
+                    <div class="control-group">
+                        <label class="control-label" for="{{ param.name }}"><strong>{{ param.title }}</strong></label>
+                        <div class="controls">{{ param.html }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if component_parameters %}
+            <div class="tab-pane" id=tab3>
+                {% for param in component_parameters %}
+                    <div class="control-group">
+                        <label class="control-label" for="{{ param.name }}"><strong>{{ param.title }}</strong></label>
+                        <div class="controls">{{ param.html }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% if sectionModules %}
+            <div class="tab-pane" id="tab4">
+                {% for module in sectionModules %}
+                    <div class="control-group">
+                        <label class="control-label" for="mod{{ module.id }}">{{ module.title }}</label>
+                        <div class="controls">
+                            <input type="checkbox" name="modules[]" id="mod{{ module.id }}" value="{{ module.id }}" {% if module.checked %} checked="checked"{% endif %}/>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </form>
+</div>

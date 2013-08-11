@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>{{ category.title }}</title>
+        <link>{{ url }}</link>
+        <description>{{ category.description }}</description>
+        <atom:link href="{{ feedUrl }}" rel="self" type="application/rss+xml" />
+        {% for material in materials %}
+        <item>
+            <title>{{ material.title }}</title>
+            <link>{{ material.url }}</link>
+            <description>{{ material.preview }}</description>
+            <pubDate>{{ material.date }}</pubDate>
+            <guid>{{ material.url }}</guid>
+        </item>
+        {% endfor %}
+    </channel>
+</rss>

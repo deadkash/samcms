@@ -1,0 +1,50 @@
+<div class="menu-add">
+    <h1>{{ ln.forms_fields }} "{{ form.title }}"</h1>
+    <form action="{{ url }}" method="POST">
+        <div class="buttons">
+            <div class="btn-group">
+                <a href="{{ back }}" class="btn"><i class="icon-chevron-left"></i>&nbsp;{{ ln.forms_back }}</a>
+                <a href="{{ add }}" class="btn"><i class="icon-plus"></i>&nbsp;{{ ln.forms_add }}</a>
+                <button name="task" value="delete" type="submit" class="btn"><i class="icon-trash"></i>&nbsp;{{ ln.forms_delete }}</button>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="menus">
+            <table class="table table-striped">
+                <tr>
+                    <th class="th30"><input type="checkbox" class="check-all"></th>
+                    <th class="th30">ID</th>
+                    <th>{{ ln.forms_name }}</th>
+                    <th>{{ ln.forms_type }}</th>
+                    <th>{{ ln.forms_field_required }}</th>
+                    <th class="th80"></th>
+                    <th class="th80"></th>
+                </tr>
+                {% for field in fields %}
+                    <tr>
+                        <td><input type="checkbox" class="check-item" name="item[]" value="{{ field.id }}"></td>
+                        <td>{{ field.id }}</td>
+                        <td><a href="{{ field.edit }}">{{ field.title }}</a></td>
+                        <td><span class="badge">{{ field.type }}</span></td>
+                        <td>
+                            {% if field.required %}
+                                <i class="icon icon-ok"></i>
+                            {% else %}
+                                <i class="icon icon-remove"></i>
+                            {% endif %}
+                        </td>
+                        <td class="btnset">
+                            <a href="{{ field.edit }}" title="{{ ln.forms_edit }}" type="button" class="btn"><i class="icon-pencil"></i></a>
+                        </td>
+                        <td class="btnset">
+                            <div class="btn-group">
+                                <button name="moveup" value="{{ field.id }}" class="btn {% if field.disabledUp %}disabled{% endif %}" {% if field.disabledUp %}disabled="disabled"{% endif %} title="{{ ln.forms_up }}"><i class="icon icon-chevron-up"></i></button>
+                                <button name="movedown" value="{{ field.id }}" class="btn {% if field.disabledDown %}disabled{% endif %}" {% if field.disabledDown %}disabled="disabled"{% endif %} title="{{ ln.forms_down }}"><i class="icon icon-chevron-down"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </form>
+</div>

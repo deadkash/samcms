@@ -1,0 +1,46 @@
+<div class="b-form-registration">
+    {% if errors %}
+    <div class="alert fade in alert-danger">
+        <button class="close" data-dismiss="alert">×</button>
+        {% for error in errors %}
+        {% if error == 'login_exists' %}Введенный логин уже существует!<br>{% endif %}
+        {% if error == 'login_empty' %}Вы не ввели логин!<br>{% endif %}
+        {% if error == 'dont_match' %}Введенные пароли не совпадают!<br>{% endif %}
+        {% if error == 'short_pass' %}Вы ввели слишком короткий пароль! Минимальная длина 4 символа.<br>{% endif %}
+        {% if error == 'invalid_email' %}Пожалуйста, введите корректный адрес электронной почты.<br>{% endif %}
+        {% if error == 'mail_exists' %}Указанный Вами e-mail уже зарегистрирован.<br>{% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <form class="form-horizontal well" id="registration" method="POST" action="">
+        <fieldset>
+            <legend>Регистрация</legend>
+            <div class="control-group">
+                <label class="control-label" for="login">Логин</label>
+                <div class="controls">
+                    <input name="login" type="text" class="input-xlarge" id="login" value="{{ user.login }}" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="password">Пароль</label>
+                <div class="controls">
+                    <input name="password" type="password" class="input-xlarge" id="password">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="password2">Повторите пароль</label>
+                <div class="controls">
+                    <input name="password2" type="password" class="input-xlarge" id="password2">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="email">E-mail</label>
+                <div class="controls">
+                    <input name="email" type="text" class="input-xlarge" id="email" value="{{ user.email }}" />
+                </div>
+            </div>
+        </fieldset>
+        <button type="submit" name="action" value="registration" class="btn">Регистрация</button>
+    </form>
+    <a href="{{ auth }}">Уже зарегистрированы?</a>
+</div>

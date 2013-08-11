@@ -1,0 +1,59 @@
+<div class="menu-add">
+    <h1>{{ ln.materials }}</h1>
+    <ul class="nav nav-tabs">
+        <li><a href="{{ categories }}">{{ ln.materials_categories }}</a></li>
+        <li class="active"><a href="#">{{ ln.materials }}</a></li>
+    </ul>
+    <form action="{{ url }}" method="GET">
+        {% if categoryList %}
+        <div class="buttons row pull-left">
+            <select class="filter" name="category">
+                <option value="0">-- {{ ln.materials_select_category }}</option>
+                {% for category in categoryList %}
+                <option value="{{ category.id }}"{% if category.current %} selected="selected"{% endif %}>{{ category.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+        <div class="buttons row pull-right">
+            <div class="btn-group">
+                <a href="{{ add }}" class="btn"><i class="icon-plus"></i>&nbsp;{{ ln.materials_add }}</a>
+                <button name="task" value="delete" type="submit" class="btn"><i class="icon-trash"></i>&nbsp;{{ ln.materials_delete }}</button>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="menus">
+            <table class="table table-striped">
+                <tr>
+                    <th class="th30"><input type="checkbox" class="check-all"></th>
+                    <th class="th30">ID</th>
+                    <th>{{ ln.materials_name }}</th>
+                    <th>{{ ln.materials_cat }}</th>
+                    <th>{{ ln.materials_pub_date }}</th>
+                    <th class="th100"></th>
+                </tr>
+                {% for material in materials %}
+                <tr>
+                    <td><input type="checkbox" class="check-item" name="item[]" value="{{ material.id }}"></td>
+                    <td>{{ material.id }}</td>
+                    <td><a href="{{ material.edit }}">{{ material.title }}</a></td>
+                    <td><span class="badge">{{ material.category_title }}</span></td>
+                    <td>{{ material.date }}</td>
+                    <td class="btnset">
+                        <a href="{{ material.edit }}" title="{{ ln.materials_edit }}" type="button" class="btn"><i class="icon-pencil"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% if pages %}
+        <div class="pagination pull-right">
+            <ul>
+                {% for page in pages %}
+                <li{% if page.disabled %} class="disabled"{% endif %}{% if page.selected %} class="active"{% endif %}><a href="{{ page.href }}">{{ page.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </form>
+</div>

@@ -1,0 +1,11 @@
+<div>
+    <h2>{{ title }}</h2>
+    {% for material in materials %}
+        <div class="post">
+            <h3><a href="{{ material.href }}">{{ material.title }}</a></h3>
+            <p class="posted">{{ material.date }}</p>
+            <div class="entry">{{ material.preview }}</div>
+            <div style="clear: both;"></div>
+        </div>
+    {% endfor %}
+</div>

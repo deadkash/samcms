@@ -1,0 +1,25 @@
+<div class="menu-add">
+    <h1>{{ ln.materials_edit_material }}</h1>
+    <form action="{{ url }}" class="form-horizontal" method="POST">
+        <div class="control-group">
+            <label class="control-label">ID</label>
+            <div class="controls">
+                <span class="input-xlarge uneditable-input">{{ material_id }}</span>
+            </div>
+        </div>
+        {% for field in fields %}
+            <div class="control-group{% if field.error %} error{% endif %}">
+                <label class="control-label" for="{{ field.name }}"><strong>{{ field.title }}</strong> {% if field.required %}<span class="red">*</span>{% endif %}</label>
+                <div class="controls">{{ field.html }}</div>
+            </div>
+        {% endfor %}
+        <div class="control-group">
+            <div class="controls">
+                <input type="hidden" name="task" value="update" />
+                <input type="hidden" name="material_id" value="{{ material_id }}"/>
+                <button class="btn" type="submit">{{ ln.materials_save }}</button>
+                <button class="btn" type="button" onclick="history.back();">{{ ln.materials_cancel }}</button>
+            </div>
+        </div>
+    </form>
+</div>

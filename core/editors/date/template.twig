@@ -1,0 +1,6 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#{{ param.name }}').datepicker();
+    })
+</script>
+<input type="text" class="input-xlarge" id="{{ param.name }}" name="{{ param.name }}" value="{{ param.default }}" data-date-format="dd.mm.yyyy">

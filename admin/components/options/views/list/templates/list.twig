@@ -1,0 +1,28 @@
+<div class="menu-add">
+    <h1>{{ ln.options_options }}</h1>
+    <form action="{{ url }}" class="form-horizontal" method="POST">
+        {% if groups %}
+            <ul class="nav nav-tabs">
+                {% for group in groups %}
+                <li{% if group.active %} class="active"{% endif %}><a href="#tab{{ group.id }}" data-toggle="tab">{{ group.title }}</a></li>
+                {% endfor %}
+            </ul>
+            <div class="itemedit-controls">
+                <input type="hidden" name="task" value="save" />
+                <button class="btn btn-info" type="submit">{{ ln.options_save }}</button>
+            </div>
+            <div class="tab-content">
+                {% for group in groups %}
+                    <div class="tab-pane{% if group.active %} active{% endif %}" id="tab{{ group.id }}">
+                        {% for param in group.items %}
+                            <div class="control-group">
+                                <label class="control-label" for="{{ param.name }}">{{ param.title }}</label>
+                                <div class="controls">{{ param.html }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </form>
+</div>

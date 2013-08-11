@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ documentTitle }}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap/css/bootstrap-responsive.css" />
+    <link type="text/css" rel="stylesheet" href="/admin/templates/default/css/main.css" />
+    {% for c in css %}<link rel="stylesheet" href="{{ c }}"/>{% endfor %}
+    <script type="text/javascript" src="/lib/jquery/jquery.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-alert.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-tab.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-modal.js"></script>
+    <script type="text/javascript" src="/admin/templates/default/js/popup-message.js"></script>
+    <script type="text/javascript" src="/admin/templates/default/js/list.js"></script>
+    {% for j in js %}<script type="text/javascript" src="{{ j }}"></script>{% endfor %}
+</head>
+<body>
+<div class="container">
+    <div class="hero-unit">
+        <h1>Доступ запрещен</h1>
+        <p>Вы запросили страницу, доступ к которой вам запрещен!</p>
+    </div>
+</div>
+</body>
+</html>

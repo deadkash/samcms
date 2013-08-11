@@ -1,0 +1,9 @@
+{% if materials %}
+<div>
+    <h3>{{ title }}</h3>
+    {% for material in materials %}
+        <div>
+            <h4><a href="{{ material.href }}">{{ material.title }}</a></h4>{{ material.preview }}</div>
+    {% endfor %}
+</div>
+{% endif %}

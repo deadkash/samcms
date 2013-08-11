@@ -1,0 +1,7 @@
+<div class="nav-collapse">
+    <ul class="nav">
+        {% for item in items %}
+        <li {% if item.current %}class="active"{% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>

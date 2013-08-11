@@ -1,0 +1,4 @@
+{% if param.default %}
+<img src="{{ param.default }}" alt="" style="max-width: 400px; max-height: 400px;display: block;border: 1px solid #ddd; padding: 5px;margin-bottom: 20px;"/>
+{% endif %}
+<input type="file" class="{{ param.class }}" id="{{ param.name }}" name="{{ param.name }}" value="{{ param.default }}">

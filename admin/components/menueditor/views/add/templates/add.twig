@@ -1,0 +1,18 @@
+<div class="menu-add">
+    <h1>{{ ln.menueditor_new_menu }}</h1>
+    <form action="{{ url }}" class="form-horizontal" method="POST">
+        <div class="control-group{% if menu_empty_title %} error{% endif %}">
+            <label class="control-label" for="title">{{ ln.menueditor_title }}</label>
+            <div class="controls">
+                <input type="text" class="input-xlarge" id="title" name="title" value="">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input type="hidden" name="task" value="save" />
+                <button class="btn" type="submit">{{ ln.menueditor_save }}</button>
+                <button class="btn" type="button" onclick="history.back();">{{ ln.menueditor_cancel }}</button>
+            </div>
+        </div>
+    </form>
+</div>

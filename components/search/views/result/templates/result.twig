@@ -1,0 +1,22 @@
+{% if results %}
+<div>
+    <p>{{ ln.search_founded }}: {{ count }}</p>
+    {% for result in results %}
+    <div>
+        <h4><a href="{{ result.href }}">{{ result.title }}</a></h4>
+        {{ result.index }}
+    </div>
+    {% endfor %}
+    {% if pageline %}
+        <div class="pagination">
+            <ul>
+                {% for page in pageline %}
+                    <li{% if page.disabled %} class="disabled"{% endif %}{% if page.selected %} class="active"{% endif %}><a href="{{ page.href }}">{{ page.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+{% else %}
+<div>{{ ln.search_no_results }}</div>
+{% endif %}

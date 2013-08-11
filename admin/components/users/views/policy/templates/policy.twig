@@ -1,0 +1,27 @@
+<div class="menu-add">
+    <h1>Политики доступа "{{ group.name }}"</h1>
+    {% if menus %}
+    <form action="{{ url }}" method="POST">
+        {% for menu in menus %}
+        <div class="menus">
+            <table class="table table-bordered policy">
+                <tr>
+                    <th colspan="3"><strong>{{ menu.title }}</strong></th>
+                </tr>
+                {% for item in menu.items %}
+                    <tr>
+                        <td class="title">{{ item.title }}</td>
+                        <td><label><input type="checkbox" name="allow[]" value="{{ item.id }}" {% if item.allow_id %}checked="checked"{% endif %}/> {{ ln.users_allow }}</label></td>
+                        <td><label><input type="checkbox" name="deny[]" value="{{ item.id }}" {% if item.deny_id %}checked="checked"{% endif %}/> {{ ln.users_deny }}</label></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endfor %}
+        <input type="hidden" name="task" value="policy"/>
+        <input type="hidden" name="policy_id" value="{{ policy_id }}"/>
+        <button class="btn" type="submit">{{ ln.core_save }}</button>
+        <button class="btn" type="button" onclick="history.back();">{{ ln.core_cancel }}</button>
+    </form>
+    {% endif %}
+</div>

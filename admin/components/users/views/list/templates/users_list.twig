@@ -1,0 +1,48 @@
+<div class="menu-add">
+    <h1>{{ ln.users_users }}</h1>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#">{{ ln.users_users }}</a></li>
+        <li><a href="{{ groups }}">{{ ln.users_users_group }}</a></li>
+    </ul>
+    <form action="{{ url }}" method="POST">
+        <div class="buttons">
+            <div class="btn-group">
+                <a href="{{ add }}" class="btn"><i class="icon-plus"></i>&nbsp;{{ ln.users_add }}</a>
+                <button name="task" value="delete" type="submit" class="btn"><i class="icon-trash"></i>&nbsp;{{ ln.users_delete }}</button>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="menus">
+            <table class="table table-striped">
+                <tr>
+                    <th class="th30"><input type="checkbox" class="check-all"></th>
+                    <th class="th30">ID</th>
+                    <th>{{ ln.users_login }}</th>
+                    <th>{{ ln.users_activity }}</th>
+                    <th>{{ ln.users_group }}</th>
+                    <th>{{ ln.users_email }}</th>
+                    <th>{{ ln.users_date }}</th>
+                    <th class="th100"></th>
+                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td><input type="checkbox" class="check-item" name="item[]" value="{{ user.id }}"></td>
+                        <td>{{ user.id }}</td>
+                        <td><a href="{{ user.edit }}">{{ user.login }}</a></td>
+                        <td>{% if user.active %}
+                                <i class="icon icon-ok"></i>
+                            {% else %}
+                                <i class="icon icon-remove"></i>
+                            {% endif %}</td>
+                        <td>{{ user.policy_title }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.date }}</td>
+                        <td class="btnset">
+                            <a href="{{ user.edit }}" title="{{ ln.users_edit }}" type="button" class="btn"><i class="icon-pencil"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </form>
+</div>

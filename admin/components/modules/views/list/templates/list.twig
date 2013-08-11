@@ -1,0 +1,59 @@
+<div>
+    <h1>{{ ln.modules_modules }}</h1>
+    <form action="{{ url }}" method="POST">
+        <div class="buttons">
+            <div class="btn-group">
+                {% if types %}
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-plus"></i>&nbsp;{{ ln.modules_add }} <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    {% for type in types %}
+                    <li><a href="{{ type.url }}">{{ type.title }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <button name="task" value="delete" type="submit" class="btn"><i class="icon-trash"></i>&nbsp;{{ ln.modules_delete }}</button>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="menus">
+            <table class="table table-striped">
+                <tr>
+                    <th class="th30"><input type="checkbox" class="check-all"></th>
+                    <th class="th30">ID</th>
+                    <th>{{ ln.modules_name }}</th>
+                    <th>{{ ln.modules_module }}</th>
+                    <th>{{ ln.modules_label }}</th>
+                    <th>{{ ln.modules_active }}</th>
+                    <th class="th100"></th>
+                </tr>
+                {% for module in modules %}
+                <tr>
+                    <td><input type="checkbox" class="check-item" name="item[]" value="{{ module.id }}"></td>
+                    <td>{{ module.id }}</td>
+                    <td><a href="{{ module.edit }}">{{ module.title }}</a></td>
+                    <td>{{ module.module }}</td>
+                    <td><span class="badge">{{ module.label }}</span></td>
+                    <td>
+                        {% if module.active %}
+                        <i class="icon icon-ok"></i>
+                        {% else %}
+                        <i class="icon icon-remove"></i>
+                        {% endif %}
+                    <td class="btnset">
+                        <a href="{{ module.edit }}" title="{{ ln.modulse_edit }}" type="button" class="btn"><i class="icon-pencil"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% if pages %}
+            <div class="pagination pull-right">
+                <ul>
+                    {% for page in pages %}
+                        <li{% if page.disabled %} class="disabled"{% endif %}{% if page.selected %} class="active"{% endif %}><a href="{{ page.href }}">{{ page.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </form>
+</div>

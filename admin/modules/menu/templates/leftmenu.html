@@ -1,0 +1,6 @@
+<ul class="nav nav-list">
+    <li class="nav-header">{{ ln.core_components }}</li>
+    {% for item in items %}
+    <li {% if item.current %}class="active"{% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
+    {% endfor %}
+</ul>

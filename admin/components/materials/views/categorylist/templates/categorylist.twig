@@ -1,0 +1,36 @@
+<div class="menu-add">
+    <h1>{{ ln.materials }}</h1>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#">{{ ln.materials_categories }}</a></li>
+        <li><a href="{{ materials }}">{{ ln.materials }}</a></li>
+    </ul>
+    <form action="{{ url }}" method="POST">
+        <div class="buttons">
+            <div class="btn-group">
+                <a href="{{ add }}" class="btn"><i class="icon-plus"></i>&nbsp;{{ ln.materials_add }}</a>
+                <button name="task" value="delete" type="submit" class="btn"><i class="icon-trash"></i>&nbsp;{{ ln.materials_delete }}</button>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="menus">
+            <table class="table table-striped">
+                <tr>
+                    <th class="th30"><input type="checkbox" class="check-all"></th>
+                    <th class="th30">ID</th>
+                    <th>{{ ln.materials_name }}</th>
+                    <th class="th100"></th>
+                </tr>
+                {% for category in categories %}
+                    <tr>
+                        <td><input type="checkbox" class="check-item" name="item[]" value="{{ category.id }}"></td>
+                        <td>{{ category.id }}</td>
+                        <td><a href="{{ category.edit }}">{{ category.title }}</a></td>
+                        <td class="btnset">
+                            <a href="{{ category.edit }}" title="Редактировать" type="button" class="btn"><i class="icon-pencil"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </form>
+</div>

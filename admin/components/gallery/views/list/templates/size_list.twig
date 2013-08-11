@@ -1,0 +1,37 @@
+<div class="menu-add">
+    <h1>{{ ln.gallery_sizes }}</h1>
+    <form action="{{ url }}" method="POST">
+        <div class="buttons">
+            <div class="btn-group">
+                <a href="{{ back }}" class="btn"><i class="icon-chevron-left"></i>&nbsp;{{ ln.gallery_back }}</a>
+                <a href="{{ add }}" class="btn"><i class="icon-plus"></i>&nbsp;{{ ln.gallery_add }}</a>
+                <button name="task" value="delete" type="submit" class="btn"><i class="icon-trash"></i>&nbsp;{{ ln.gallery_delete }}</button>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+        <div class="menus">
+            <table class="table table-striped">
+                <tr>
+                    <th class="th30"><input type="checkbox" class="check-all"></th>
+                    <th class="th30">ID</th>
+                    <th>{{ ln.gallery_name }}</th>
+                    <th>{{ ln.gallery_width }}</th>
+                    <th>{{ ln.gallery_height }}</th>
+                    <th class="th100"></th>
+                </tr>
+                {% for size in sizes %}
+                    <tr>
+                        <td><input type="checkbox" class="check-item" name="item[]" value="{{ size.id }}"></td>
+                        <td>{{ size.id }}</td>
+                        <td><a href="{{ size.edit }}">{{ size.title }}</a></td>
+                        <td>{{ size.width }}</td>
+                        <td>{{ size.height }}</td>
+                        <td class="btnset">
+                            <a href="{{ size.edit }}" title="{{ ln.gallery_edit }}" type="button" class="btn"><i class="icon-pencil"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,152 @@
+strong, label, a, select, textarea, input {
+    font-size: 13px;
+}
+.btn {
+    font-size: 13px !important;
+}
+.main {
+    padding-top: 60px;
+}
+
+.clear {
+    clear: both;
+}
+
+.b-formbox {
+    width: 450px;
+    height: 90px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -45px;
+    margin-left: -225px;
+}
+
+.b-formbox.form-recover {
+
+    width: 460px;
+    margin-left: -230px;
+    margin-top: -70px;
+}
+
+.b-form-registration {
+    width: 500px;
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -200px;
+    margin-left: -250px;
+}
+
+.login-links {
+    text-align: right;
+    margin-top: -10px;
+}
+
+.profile-tabs {
+    margin-top: 20px;
+}
+
+.login-data {
+    margin-top: 20px;
+}
+
+.login-data .left {
+    float: left;
+    width: 150px;
+    text-align: right;
+    margin-right: 20px;
+    font-size: 12pt;
+}
+
+.login-data .right {
+    float: right;
+    text-align: left;
+    width: 200px;
+}
+
+.login-data .item {
+    width: 370px;
+    height: 25px;
+}
+
+.avatar {
+    margin-top: 30px;
+    width: 134px;
+    text-align: center;
+}
+
+.avatar img {
+    padding: 5px;
+    border: 1px solid #ddd;
+}
+
+.change-item h2 {
+    margin-bottom: 20px;
+    font-size: 14pt;
+}
+
+.b-news h1 {
+    margin-bottom: 30px;
+}
+.b-news h3 {
+    font-size: 12pt;
+}
+
+.b-news .b-news-date {
+    color: #9c9c9c;
+    font-size: 9pt;
+    margin-bottom: 20px;
+}
+
+.b-news .b-news-item {
+    margin-bottom: 20px;
+    clear: both;
+}
+
+.b-news .b-news-item .admin {
+    margin-top: 20px;
+}
+
+div.menus th.th30 {
+    width: 30px;
+}
+div.menus th.th80 {
+    width: 80px;
+}
+div.menus th.th100 {
+    width: 100px;
+}
+div.menus th.th150 {
+    width: 150px;
+}
+div.menus td.btnset {
+    text-align: center;
+}
+.buttons {
+    margin: 10px auto;
+    text-align: right;
+}
+.buttons .btn-group {
+    float: right;
+}
+.menu-add h1 {
+    margin-bottom: 20px;
+}
+.margin20 {
+    margin: 20px auto;
+}
+.itemedit-controls {
+    text-align: right;
+    margin-bottom: 20px;
+}
+table.policy {
+    width: 50%;
+}
+table.policy td.title {
+    width: 200px;
+}
+.red {
+    color: red;
+}

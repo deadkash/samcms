@@ -1,0 +1,47 @@
+<div class="menu-add">
+    <h1>{{ ln.gallery_resize }}</h1>
+    <form action="{{ url }}" class="form-horizontal" method="POST" >
+        <script type="text/javascript">
+            $(document).ready(function(){
+            {% for size in sizes %}
+
+                $('#target_{{ size.id }}').Jcrop({
+                    bgFade:     true,
+                    bgOpacity: .2,
+                    allowResize: true,
+                    setSelect: [ 0, 0, {{ size.width }}, {{ size.height }} ],
+                    onSelect: updateCoords_{{ size.id }},
+                    minSize: [ {{ size.width }}, {{ size.height }} ],
+                    maxSize: [ {{ size.width }}, {{ size.height }} ]
+                });
+
+                function updateCoords_{{ size.id }}(c) {
+                    $('#size_{{ size.id }}_x').val(c.x);
+                    $('#size_{{ size.id }}_y').val(c.y);
+                    $('#size_{{ size.id }}_w').val(c.w);
+                    $('#size_{{ size.id }}_h').val(c.h);
+                    $('#size_{{ size.id }}_ow').val($('#target_{{ size.id }}').width());
+                    $('#size_{{ size.id }}_oh').val($('#target_{{ size.id }}').height());
+                }
+            {% endfor %}
+            });
+        </script>
+        {% for size in sizes %}
+        <div style="margin-bottom: 50px;">
+            <h3>{{ size.title }} {{ size.width }} x {{ size.height }}</h3>
+            <img src="{{ image.image }}" alt="" id="target_{{ size.id }}" style="width: 970px;" />
+            <input type="hidden" id="size_{{ size.id }}_x" name="size_{{ size.id }}_x" value="" />
+            <input type="hidden" id="size_{{ size.id }}_y" name="size_{{ size.id }}_y" value="" />
+            <input type="hidden" id="size_{{ size.id }}_w" name="size_{{ size.id }}_w" value="" />
+            <input type="hidden" id="size_{{ size.id }}_h" name="size_{{ size.id }}_h" value="" />
+            <input type="hidden" id="size_{{ size.id }}_ow" name="size_{{ size.id }}_ow" value="" />
+            <input type="hidden" id="size_{{ size.id }}_oh" name="size_{{ size.id }}_oh" value="" />
+        </div>
+        {% endfor %}
+        <input type="hidden" name="task" value="resize" />
+        <input type="hidden" name="session_id" value="{{ session_id }}" />
+        <input type="hidden" name="image_id" value="{{ image.id }}"/>
+        <button class="btn" type="submit">{{ ln.gallery_save }}</button>
+        <button class="btn" type="button" onclick="history.back();">{{ ln.gallery_cancel }}</button>
+    </form>
+</div>
