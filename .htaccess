@@ -1,4 +1,5 @@
 # SamCMS 2013
+# Copyright (c) 2013, Kash <deadkash@gmail.com>
 RewriteEngine On
 Options +FollowSymlinks
 Options -Indexes

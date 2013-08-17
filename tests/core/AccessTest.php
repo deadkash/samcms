@@ -10,14 +10,44 @@ require_once __DIR__ . "/../../loader.php";
  */
 class AccessTest extends PHPUnit_Framework_TestCase {
 
+    /** @var int ID текущего пользователя */
+    protected $userId;
+
+    /** @var stdClass объект текущего пользователя */
+    protected $user;
+
     /** @var  Access */
     protected $object;
 
+    /**
+     * Перед запуском теста
+     * @return void
+     */
     protected function setUp() {
+
         $this->object = new Access;
+
+        //Создаем пользователя
+        $user = new stdClass();
+        $user->login = 'TestUser';
+        $user->password = 'TestUserPassword';
+        $user->email = 'testuseremail@testuseremailhost.com';
+        $this->user = clone $user;
+
+        $this->userId = $this->object->createUser($user);
+        $this->object->activateUser($this->userId);
     }
 
-    protected function tearDown() {}
+    /**
+     * После запуска теста
+     * @return void
+     */
+    protected function tearDown() {
+
+        //Удаляем пользователя
+        $db = DB::create();
+        $db->delete('users', 'id', $this->userId);
+    }
 
     /**
      * @covers Access::construct
@@ -30,7 +60,17 @@ class AccessTest extends PHPUnit_Framework_TestCase {
      * @covers Access::setDefaultPolicy
      */
     public function testSetDefaultPolicy(){
-        $this->markTestIncomplete();
+
+        $policyId = 5;
+        $this->object->setDefaultPolicy($policyId);
+        $this->assertEquals($policyId, $this->object->getDefaultPolicy());
+    }
+
+    /**
+     * @covers Access::getDefaultPolicy
+     */
+    public function testGetDefaultPolicy() {
+        $this->assertEquals(4, $this->object->getDefaultPolicy());
     }
 
     /**
@@ -38,7 +78,42 @@ class AccessTest extends PHPUnit_Framework_TestCase {
      */
     public function testGetAccess(){
 
-        $this->markTestIncomplete();
+        $sectionId = 799;
+
+        //Незарегистрированному пользователю можно зайти в раздел
+        $this->assertEquals(true, $this->object->getAccess($sectionId));
+
+        //Зарегистрированному пользователю можно зайти в раздел
+        $this->object->setUserLogIn($this->userId);
+        $this->assertEquals(true, $this->object->getAccess($sectionId));
+        $this->object->setUserLogOut();
+
+        //Запрещаем вход незарегистрированным пользователям
+        $policyId = 4;
+        $query = "INSERT INTO `users_policy_deny` (`policy_id`,`section_id`)
+                  VALUES (".$policyId.",".$sectionId.");";
+        $db = DB::create();
+        $db->query($query);
+        $denyId = $db->getInsertId();
+
+        $this->assertEquals(false, $this->object->getAccess($sectionId));
+
+        //Разрешаем вход
+        $db->delete('users_policy_deny', 'id', $denyId);
+
+        //Запрещаем вход зарегистрированным пользователям
+        $policyId = 3;
+        $query = "INSERT INTO `users_policy_deny` (`policy_id`,`section_id`)
+                  VALUES (".$policyId.",".$sectionId.");";
+        $db = DB::create();
+        $db->query($query);
+        $denyId = $db->getInsertId();
+
+        $this->object->setUserLogIn($this->userId);
+        $this->assertEquals(false, $this->object->getAccess($sectionId));
+
+        //Разрешаем вход
+        $db->delete('users_policy_deny', 'id', $denyId);
     }
 
     /**
@@ -46,79 +121,100 @@ class AccessTest extends PHPUnit_Framework_TestCase {
      */
     public function testCheckAccess() {
 
-        //Создаем раздел, к которому хотим проверить доступ
+        $policyId = 16;
+        $sectionId = 799;
+        $query = "INSERT INTO `users_policy_deny` (`policy_id`,`section_id`)
+                  VALUES (".$policyId.",".$sectionId.");";
+        $db = DB::create();
+        $db->query($query);
+        $denyId = $db->getInsertId();
 
-        //Создаем тестовую группу пользователей
+        $this->assertEquals(false, $this->object->checkAccess($sectionId, $policyId));
+        $this->assertEquals(true, $this->object->checkAccess(800, 13));
 
-        //Разрешаем доступ к разделу
-
-        //Проверяем доступ
-
-        //Запрещаем доступ к разделу
-
-        //Проверяем доступ
-
-        //Удаляем раздел
-
-        //Удаляем тестовую группу
-
-        $this->markTestIncomplete();
+        $db->delete('users_policy_deny', 'id', $denyId);
     }
 
     /**
      * @covers Access::getUser
      */
     public function testGetUser() {
-        $this->markTestIncomplete();
+
+        $objectUser = $this->object->getUser($this->userId);
+        $this->assertEquals($this->user->login, $objectUser->login);
     }
 
     /**
      * @covers Access::getCurrentUser
      */
     public function testGetCurrentUser() {
-        $this->markTestIncomplete();
+
+        $this->object->setUserLogIn($this->userId);
+        $objectUser = $this->object->getCurrentUser();
+        $this->assertEquals($this->user->login, $objectUser->login);
     }
 
     /**
      * @covers Access::checkLogin
      */
     public function testCheckLogin() {
-        $this->markTestIncomplete();
+
+        $this->assertEquals($this->userId, $this->object->checkLogin($this->user->login, $this->user->password));
+        $this->assertEquals(false, $this->object->checkLogin('blabla', 'passblaword'));
+        Debug::dump($this->user, $this->object);
     }
 
     /**
      * @covers Access::preparePassword
      */
     public function testPreparePassword() {
-        $this->markTestIncomplete();
+
+        $lgn = 'MyLogin';
+        $pwd = 'MyPassword';
+        $hash = md5($lgn.'_|_'.$pwd);
+
+        $this->assertEquals($hash, $this->object->preparePassword($pwd, $lgn));
     }
 
     /**
      * @covers Access::setUserLogIn
      */
     public function testSetUserLogIn() {
-        $this->markTestIncomplete();
+
+        $this->object->setUserLogIn($this->userId);
+        $objectUser = $this->object->getCurrentUser();
+        $this->assertEquals($this->userId, $objectUser->id);
     }
 
     /**
      * @covers Access::setUserLogOut
      */
     public function testSetUserLogOut() {
-        $this->markTestIncomplete();
+
+        $this->object->setUserLogIn($this->userId);
+        $objectUser = $this->object->getCurrentUser();
+        $this->assertEquals($this->userId, $objectUser->id);
+        $this->object->setUserLogOut();
+        $objectUser = $this->object->getCurrentUser();
+        $this->assertEquals(false, $objectUser);
     }
 
     /**
      * @covers Access::loginExists
      */
     public function testLoginExists(){
-        $this->markTestIncomplete('Закончи меня');
+
+        $this->assertEquals($this->userId, $this->object->loginExists($this->user->login));
+        $this->assertEquals(false, $this->object->loginExists('ThisLoginProbablyNotExists'));
     }
 
     /**
      * @covers Access::createUser
      */
     public function testCreateUser(){
-        $this->markTestIncomplete();
+
+        $objectUser = $this->object->getUser($this->userId);
+        $this->assertEquals($this->userId, $objectUser->id);
     }
 
     /**
@@ -134,27 +230,50 @@ class AccessTest extends PHPUnit_Framework_TestCase {
      * @covers Access::checkPassMinLength
      */
     public function testCheckPassMinLength(){
-        $this->markTestIncomplete();
+
+        $pass1 = 'VeryLongPassword';
+        $pass2 = 'vlp';
+
+        $this->assertEquals(true, $this->object->checkPassMinLength($pass1));
+        $this->assertEquals(false, $this->object->checkPassMinLength($pass2));
     }
 
     /**
      * @coveres Access::activateUser
      */
     public function testActivateUser(){
-        $this->markTestIncomplete();
+
+        $db = DB::create();
+        $query = "UPDATE `users`
+                     SET `active`=0
+                   WHERE `id`=".$this->userId.";";
+        $db->query($query);
+
+        $this->assertEquals(false, $this->object->checkLogin($this->user->login, $this->user->password));
+        $this->object->activateUser($this->userId);
+        $this->assertEquals($this->userId, $this->object->checkLogin($this->user->login, $this->user->password));
     }
 
     /**
      * @covers Access::existEmail
      */
     public function testExistEmail(){
-        $this->markTestIncomplete();
+
+        $this->assertEquals($this->userId, $this->object->existEmail($this->user->email));
+        $this->assertEquals(false, $this->object->existEmail('thisemailprobablynotexists@tlen.com'));
     }
 
     /**
      * @coveres Access::changePassword
      */
     public function testChangePassword(){
-        $this->markTestIncomplete();
+
+        $this->assertEquals($this->userId, $this->object->checkLogin($this->user->login, $this->user->password));
+
+        $newPassword = 'NewTestUserPassword';
+        $this->object->changePassword($this->userId, $newPassword);
+
+        $this->assertEquals(false, $this->object->checkLogin($this->user->login, $this->user->password));
+        $this->assertEquals($this->userId, $this->object->checkLogin($this->user->login, $newPassword));
     }
 }

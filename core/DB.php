@@ -92,7 +92,7 @@ class DB {
         $this->mysql->query($query);
 
         //Режим отладки
-        $this->debug = true;
+        $this->debug = false;
 
         //Запрос и его части
         $this->query = '';

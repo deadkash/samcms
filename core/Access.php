@@ -46,6 +46,14 @@ class Access extends Core {
     }
 
     /**
+     * Возвращает установленную политики по умолчанию
+     * @return int
+     */
+    public function getDefaultPolicy() {
+        return $this->defaultPolicy;
+    }
+
+    /**
      * Проверка доступа к разделу
      *
      * @param $itemId
