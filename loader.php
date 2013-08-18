@@ -36,7 +36,8 @@ class Autoloader {
         'Captcha',
         'Image',
         'header',
-        'Cache'
+        'Cache',
+        'Installation'
     );
 
     /**
@@ -54,7 +55,8 @@ class Autoloader {
         'View',
         'Document',
         'Plugin',
-        'Field'
+        'Field',
+        'Install'
     );
 
     /**

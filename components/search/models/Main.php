@@ -14,15 +14,10 @@ class SearchModelMain extends Model {
     /** @var int Длина индекса для вывода */
     private $indexLength = 300;
 
-    /** @var string Путь к плагинам */
-    private $pluginFolder;
-
     /**
      * Конструктор
      */
     public function __construct() {
-
-        $this->pluginFolder = PLUGINS_PATH.'search/';
         parent::__construct();
     }
 
