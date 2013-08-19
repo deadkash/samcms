@@ -11,6 +11,7 @@
 
 $language = array();
 
+$language['gallery']                                 = 'Фотогалерея';
 $language['gallery_sessions']                        = 'Фотосессии';
 $language['gallery_session']                         = 'Фотосессия';
 $language['gallery_add']                             = 'Добавить';

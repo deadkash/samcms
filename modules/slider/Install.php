@@ -1,34 +1,34 @@
 <?php
+
 /**
  * Установщик
  *
  * @project SamCMS
- * @package Forms
+ * @package Slider
  * @author Kash
- * @date 17.08.13
+ * @date 19.08.13
  * @copyright Copyright (c) 2013, Kash <deadkash@gmail.com>
  */
+class SliderInstall extends Install {
 
-class FormsInstall extends Install {
+    /** @var string Тип */
+    protected $type = 'module';
 
-    /** @var string Тип компонент */
-    protected $type = 'component';
+    /** @var string Имя */
+    protected $name = 'Slider';
 
-    /** @var string Название компонента */
-    protected $name = 'Forms';
-
-    /** @var array Параметры раздела */
+    /** @var array Параметры */
     protected $params = array(
         0 => array(
-            'name' => 'form_id',
-            'title' => 'forms_form',
-            'type' => 'form',
+            'name' => 'session_id',
+            'title' => 'gallery_session',
+            'type' => 'gallery',
             'default' => ''
         )
     );
 
     /** @var string Заголовок */
-    protected $title = 'forms_forms';
+    protected $title = 'slider';
 
     /**
      * Конструктор

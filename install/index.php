@@ -14,4 +14,22 @@ ini_set("error_reporting", E_ALL);
 
 require_once(__DIR__.'/../loader.php');
 
-$install = new Installation();
+$installation = new Installation();
+
+$components = $installation->getComponents();
+foreach ($components as $component) {
+
+    $componentPath = $component['path'];
+    $componentName = $component['name'];
+
+    $install = $installation->install($componentName, $componentPath);
+}
+
+$modules = $installation->getModules();
+foreach ($modules as $module) {
+
+    $modulePath = $module['path'];
+    $moduleName = $module['name'];
+
+    $install = $installation->install($moduleName, $modulePath);
+}

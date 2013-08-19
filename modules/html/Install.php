@@ -1,34 +1,34 @@
 <?php
+
 /**
  * Установщик
  *
  * @project SamCMS
- * @package Forms
+ * @package Html
  * @author Kash
- * @date 17.08.13
+ * @date 19.08.13
  * @copyright Copyright (c) 2013, Kash <deadkash@gmail.com>
  */
+class HtmlInstall extends Install {
 
-class FormsInstall extends Install {
+    /** @var string Тип */
+    protected $type = 'module';
 
-    /** @var string Тип компонент */
-    protected $type = 'component';
+    /** @var string Имя */
+    protected $name = 'Html';
 
-    /** @var string Название компонента */
-    protected $name = 'Forms';
-
-    /** @var array Параметры раздела */
+    /** @var array Параметры */
     protected $params = array(
         0 => array(
-            'name' => 'form_id',
-            'title' => 'forms_form',
-            'type' => 'form',
+            'name' => 'text',
+            'title' => 'html_code',
+            'type' => 'editor',
             'default' => ''
         )
     );
 
     /** @var string Заголовок */
-    protected $title = 'forms_forms';
+    protected $title = 'html';
 
     /**
      * Конструктор

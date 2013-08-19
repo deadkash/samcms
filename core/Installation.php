@@ -7,6 +7,7 @@
  * @author Kash
  * @since 0.2.4
  * @date 17.08.13
+ * @copyright Copyright (c) 2013, Kash <deadkash@gmail.com>
  */
 
 class Installation extends Core {
@@ -134,10 +135,11 @@ class Installation extends Core {
      */
     public function install($elementName, $elementPath) {
 
-        $intallClass = $this->getElementInstallClass($elementName, $elementPath);
-        if (!$intallClass) return false;
+        $installClass = $this->getElementInstallClass($elementName, $elementPath);
+        if (!$installClass) return false;
 
-        return $intallClass->install();
+        $this->register($installClass);
+        return $installClass->execute();
     }
 
     /**
@@ -158,4 +160,19 @@ class Installation extends Core {
         return new $installClass();
     }
 
+    /**
+     * Регистрирует указанное расширение
+     * @param Install $install
+     * @return bool
+     */
+    public function register(Install $install){
+
+        $extension = new stdClass();
+        $extension->name = $install->getName();
+        $extension->title = $install->getTitle();
+        $extension->type = $install->getType();
+        $extension->params = json_encode($install->getParams());
+
+        return $this->db->insert('extensions', $extension);
+    }
 }
