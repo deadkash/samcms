@@ -15,11 +15,27 @@ class Installation extends Core {
     /** @var string Разделитель sql запросов */
     private $sqlDelimiter = ';';
 
+    /** @var array Параметры для файла конфигурации */
+    private $configParams = array();
+
     /**
      * Конструктор
      */
     public function __construct(){
         parent::__construct();
+    }
+
+    /**
+     * Добавляет параметр в конфиг
+     * @param string $paramName
+     * @param mixed $paramValue
+     * @return void
+     */
+    public function setConfigParam($paramName, $paramValue) {
+        $this->configParams[] = array(
+            'name' => $paramName,
+            'value' => $paramValue
+        );
     }
 
     /**
@@ -174,5 +190,20 @@ class Installation extends Core {
         $extension->params = json_encode($install->getParams());
 
         return $this->db->insert('extensions', $extension);
+    }
+
+    /**
+     * Генерирует файл конфигурации по параметрам
+     * @return int
+     */
+    public function generateConfig() {
+
+        $data['params'] = $this->configParams;
+        $tplPath = ABS_PATH.'install/templates/';
+        $tplName = 'config.twig';
+        $configPath = ABS_PATH.'config.php';
+
+        $configContent = Templater::render($tplPath, $tplName, $data);
+        return @file_put_contents($configPath, $configContent);
     }
 }

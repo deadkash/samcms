@@ -1,8 +1,10 @@
 # SamCMS 2013
 # Copyright (c) 2013, Kash <deadkash@gmail.com>
-RewriteEngine On
+ErrorDocument 404 /404.php
 Options +FollowSymlinks
 Options -Indexes
-RewriteCond %{REQUEST_FILENAME} !-d
+RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_URI} ![.][^\/]*$
 RewriteRule ^(.*) index.php?%{QUERY_STRING}
