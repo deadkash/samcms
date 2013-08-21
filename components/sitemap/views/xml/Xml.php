@@ -29,7 +29,7 @@ class SitemapViewXml extends View {
         $this->setModel('Sitemap');
 
         $document = Document::get();
-        $document->setTplPath(ROOT_PATH.'components/sitemap/views/xml/templates/');
+        $document->setTplPath(APP_PATH.'components/sitemap/views/xml/templates/');
         $document->setTemplate('xml.twig');
         $document->setContentType('application/xml');
 

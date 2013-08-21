@@ -31,7 +31,7 @@ class Debug {
     public static function dump() {
 
         $args = func_get_args();
-        $fileResource = fopen(ROOT_PATH.'dump.log', 'a');
+        $fileResource = fopen(APP_PATH.'dump.log', 'a');
 
         foreach ($args as $arg) {
 

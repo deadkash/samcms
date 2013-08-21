@@ -89,6 +89,28 @@ class Language extends Core {
     }
 
     /**
+     * Устанавливает пользовательские словари
+     * @param $path
+     */
+    public static function setCustomDictionary($path){
+
+        $dictionaryList = self::getCustomDictionaryList($path);
+
+        foreach ($dictionaryList as $dictionaryPath) {
+            if (self::$php) {
+                self::scanPHPDictionary($dictionaryPath);
+            }
+            else {
+                self::scanDictionary($dictionaryPath);
+            }
+        }
+
+        if (self::$cache) {
+            self::setCache(self::$dictionary, 'custom');
+        }
+    }
+
+    /**
      * Сканирует словарь
      * @param $dictionaryPath
      */
@@ -135,10 +157,35 @@ class Language extends Core {
 
         $output = array();
         if (!isset($language->prefix)) return $output;
-        $dictPath = ROOT_PATH.'languages/'.$language->prefix.'/';
+        $dictPath = APP_PATH.'languages/'.$language->prefix.'/';
         $langExt = '.ln';
         if (self::$php) $langExt = '.php';
 
+        //Если не существует папка со словарями
+        if (!file_exists($dictPath)) return $output;
+
+        $files = scandir($dictPath);
+
+        foreach ($files as $file) {
+
+            if (strrpos($file, $langExt) === (strlen($file) - strlen($langExt))) {
+                $output[] = $dictPath.$file;
+            }
+        }
+
+        return $output;
+    }
+
+    /**
+     * Возвращает список пользовательских словарей
+     * @param $dictPath
+     * @return array
+     */
+    private static function getCustomDictionaryList($dictPath){
+
+        $output = array();
+        $langExt = '.ln';
+        if (self::$php) $langExt = '.php';
 
         //Если не существует папка со словарями
         if (!file_exists($dictPath)) return $output;

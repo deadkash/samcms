@@ -21,7 +21,7 @@ class ApplicationHelper {
      * @return string
      */
     public static function getModulePath($moduleName) {
-        return ROOT_PATH.'modules/'.strtolower($moduleName).'/'.$moduleName.'.php';
+        return APP_PATH.'modules/'.strtolower($moduleName).'/'.$moduleName.'.php';
     }
 
     /**
@@ -31,7 +31,7 @@ class ApplicationHelper {
      * @return string
      */
     public static function getComponentPath($componentName) {
-        return ROOT_PATH.'components/'.strtolower($componentName).'/'.$componentName.'.php';
+        return APP_PATH.'components/'.strtolower($componentName).'/'.$componentName.'.php';
     }
 
     /**

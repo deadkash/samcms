@@ -34,7 +34,7 @@ abstract class View {
      * Имя класса
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * Путь к шаблону

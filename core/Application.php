@@ -121,7 +121,7 @@ class Application {
     public function run() {
 
         $document = Document::get();
-        $document->setTplPath(ROOT_PATH.'templates/'.$this->theme);
+        $document->setTplPath(APP_PATH.'templates/'.$this->theme);
         $document->setTemplate($this->getTemplate());
 
         //Получаем компонент раздела

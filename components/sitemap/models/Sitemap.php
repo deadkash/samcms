@@ -168,7 +168,7 @@ class SitemapModelSitemap extends Model {
      */
     private function getSitemapPlugin($component) {
 
-        $pluginPath = ROOT_PATH.'plugins/sitemap/'.$component.'.php';
+        $pluginPath = APP_PATH.'plugins/sitemap/'.$component.'.php';
         if (file_exists($pluginPath)) {
             require_once($pluginPath);
         }

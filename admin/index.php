@@ -15,6 +15,7 @@ ini_set("error_reporting", E_ALL);
 
 define('ADMIN', 1);
 require_once __DIR__.'/../loader.php';
+Autoloader::setAppPath(ABS_PATH.'admin/');
 
 $application = new Application();
 

@@ -87,9 +87,11 @@ class DB {
      */
     private function __construct() {
 
-        $this->mysql = new mysqli(Config::$dbhost, Config::$dbuser, Config::$dbpass, Config::$dbname);
-        $query = "SET NAMES utf8";
-        $this->mysql->query($query);
+        if (class_exists('Config')) {
+            $this->mysql = new mysqli(Config::$dbhost, Config::$dbuser, Config::$dbpass, Config::$dbname);
+            $query = "SET NAMES utf8";
+            $this->mysql->query($query);
+        }
 
         //Режим отладки
         $this->debug = false;

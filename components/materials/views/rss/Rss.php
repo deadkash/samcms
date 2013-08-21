@@ -28,7 +28,7 @@ class MaterialsViewRss extends View {
         $this->setModel('Main');
 
         $document = Document::get();
-        $document->setTplPath(ROOT_PATH.'components/materials/views/rss/templates/');
+        $document->setTplPath(APP_PATH.'components/materials/views/rss/templates/');
         $document->setTemplate('rss.twig');
         $document->setContentType('application/xml');
 

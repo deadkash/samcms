@@ -18,6 +18,17 @@ class Templater extends Core {
      */
     private static $templaters;
 
+    /** @var bool Использовать языковые метки */
+    private static $useLanguage = true;
+
+    /**
+     * Установка флага использования языковых меток
+     * @param $flag
+     */
+    public static function setUseLanguage($flag){
+        self::$useLanguage = $flag;
+    }
+
     /**
      * Отрисовывает шаблон
      *
@@ -34,7 +45,9 @@ class Templater extends Core {
         }
 
         //Вставка языковых меток
-        $data['ln'] = Language::getDictionary(Parameters::getParameter('language'));
+        if (self::$useLanguage) {
+            $data['ln'] = Language::getDictionary(Parameters::getParameter('language'));
+        }
 
         //Если класс шаблонизатора существует, то рисуем сразу
         if (isset(self::$templaters[$path]) && self::$templaters) {

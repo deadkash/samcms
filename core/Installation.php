@@ -151,7 +151,7 @@ class Installation extends Core {
      */
     public function install($elementName, $elementPath) {
 
-        $installClass = $this->getElementInstallClass($elementName, $elementPath);
+        $installClass = $this->getElementInstallObject($elementName, $elementPath);
         if (!$installClass) return false;
 
         $this->register($installClass);
@@ -159,11 +159,12 @@ class Installation extends Core {
     }
 
     /**
+     * Возвращает объект установщика компонента или модуля
      * @param $elementName
      * @param $elementPath
      * @return mixed
      */
-    private function getElementInstallClass($elementName, $elementPath) {
+    private function getElementInstallObject($elementName, $elementPath) {
 
         $installPath = $elementPath.'Install.php';
         if (!file_exists($installPath)) return false;
@@ -205,5 +206,58 @@ class Installation extends Core {
 
         $configContent = Templater::render($tplPath, $tplName, $data);
         return @file_put_contents($configPath, $configContent);
+    }
+
+    /**
+     * Добавление группы пользователей
+     * @param string $title
+     * @return bool
+     */
+    public function addUserGroup($title) {
+
+        $group = new stdClass();
+        $group->title = $title;
+
+        return $this->db->insert('users_policy', $group);
+    }
+
+    /**
+     * Создает нового пользователя.
+     * @param $login string Логин пользователя
+     * @param $email string E-mail пользователя
+     * @param $password string Пароль пользователя
+     * @param $groupId int ID группы пользователя
+     * @return bool
+     */
+    public function addUser($login, $email, $password, $groupId){
+
+        $access = new Access();
+        $user = new stdClass();
+        $user->login = $login;
+        $user->email = $email;
+        $user->active = 1;
+        $user->password = $access->preparePassword($password, $login);
+        $user->policy_id = $groupId;
+
+        return $this->db->insert('users', $user);
+    }
+
+    /**
+     * Создает меню системы управления
+     * @param $title
+     * @return bool
+     */
+    public function addAdminMenu($title){
+
+        $menu = new stdClass();
+        $menu->title = $title;
+        $menu->hide = 1;
+
+        return $this->db->insert('menu', $menu);
+    }
+
+    public function createAdminMainSection($menuId, $text){
+
+
     }
 }
