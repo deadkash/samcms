@@ -28,6 +28,12 @@ class BuilderViewUser extends View {
         $this->setTemplate('user.twig');
         $this->setModel('Main');
 
+        if (isset($_SESSION['install_language']) &&
+            file_exists(ABS_PATH.'install/languages/'.$_SESSION['install_language'].'/'))  {
+            Language::setCustomDictionary(ABS_PATH.'install/languages/'.$_SESSION['install_language'].'/');
+        }
+        $this->setValue('ln', Language::getDictionary('custom'));
+
         return $this->render();
     }
 }

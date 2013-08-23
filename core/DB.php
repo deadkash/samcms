@@ -88,10 +88,18 @@ class DB {
     private function __construct() {
 
         if (class_exists('Config')) {
-            $this->mysql = new mysqli(Config::$dbhost, Config::$dbuser, Config::$dbpass, Config::$dbname);
-            $query = "SET NAMES utf8";
-            $this->mysql->query($query);
+            @$this->mysql = new mysqli(Config::$dbhost, Config::$dbuser, Config::$dbpass, Config::$dbname);
+
+            if ($this->mysql->connect_error) {
+                die('DB error ('.$this->mysql->connect_errno.') '.$this->mysql->connect_error);
+            }
         }
+        else {
+            Router::redirect('/install/');
+        }
+
+        $query = "SET NAMES utf8";
+        $this->mysql->query($query);
 
         //Режим отладки
         $this->debug = false;
@@ -105,13 +113,6 @@ class DB {
 
         //ID строки
         $this->insertId = false;
-    }
-
-    /**
-     * Деструктор
-     */
-    public function __destruct() {
-        $this->mysql->close();
     }
 
     /**

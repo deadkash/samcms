@@ -2,7 +2,7 @@
 <html lang="ru-RU">
 <head>
     <meta charset="UTF-8">
-    <title>Мастер установки SamCMS</title>
+    <title>{{ ln.install_title }}</title>
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap-responsive.css"/>
     <link rel="stylesheet" href="/install/components/builder/assets/css/main.css"/>
@@ -10,40 +10,41 @@
 <body>
 <div class="container">
     <div class="page-header">
-        <h1>Шаг 2 <small>Создание пользователя</small></h1>
+        <h1>{{ ln.install_user_step2 }} <small>{{ ln.install_user_step2_desc }}</small></h1>
     </div>
-    <form class="form-horizontal">
+    <form class="form-horizontal" action="/install/" method="GET">
         <div class="control-group">
-            Необходимо создать учетную запись администратора системы управления. Используя данные, введенные ниже, вы будете заходить в систему администрирования.
+            {{ ln.install_user_description }}
         </div>
         <div class="control-group">
-            <label class="control-label" for="login">Логин</label>
+            <label class="control-label" for="login">{{ ln.install_user_login }}</label>
             <div class="controls">
-                <input type="text" id="login">
-                <p class="muted"><small>Логин должен состоять из латинских букв и цифр</small></p>
+                <input type="text" id="login" name="login">
+                <p class="muted"><small>{{ ln.install_user_login_desc }}</small></p>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="email">E-mail</label>
             <div class="controls">
-                <input type="text" id="email">
+                <input type="text" id="email" name="email">
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="password">Пароль</label>
+            <label class="control-label" for="password">{{ ln.install_user_pass }}</label>
             <div class="controls">
-                <input type="password" id="password">
+                <input type="password" id="password" name="password">
             </div>
         </div>
         <div class="control-group">
-            <label class="control-label" for="confirm_password">Повторите пароль</label>
+            <label class="control-label" for="confirm_password">{{ ln.install_user_pass_confirm }}</label>
             <div class="controls">
-                <input type="password" id="confirm_password">
+                <input type="password" id="confirm_password" name="confirm_password">
             </div>
         </div>
         <div class="control-group">
             <div class="controls">
-                <button type="submit" class="btn btn-info">Дальше <i class="icon icon-arrow-right icon-white"></i></button>
+                <input type="hidden" name="task" value="setUser" />
+                <button type="submit" name="view" value="params" class="btn btn-info">{{ ln.install_user_continue }} <i class="icon icon-arrow-right icon-white"></i></button>
             </div>
         </div>
     </form>

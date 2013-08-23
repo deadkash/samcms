@@ -22,7 +22,9 @@ class Installation extends Core {
      * Конструктор
      */
     public function __construct() {
-        if ($this->issetConfig()) parent::__construct();
+        if ($this->issetConfig()) {
+            $this->db = DB::create();
+        }
     }
 
     /**
@@ -205,7 +207,13 @@ class Installation extends Core {
         $configPath = ABS_PATH.'config.php';
 
         $configContent = Templater::render($tplPath, $tplName, $data);
-        return @file_put_contents($configPath, $configContent);
+        $result = @file_put_contents($configPath, $configContent);
+
+        if ($result) {
+            require_once ABS_PATH.'config.php';
+        }
+
+        return $result;
     }
 
     /**

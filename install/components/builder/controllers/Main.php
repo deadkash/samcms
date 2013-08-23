@@ -39,6 +39,10 @@ class BuilderControllerMain extends Controller {
             case 'setConfig':
                 $this->setConfig();
                 break;
+
+            case 'setUser':
+                $this->setUser();
+                break;
         }
 
         //Загружаем представление
@@ -81,14 +85,23 @@ class BuilderControllerMain extends Controller {
         $adminTheme = Request::getStr('admintheme');
 
         //Валидация
+        if (true) {
 
-        $installation->setConfigParam('dbhost', $dbhost);
-        $installation->setConfigParam('dbuser', $dbuser);
-        $installation->setConfigParam('dbpass', $dbpass);
-        $installation->setConfigParam('dbname', $dbname);
-        $installation->setConfigParam('theme', $siteTheme);
-        $installation->setConfigParam('admintheme', $adminTheme);
+            $installation->setConfigParam('dbhost', $dbhost);
+            $installation->setConfigParam('dbuser', $dbuser);
+            $installation->setConfigParam('dbpass', $dbpass);
+            $installation->setConfigParam('dbname', $dbname);
+            $installation->setConfigParam('theme', $siteTheme);
+            $installation->setConfigParam('admintheme', $adminTheme);
 
-        $installation->generateConfig();
+            $installation->generateConfig();
+            $installation->db = DB::create();
+            $installation->executeSQL(ABS_PATH.'install/sql/install.sql');
+        }
+    }
+
+    private function setUser(){
+
+        //Создание группы
     }
 }

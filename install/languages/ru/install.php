@@ -33,4 +33,13 @@ $language['install_config_theme_admin'] = 'Тема системы управл�
 $language['install_config_back'] = 'Вернуться к выбору языка';
 $language['install_config_continue'] = 'Дальше';
 
+$language['install_user_step2'] = 'Шаг 2';
+$language['install_user_step2_desc'] = 'Создание пользователя';
+$language['install_user_description'] = 'Необходимо создать учетную запись администратора системы управления. Используя данные, введенные ниже, вы будете заходить в систему администрирования.';
+$language['install_user_login'] = 'Логин';
+$language['install_user_login_desc'] = 'Логин должен состоять из латинских букв и цифр';
+$language['install_user_pass'] = 'Пароль';
+$language['install_user_pass_confirm'] = 'Повторите пароль';
+$language['install_user_continue'] = 'Дальше';
+
 return $language;
