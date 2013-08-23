@@ -11,15 +11,16 @@
  */
 class Builder extends Component {
 
-    public function __construct(){
-
-    }
+    /**
+     * Конструктор
+     */
+    public function __construct(){}
 
     /**
      * Контроллер по умолчанию
      * @var string
      */
-    private $defaultController = 'Welcome';
+    private $defaultController = 'Main';
 
     /**
      * Название компонента

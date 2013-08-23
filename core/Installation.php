@@ -21,8 +21,8 @@ class Installation extends Core {
     /**
      * Конструктор
      */
-    public function __construct(){
-        parent::__construct();
+    public function __construct() {
+        if ($this->issetConfig()) parent::__construct();
     }
 
     /**
@@ -256,8 +256,47 @@ class Installation extends Core {
         return $this->db->insert('menu', $menu);
     }
 
-    public function createAdminMainSection($menuId, $text){
+    /**
+     * Возвращает темы по пути
+     * @param $path
+     * @return array
+     */
+    private function getThemes($path){
 
+        $output = array();
+        if (!file_exists($path)) return $output;
 
+        $themes = scandir($path);
+        foreach ($themes as $theme) {
+            if (is_dir($path.$theme) && $theme[0] != '.') {
+                $output[] = $theme;
+            }
+        }
+
+        return $output;
+    }
+
+    /**
+     * Возвращает темы сайта
+     * @return array
+     */
+    public function getSiteThemes(){
+        return $this->getThemes(ABS_PATH.'templates/');
+    }
+
+    /**
+     * Возвращает темы админки
+     * @return array
+     */
+    public function getAdminThemes(){
+        return $this->getThemes(ABS_PATH.'admin/templates/');
+    }
+
+    /**
+     * Существует ли файл конфигурации
+     * @return bool
+     */
+    public function issetConfig(){
+        return file_exists(ABS_PATH.'config.php');
     }
 }

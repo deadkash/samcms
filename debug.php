@@ -7,7 +7,6 @@
  * @author Kash
  * @package root
  * @date 29.07.12
- * @source debug.php
  * @copyright Copyright (c) 2013, Kash <deadkash@gmail.com>
  */
 

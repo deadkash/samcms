@@ -149,7 +149,7 @@ define('NOREPLY_EMAIL', 'no-reply@'.str_replace('www.','', $_SERVER['HTTP_HOST']
 
 $startTime = microtime(1);
 
-require_once('config.php');
+if (file_exists(ABS_PATH.'config.php')) require_once('config.php');
 require_once('lib/Twig/Autoloader.php');
 Twig_Autoloader::register();
 spl_autoload_register(array('Autoloader', 'load'));

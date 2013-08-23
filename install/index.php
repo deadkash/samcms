@@ -1,12 +1,12 @@
 <?php
 /**
- *
+ * Индексный файл установщика нового приложения
  *
  * @project SamCMS
- * @package 
+ * @package Install
  * @author Kash
- * @version 0.2.1
  * @date 17.08.13
+ * @copyright Copyright (c) 2013, Kash <deadkash@gmail.com>
  */
 
 ini_set("display_errors","1");
@@ -17,6 +17,7 @@ require_once(ABS_PATH.'install/components/builder/Builder.php');
 
 Autoloader::setAppPath(ABS_PATH.'install/');
 Templater::setUseLanguage(false);
+Language::setCustomDictionary(ABS_PATH.'install/languages/ru/');
 
 $builder = new Builder();
 echo $builder->render();

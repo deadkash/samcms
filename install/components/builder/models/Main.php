@@ -11,6 +11,10 @@
  */
 class BuilderModelMain extends Model {
 
+    public function __construct(){
+        
+    }
+
     /**
      * Возвращает языки
      * @return array
@@ -20,7 +24,8 @@ class BuilderModelMain extends Model {
         return array(
             0 => array(
                 'title' => 'Русский',
-                'value' => 'ru'
+                'value' => 'ru',
+                'selected' => true
             ),
             1 => array(
                 'title' => 'English',

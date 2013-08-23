@@ -144,7 +144,10 @@ class Language extends Core {
         if (file_exists($dictionaryPath)) {
 
             $dictionary = include_once($dictionaryPath);
-            self::$dictionary = array_merge(self::$dictionary, $dictionary);
+
+            if (is_array($dictionary)) {
+                self::$dictionary = array_merge(self::$dictionary, $dictionary);
+            }
         }
     }
 

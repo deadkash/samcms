@@ -28,8 +28,12 @@ class BuilderViewWelcome extends View {
         $this->setTemplate('welcome.twig');
         $this->setModel('Main');
 
+        //Доступные языки
         $languages = $this->model->getLanguages();
         $this->setValue('languages', $languages);
+
+        //Языковые переменные
+        $this->setValue('ln', Language::getDictionary('custom'));
 
         return $this->render();
     }
