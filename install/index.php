@@ -19,7 +19,7 @@ require_once(ABS_PATH.'install/modules/message/Message.php');
 
 Autoloader::setAppPath(ABS_PATH.'install/');
 Templater::setUseLanguage(false);
-Language::setCustomDictionary(ABS_PATH.'install/languages/ru/');
+Language::setCustomDictionary(ABS_PATH.'install/languages/russian/');
 
 $builder = new Builder();
 echo $builder->render();

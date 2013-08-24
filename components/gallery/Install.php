@@ -54,6 +54,9 @@ class GalleryInstall extends Install {
      * @return bool
      */
     public function execute(){
+
+        $installation = new Installation();
+        $installation->executeSQL(ABS_PATH.'components/gallery/install/install.sql');
         return true;
     }
 }

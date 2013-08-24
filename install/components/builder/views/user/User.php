@@ -26,7 +26,6 @@ class BuilderViewUser extends View {
     public function display(){
 
         $this->setTemplate('user.twig');
-        $this->setModel('Main');
 
         if (isset($_SESSION['install_language']) &&
             file_exists(ABS_PATH.'install/languages/'.$_SESSION['install_language'].'/'))  {

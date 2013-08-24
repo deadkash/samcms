@@ -12,6 +12,6 @@
 
 $language = array();
 
-$language['sitemap'] = 'Карта сайта';
+$language['sitemap'] = 'Sitemap';
 
 return $language;

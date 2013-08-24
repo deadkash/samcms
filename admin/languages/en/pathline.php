@@ -12,6 +12,6 @@
 
 $language = array();
 
-$language['pathline'] = 'Навигация';
+$language['pathline'] = 'Navigation';
 
 return $language;

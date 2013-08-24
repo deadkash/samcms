@@ -1,6 +1,6 @@
 <?php
 /**
- * Language values
+ * Языковые переменные
  *
  * @project SamCMS
  * @package Language

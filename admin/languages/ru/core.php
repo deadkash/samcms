@@ -24,6 +24,9 @@ $language['core_slider']         = 'Слайды';
 $language['core_sitemap']        = 'Карта сайта';
 $language['core_search']         = 'Результаты поиска';
 $language['core_searchform']     = 'Поиск';
+$language['core_admin_main_title'] = 'Административная панель';
+$language['core_admin_404_title'] = '404 ошибка';
+$language['core_admin_403_title'] = 'Доступ запрещен';
 
 //Надписи
 $language['core_not_selected']   = 'Не выбрано';

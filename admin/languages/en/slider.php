@@ -12,6 +12,6 @@
 
 $language = array();
 
-$language['slider'] = 'Слайды';
+$language['slider'] = 'Slides';
 
 return $language;

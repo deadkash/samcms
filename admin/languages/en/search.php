@@ -12,7 +12,7 @@
 
 $language = array();
 
-$language['search']             = 'Результаты поиска';
-$language['search_searchform']  = 'Поиск';
+$language['search']             = 'Search results';
+$language['search_searchform']  = 'Search';
 
 return $language;

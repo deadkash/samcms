@@ -1,6 +1,6 @@
 <?php
 /**
- * Language values
+ * Языковые переменные
  *
  * @project SamCMS
  * @package Language
@@ -11,26 +11,39 @@
 
 $language = array();
 
-//Components
+//Компоненты
 $language['core_components']     = 'Components';
-$language['core_menueditor']     = 'Menu editor';
+$language['core_menueditor']     = 'Sections editor';
 $language['core_modules']        = 'Modules';
 $language['core_users']          = 'Users';
 $language['core_options']        = 'Settings';
 $language['core_materials']      = 'Materials';
 $language['core_forms']          = 'Forms';
 $language['core_gallery']        = 'Gallery';
-$language['core_slider']         = 'Slider';
+$language['core_slider']         = 'Slides';
 $language['core_sitemap']        = 'Sitemap';
+$language['core_search']         = 'Search results';
+$language['core_searchform']     = 'Search';
+$language['core_admin_main_title'] = 'Administrative panel';
+$language['core_admin_404_title'] = 'Error 404';
+$language['core_admin_403_title'] = 'Access denied';
 
-//Labels
-$language['core_exit']           = 'Logout';
-$language['core_not_selected']   = 'Not selected';
-$language['core_pathline']       = 'Pathline';
-$language['core_frequency']      = 'SEO Frequency';
-$language['core_priority']       = 'SEO Priority';
+//Надписи
+$language['core_not_selected']   = 'No selection';
+$language['core_pathline']       = 'Site navigation';
+$language['core_exit']           = 'Exit';
+$language['core_add']            = 'Add';
+$language['core_delete']         = 'Delete';
+$language['core_name']           = 'Name';
+$language['core_edit']           = 'Edit';
+$language['core_frequency']      = 'Refresh rate';
+$language['core_priority']       = 'Page priority';
+$language['core_previous']       = 'Previous';
+$language['core_next']           = 'Next';
+$language['core_save']           = 'Save';
+$language['core_cancel']         = 'Cancel';
 
-//Month
+//Месяцы
 $language['core_month01']        = 'January';
 $language['core_month02']        = 'February';
 $language['core_month03']        = 'March';

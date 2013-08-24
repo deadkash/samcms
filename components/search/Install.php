@@ -35,6 +35,9 @@ class SearchInstall extends Install {
      * @return bool
      */
     public function execute(){
+
+        $installation = new Installation();
+        $installation->executeSQL(ABS_PATH.'components/search/install/install.sql');
         return true;
     }
 }

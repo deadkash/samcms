@@ -26,7 +26,6 @@ class BuilderViewParams extends View {
     public function display(){
 
         $this->setTemplate('params.twig');
-        $this->setModel('Main');
 
         //Языковые переменные
         $this->setValue('ln', Language::getDictionary('custom'));

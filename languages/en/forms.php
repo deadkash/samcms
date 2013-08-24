@@ -1,6 +1,6 @@
 <?php
 /**
- * Language values
+ * Языковые переменные
  *
  * @project SamCMS
  * @package Language
@@ -12,6 +12,6 @@
 $language = array();
 
 $language['forms_send']              = 'Send';
-$language['forms_required_fields']   = 'required fields';
+$language['forms_required_fields']   = 'requiered fields';
 
 return $language;

@@ -1,6 +1,6 @@
 <?php
 /**
- * Language values
+ * Языковые переменные
  *
  * @project SamCMS
  * @package Language
@@ -23,5 +23,8 @@ $language['core_month09']        = 'September';
 $language['core_month10']        = 'October';
 $language['core_month11']        = 'November';
 $language['core_month12']        = 'December';
+
+$language['core_previous']       = 'Previous';
+$language['core_next']           = 'Next';
 
 return $language;

@@ -11,8 +11,8 @@
 
 $language = array();
 
-$language['search_send'] = 'Найти';
-$language['search_no_results'] = 'Поиск не дал результатов';
-$language['search_founded'] = 'Всего найдено результатов';
+$language['search_send'] = 'Search';
+$language['search_no_results'] = 'We did not find results';
+$language['search_founded'] = 'All found results';
 
 return $language;

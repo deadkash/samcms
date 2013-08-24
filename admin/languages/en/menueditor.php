@@ -1,6 +1,6 @@
 <?php
 /**
- * Language values
+ * Языковые переменные
  *
  * @project SamCMS
  * @package Language
@@ -11,48 +11,51 @@
 
 $language = array();
 
-$language['menueditor_new_menu']                 = 'New menu';
-$language['menueditor_title']                    = 'Title';
-$language['menueditor_save']                     = 'Save';
-$language['menueditor_cancel']                   = 'Cancel';
-$language['menueditor_newitem']                  = 'New menu item';
-$language['menueditor_main_params']              = 'Main parameters';
-$language['menueditor_section_params']           = 'Section parameters';
-$language['menueditor_component_params']         = 'Component parameters';
-$language['menueditor_section_modules']          = 'Section modules';
-$language['menueditor_menu']                     = 'Menu';
-$language['menueditor_template']                 = 'Template';
-$language['menueditor_alias']                    = 'Alias';
-$language['menueditor_parent']                   = 'Parent section';
-$language['menueditor_empty_choice']             = 'Not selected';
-$language['menueditor_active']                   = 'Active';
-$language['menueditor_pagetitle']                = 'Page';
-$language['menueditor_pagedescription']          = 'Page description';
-$language['menueditor_pagekeywords']             = 'Page keywords';
-$language['menueditor_pagetemplate']             = 'Page template';
-$language['menueditor_editmenu']                 = 'Edit menu';
-$language['menueditor_component']                = 'Component';
-$language['menueditor_items']                    = 'Menu items';
-$language['menueditor_back']                     = 'Back';
-$language['menueditor_add']                      = 'Add';
-$language['menueditor_delete']                   = 'Delete';
-$language['menueditor_name']                     = 'Name';
-$language['menueditor_edit']                     = 'Edit';
-$language['menueditor_editmenuitem']             = 'Edit menu item';
-$language['menueditor_menulist']                 = 'Menu list';
-$language['menueditor_open_all']                 = 'Show all item';
-$language['menueditor_visible']                  = 'Visible';
-$language['menueditor_msg_menu_empty_title']     = '<strong>Error:</strong> The title can not be empty!';
-$language['menueditor_msg_menu_success_upd']     = '<strong>Success:</strong> The menu is updated.';
-$language['menueditor_msg_menu_success_add']     = '<strong>Success:</strong> The menu was added.';
-$language['menueditor_msg_menu_fail_add']        = '<strong>Error:</strong> Failed to add menu.';
-$language['menueditor_msg_menu_success_delete']  = '<strong>Success:</strong> Items removed.';
-$language['menueditor_msg_menu_fail_delete']     = '<strong>Error:</strong> Elements were not removed.';
-$language['menueditor_msg_menuitem_success_add'] = '<strong>Success:</strong> Menu item added.';
-$language['menueditor_msg_menuitem_success_upd'] = '<strong>Success:</strong> Menu item updated.';
-$language['menueditor_msg_empty_title']          = '<strong>Error:</strong> Title can not be empty!';
-$language['menueditor_msg_alias_exists']         = '<strong>Error:</strong> Alias exists!';
-$language['menueditor_msg_system_alias']         = '<strong>Error:</strong> This alias is reserved!';
-$language['menueditor_msg_empty_menu']           = '<strong>Error:</strong> Select menu!';
+$language['menueditor_new_menu']                 = 'Новое меню';
+$language['menueditor_title']                    = 'Заголовок';
+$language['menueditor_save']                     = 'Сохранить';
+$language['menueditor_cancel']                   = 'Отмена';
+$language['menueditor_newitem']                  = 'Новый пункт меню';
+$language['menueditor_main_params']              = 'Основные параметры';
+$language['menueditor_section_params']           = 'Параметры раздела';
+$language['menueditor_component_params']         = 'Параметры компонента';
+$language['menueditor_section_modules']          = 'Модули раздела';
+$language['menueditor_menu']                     = 'Меню';
+$language['menueditor_template']                 = 'Шаблон';
+$language['menueditor_alias']                    = 'Псевдоним';
+$language['menueditor_parent']                   = 'Родительский раздел';
+$language['menueditor_empty_choice']             = 'Не выбрано';
+$language['menueditor_active']                   = 'Активность';
+$language['menueditor_pagetitle']                = 'Заголовок страницы';
+$language['menueditor_pagedescription']          = 'Описание сайта';
+$language['menueditor_pagekeywords']             = 'Ключевые слова';
+$language['menueditor_pagetemplate']             = 'Шаблон страницы';
+$language['menueditor_editmenu']                 = 'Редактирование меню';
+$language['menueditor_component']                = 'Компонент';
+$language['menueditor_items']                    = 'Пункты меню';
+$language['menueditor_back']                     = 'Назад';
+$language['menueditor_add']                      = 'Добавить';
+$language['menueditor_delete']                   = 'Удалить';
+$language['menueditor_name']                     = 'Название';
+$language['menueditor_edit']                     = 'Редактировать';
+$language['menueditor_up']                       = 'Вверх';
+$language['menueditor_down']                     = 'Вниз';
+$language['menueditor_editmenuitem']             = 'Редактирование пункта меню';
+$language['menueditor_menulist']                 = 'Список меню';
+$language['menueditor_open_all']                 = 'Показать все пункты меню';
+$language['menueditor_visible']                  = 'Показать в меню';
+$language['menueditor_titleh1']                  = 'Заголовок H1';
+$language['menueditor_msg_menu_empty_title']     = '<strong>Ошибка:</strong> Заголовок не может быть пустым!';
+$language['menueditor_msg_menu_success_upd']     = '<strong>Успешно:</strong> Меню обновлено.';
+$language['menueditor_msg_menu_success_add']     = '<strong>Успешно:</strong> Меню добавлено.';
+$language['menueditor_msg_menu_fail_add']        = '<strong>Ошибка:</strong> Не удалось добавить меню.';
+$language['menueditor_msg_menu_success_delete']  = '<strong>Успешно:</strong> Элементы удалены.';
+$language['menueditor_msg_menu_fail_delete']     = '<strong>Ошибка:</strong> Элементы не были удалены.';
+$language['menueditor_msg_menuitem_success_add'] = '<strong>Успешно:</strong> Пункт меню добавлен.';
+$language['menueditor_msg_menuitem_success_upd'] = '<strong>Успешно:</strong> Пункт меню обновлен.';
+$language['menueditor_msg_empty_title']          = '<strong>Ошибка:</strong> Заголовок не может быть пустым!';
+$language['menueditor_msg_alias_exists']         = '<strong>Ошибка:</strong> Такой псевдоним уже существует!';
+$language['menueditor_msg_system_alias']         = '<strong>Ошибка:</strong> Данный псевдоним зарезервирован!';
+$language['menueditor_msg_empty_menu']           = '<strong>Ошибка:</strong> Выберите меню!';
 
 return $language;

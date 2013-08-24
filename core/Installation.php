@@ -90,27 +90,27 @@ class Installation extends Core {
 
     /**
      * Возвращает массив компонентов или модулей из указанной папки
-     * @param $componentsPath string путь к компонентам
+     * @param $elementPath string путь к компонентам
      * @return array
      */
-    private function getComponentsAndModules($componentsPath) {
+    private function getComponentsAndModules($elementPath) {
 
-        $items = scandir($componentsPath);
-        $components = array();
+        $items = scandir($elementPath);
+        $elements = array();
         foreach ($items as $item) {
 
-            if ($this->isComponentDir($item, $componentsPath)) {
-                $componentPath = $componentsPath.$item.'/';
+            if ($this->isComponentDir($item, $elementPath)) {
+                $componentPath = $elementPath.$item.'/';
                 $componentName = ucfirst($item);
 
-                $components[] = array(
+                $elements[] = array(
                     'path' => $componentPath,
                     'name' => $componentName
                 );
             }
         }
 
-        return $components;
+        return $elements;
     }
 
     /**
@@ -296,6 +296,248 @@ class Installation extends Core {
     }
 
     /**
+     * Добавляет главный раздел системы управления
+     * @param $title
+     * @param $menuId
+     * @param $content
+     * @return bool
+     */
+    public function addAdminMainSection($title, $menuId, $content){
+
+        $item = new stdClass();
+        $item->menu_id = $menuId;
+        $item->title = $title;
+        $item->component = 'Content';
+        $item->alias = '';
+        $item->active = 1;
+        $item->visible = 0;
+        $item->parent = 0;
+        $item->level = 0;
+        $item->ordering = 0;
+        $item->hide = 1;
+
+        $itemId = $this->db->insert('menu_items', $item);
+
+        $componentParam = new stdClass();
+        $componentParam->component = 'Content';
+        $componentParam->item_id = $itemId;
+        $componentParam->name = 'text';
+        $componentParam->type = 'editor';
+        $componentParam->title = 'content_code';
+        $componentParam->value = $content;
+
+        $this->db->insert('components_parameters', $componentParam);
+
+        return $itemId;
+    }
+
+    /**
+     * Добавляет 404 страницу в админку
+     * @param $title
+     * @param $menuId
+     * @param $content
+     * @return bool
+     */
+    public function addAdmin404Section($title, $menuId, $content){
+
+        //Создание пункта меню
+        $item = new stdClass();
+        $item->menu_id = $menuId;
+        $item->title = $title;
+        $item->component = 'Content';
+        $item->alias = '404';
+        $item->active = 1;
+        $item->visible = 0;
+        $item->parent = 0;
+        $item->level = 0;
+        $item->ordering = 0;
+        $item->hide = 1;
+        $itemId = $this->db->insert('menu_items', $item);
+
+        //Добавление текста в компонент Content
+        $componentParam = new stdClass();
+        $componentParam->component = 'Content';
+        $componentParam->item_id = $itemId;
+        $componentParam->name = 'text';
+        $componentParam->type = 'editor';
+        $componentParam->title = 'content_code';
+        $componentParam->value = $content;
+        $this->db->insert('components_parameters', $componentParam);
+
+        //Подмена шаблона вывода
+        $sectionParam = new stdClass();
+        $sectionParam->section_id = $itemId;
+        $sectionParam->name = 'template';
+        $sectionParam->type = 'text';
+        $sectionParam->title = 'menueditor_pagetemplate';
+        $sectionParam->value = '404.twig';
+        $this->db->insert('section_parameters', $sectionParam);
+
+        return $itemId;
+    }
+
+    /**
+     * Добавляет 403 страницу в админку
+     * @param $title
+     * @param $menuId
+     * @param $content
+     * @return bool
+     */
+    public function addAdmin403Section($title, $menuId, $content){
+
+        //Создание пункта меню
+        $item = new stdClass();
+        $item->menu_id = $menuId;
+        $item->title = $title;
+        $item->component = 'Content';
+        $item->alias = '403';
+        $item->active = 1;
+        $item->visible = 0;
+        $item->parent = 0;
+        $item->level = 0;
+        $item->ordering = 0;
+        $item->hide = 1;
+        $itemId = $this->db->insert('menu_items', $item);
+
+        //Добавление текста в компонент Content
+        $componentParam = new stdClass();
+        $componentParam->component = 'Content';
+        $componentParam->item_id = $itemId;
+        $componentParam->name = 'text';
+        $componentParam->type = 'editor';
+        $componentParam->title = 'content_code';
+        $componentParam->value = $content;
+        $this->db->insert('components_parameters', $componentParam);
+
+        //Подмена шаблона вывода
+        $sectionParam = new stdClass();
+        $sectionParam->section_id = $itemId;
+        $sectionParam->name = 'template';
+        $sectionParam->type = 'text';
+        $sectionParam->title = 'menueditor_pagetemplate';
+        $sectionParam->value = '403.twig';
+        $this->db->insert('section_parameters', $sectionParam);
+
+        return $itemId;
+    }
+
+    /**
+     * Добавляет страницу авторизации
+     * @param $title
+     * @param $menuId
+     * @return bool
+     */
+    public function addAuthSection($title, $menuId){
+
+        $item = new stdClass();
+        $item->menu_id = $menuId;
+        $item->title = $title;
+        $item->component = 'Auth';
+        $item->alias = 'auth';
+        $item->active = 1;
+        $item->visible = 0;
+        $item->parent = 0;
+        $item->level = 0;
+        $item->ordering = 0;
+        $item->hide = 1;
+        $itemId = $this->db->insert('menu_items', $item);
+
+        $componentParam = new stdClass();
+        $componentParam->component = 'Auth';
+        $componentParam->item_id = $itemId;
+        $componentParam->name = 'view';
+        $componentParam->type = 'text';
+        $componentParam->title = 'auth_view';
+        $componentParam->value = 'Login';
+        $this->db->insert('components_parameters', $componentParam);
+
+        //Подмена шаблона вывода
+        $sectionParam = new stdClass();
+        $sectionParam->section_id = $itemId;
+        $sectionParam->name = 'template';
+        $sectionParam->type = 'text';
+        $sectionParam->title = 'menueditor_pagetemplate';
+        $sectionParam->value = 'auth.twig';
+        $this->db->insert('section_parameters', $sectionParam);
+
+        return $itemId;
+    }
+
+    /**
+     * Создает страницу восстановления пароля
+     * @param $title
+     * @param $menuId
+     * @return bool
+     */
+    public function addRecoverSection($title, $menuId){
+
+        $item = new stdClass();
+        $item->menu_id = $menuId;
+        $item->title = $title;
+        $item->component = 'Auth';
+        $item->alias = 'recover';
+        $item->active = 1;
+        $item->visible = 0;
+        $item->parent = 0;
+        $item->level = 0;
+        $item->ordering = 0;
+        $item->hide = 1;
+
+        $itemId = $this->db->insert('menu_items', $item);
+
+        $componentParam = new stdClass();
+        $componentParam->component = 'Auth';
+        $componentParam->item_id = $itemId;
+        $componentParam->name = 'view';
+        $componentParam->type = 'text';
+        $componentParam->title = 'auth_view';
+        $componentParam->value = 'Recover';
+
+        $this->db->insert('components_parameters', $componentParam);
+
+        return $itemId;
+    }
+
+    /**
+     * Возвращает текст для главной страницы админки
+     * @return string
+     */
+    public function getAdminMainContent(){
+
+        $tplPath = ABS_PATH.'install/templates/';
+        $tplName = 'admin_content.twig';
+        $data['ln'] = Language::getDictionary('custom');
+
+        return Templater::render($tplPath, $tplName, $data);
+    }
+
+    /**
+     * Возвращает текст для 404 страницы админки
+     * @return string
+     */
+    public function getAdmin404Content(){
+
+        $tplPath = ABS_PATH.'install/templates/';
+        $tplName = 'admin_404.twig';
+        $data['ln'] = Language::getDictionary('custom');
+
+        return Templater::render($tplPath, $tplName, $data);
+    }
+
+    /**
+     * Возвращает текст для 403 страницы админки
+     * @return string
+     */
+    public function getAdmin403Content(){
+
+        $tplPath = ABS_PATH.'install/templates/';
+        $tplName = 'admin_403.twig';
+        $data['ln'] = Language::getDictionary('custom');
+
+        return Templater::render($tplPath, $tplName, $data);
+    }
+
+    /**
      * Возвращает темы по пути
      * @param $path
      * @return array
@@ -374,5 +616,24 @@ class Installation extends Core {
                      SET `value`='".$value."'
                    WHERE `name`='".$name."';";
         return $this->db->query($query);
+    }
+
+    /**
+     * Возвращает языки
+     * @return array
+     */
+    public function getLanguages(){
+
+        return array(
+            0 => array(
+                'title' => 'Русский',
+                'value' => 'ru',
+                'selected' => true
+            ),
+            1 => array(
+                'title' => 'English',
+                'value' => 'en'
+            )
+        );
     }
 }

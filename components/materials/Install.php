@@ -51,17 +51,13 @@ class MaterialsInstall extends Install {
     protected $title = 'materials';
 
     /**
-     * Конструктор
-     */
-    public function __construct(){
-        parent::__construct();
-    }
-
-    /**
      * Запуск установки
      * @return bool
      */
     public function execute(){
+
+        $installation = new Installation();
+        $installation->executeSQL(ABS_PATH.'components/materials/install/install.sql');
         return true;
     }
 }

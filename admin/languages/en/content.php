@@ -1,6 +1,6 @@
 <?php
 /**
- * Language values
+ * Языковые переменные
  *
  * @project SamCMS
  * @package Language
@@ -11,7 +11,7 @@
 
 $language = array();
 
-$language['content']         = 'HTML-code';
-$language['content_code']    = 'HTML-code';
+$language['content']         = 'HTML';
+$language['content_code']    = 'HTML';
 
 return $language;

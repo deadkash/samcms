@@ -12,6 +12,7 @@
 
 $language = array();
 
-$language['html'] = 'HTML-код';
+$language['html']       = 'HTML';
+$language['html_code']  = 'HTML';
 
 return $language;

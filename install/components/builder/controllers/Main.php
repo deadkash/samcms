@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Контроллер приветствия
+ * Контроллер
  *
  * @project SamCMS
  * @package Install
@@ -16,6 +16,12 @@ class BuilderControllerMain extends Controller {
      * @var string
      */
     private $defaultView = 'Welcome';
+
+    /** @var int ID верхнего меню в админке */
+    private $topAdminMenuId;
+
+    /** @var int ID левого меню в админке */
+    private $leftAdminMenuId;
 
     /**
      * Конструктор
@@ -105,7 +111,7 @@ class BuilderControllerMain extends Controller {
                 $installation->setConfigParam('dbpass', $dbConfig->dbpass);
                 $installation->setConfigParam('dbname', $dbConfig->dbname);
                 $installation->setConfigParam('theme', $siteTheme);
-                $installation->setConfigParam('admintheme', $adminTheme);
+                $installation->setConfigParam('adminTheme', $adminTheme);
 
                 $installation->generateConfig();
                 $installation->db = DB::create();
@@ -199,6 +205,12 @@ class BuilderControllerMain extends Controller {
             //Обновляем параметры
             $installation->executeSQL(ABS_PATH.'install/sql/parameters.sql');
             $installation->updateParams($params);
+
+            $this->setAdminValues();
+            $this->setFrontValues();
+            $this->setElements();
+            $this->registerAdminSystemComponents();
+            $this->registerAdminComponents();
         }
         else {
 
@@ -206,5 +218,100 @@ class BuilderControllerMain extends Controller {
             Fields::setMessages($paramFields, $this->component);
             Fields::setErrors($paramFields);
         }
+    }
+
+    /**
+     * Установка админских переменных и разделов
+     * @return void
+     */
+    private function setAdminValues(){
+
+        $installation = new Installation();
+
+        //Создаем верхнее и левое меню системы управления
+        $this->topAdminMenuId = $installation->addAdminMenu('admin_top_menu');
+        $this->leftAdminMenuId = $installation->addAdminMenu('admin_left_menu');
+
+        //Создаем стартовый раздел системы управления
+        $adminMainContent = $installation->getAdminMainContent();
+        $adminMainSectionId = $installation->addAdminMainSection('core_admin_main_title', $this->topAdminMenuId,
+            $adminMainContent);
+        $installation->updateParam('404_section_admin', $adminMainSectionId);
+
+        //Создать страницу 404 ошибки системы управления
+        $admin404Content = $installation->getAdmin404Content();
+        $admin404sectionId = $installation->addAdmin404Section('core_admin_404_title', $this->topAdminMenuId,
+            $admin404Content);
+        $installation->updateParam('auth_section', $admin404sectionId);
+
+        //Создаем страницу 403 ошибки системы управления
+        $admin403Content = $installation->getAdmin403Content();
+        $admin403sectionId = $installation->addAdmin403Section('core_admin_404_title', $this->topAdminMenuId,
+            $admin403Content);
+        $installation->updateParam('403_section', $admin403sectionId);
+
+        //Создаем страницу авторизации
+        $authSectionId = $installation->addAuthSection('core_auth_title', $this->topAdminMenuId);
+        $installation->updateParam('auth_section', $authSectionId);
+
+        //Создаем страницу восстановления пароля
+        $recoverSectionId = $installation->addRecoverSection('core_recover_title', $this->topAdminMenuId);
+        $installation->updateParam('recover_section', $recoverSectionId);
+
+        //Выбираем язык
+        $language = (isset($_SESSION['install_language'])) ? $_SESSION['install_language'] : '';
+        $installation->updateParam('language', $language);
+    }
+
+    /**
+     * Устанавливает параметры и разделы клиентской части
+     * @return void
+     */
+    private function setFrontValues() {
+
+        //Создаем основное меню
+
+        //Добавляем главную
+
+        //Сохраняем в параметрах
+
+        //Добавляем 404 страницу
+
+        //Сохраняем в параметрах
+    }
+
+    /**
+     * Обходит элементы и устанавливает их
+     * @return void
+     */
+    private function setElements(){
+
+        $installation = new Installation();
+
+        $components = $installation->getComponents();
+        foreach ($components as $component) {
+            $installation->install($component['name'], $component['path']);
+        }
+
+        $modules = $installation->getModules();
+        foreach ($modules as $module) {
+            $installation->install($module['name'], $module['path']);
+        }
+    }
+
+    /**
+     * Регистрация системных компонентов в верхнем меню
+     * @return void
+     */
+    private function registerAdminSystemComponents() {
+
+    }
+
+    /**
+     * Регистрация админских компонентов в левом меню
+     * @return void
+     */
+    private function registerAdminComponents(){
+
     }
 }

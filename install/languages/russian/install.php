@@ -15,6 +15,11 @@ $language['install_title'] = 'Мастер установки SamCMS';
 $language['install_superuser_group'] = 'Администратор';
 $language['install_unreg_group'] = 'Посетитель сайта';
 $language['install_reg_group'] = 'Зарегистрированный пользователь';
+$language['install_admin_panel'] = 'Административная панель';
+$language['install_404_error'] = '404 ошибка';
+$language['install_404_error_text'] = 'Страница, которую вы запросили, где-то затерялась :(';
+$language['install_403_error'] = 'Доступ запрещен';
+$language['install_403_error_text'] = 'Вы запросили страницу, доступ к которой вам запрещен!';
 
 $language['install_welcome'] = 'Добро пожаловать';
 $language['install_welcome_subtext'] = 'в мастер установки SamCMS';

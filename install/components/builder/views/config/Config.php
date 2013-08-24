@@ -31,7 +31,6 @@ class BuilderViewConfig extends View {
         }
 
         $this->setTemplate('config.twig');
-        $this->setModel('Main');
 
         //Языковые переменные
         $this->setValue('ln', Language::getDictionary('custom'));
