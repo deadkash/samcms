@@ -13,18 +13,6 @@
 class Access extends Core {
 
     /**
-     * Политика доступа для незарегистрированных пользователей
-     * @var int
-     */
-    private $defaultPolicy = 4;
-
-    /**
-     * Политика доступа для зарегистрированных пользователей
-     * @var int
-     */
-    private $registerPolicy = 3;
-
-    /**
      * Минимальная длина пароля
      * @var int
      */
@@ -38,22 +26,6 @@ class Access extends Core {
     }
 
     /**
-     * Установка политики для незарегистрированных пользователей
-     * @param $policyId
-     */
-    public function setDefaultPolicy($policyId) {
-        $this->defaultPolicy = $policyId;
-    }
-
-    /**
-     * Возвращает установленную политики по умолчанию
-     * @return int
-     */
-    public function getDefaultPolicy() {
-        return $this->defaultPolicy;
-    }
-
-    /**
      * Проверка доступа к разделу
      *
      * @param $itemId
@@ -63,7 +35,7 @@ class Access extends Core {
 
         if (!isset($_SESSION['_user_vars'])) {
 
-            return $this->checkAccess($itemId, $this->defaultPolicy);
+            return $this->checkAccess($itemId, Config::$defaultPolicy);
         }
         else {
             if (!isset($_SESSION['_user_vars']['id'])) return false;
@@ -257,7 +229,7 @@ class Access extends Core {
     public function createUser($user) {
 
         $user->active = 0;
-        $user->policy_id = $this->registerPolicy;
+        $user->policy_id = Config::$registerPolicy;
         $user->password = $this->preparePassword($user->password, $user->login);
         $user->date = date('Y-m-d H:i:s');
 

@@ -12,6 +12,9 @@
 $language = array();
 
 $language['install_title'] = 'Мастер установки SamCMS';
+$language['install_superuser_group'] = 'Администратор';
+$language['install_unreg_group'] = 'Посетитель сайта';
+$language['install_reg_group'] = 'Зарегистрированный пользователь';
 
 $language['install_welcome'] = 'Добро пожаловать';
 $language['install_welcome_subtext'] = 'в мастер установки SamCMS';
@@ -41,5 +44,26 @@ $language['install_user_login_desc'] = 'Логин должен состоять
 $language['install_user_pass'] = 'Пароль';
 $language['install_user_pass_confirm'] = 'Повторите пароль';
 $language['install_user_continue'] = 'Дальше';
+
+$language['install_params_step3'] = 'Шаг 3';
+$language['install_params_step3_desc'] = 'Описание сайта';
+$language['install_params_continue'] = 'Дальше';
+$language['install_params_metatitle'] = 'Название сайта';
+$language['install_params_metakeywords'] = 'Ключевые слова сайта';
+$language['install_params_metadescription'] = 'Описание сайта';
+
+//Сообщения
+$language['builder_msg_dbhost_error_required'] = '<strong>Ошибка:</strong> Заполните поле "Сервер"!';
+$language['builder_msg_dbuser_error_required'] = '<strong>Ошибка:</strong> Заполните поле "Пользователь"!';
+$language['builder_msg_dbpass_error_required'] = '<strong>Ошибка:</strong> Заполните поле "Пароль"!';
+$language['builder_msg_dbname_error_required'] = '<strong>Ошибка:</strong> Заполните поле "Имя базы данных"!';
+$language['builder_msg_login_error_required'] = '<strong>Ошибка:</strong> Заполните поле "Логин"!';
+$language['builder_msg_email_error_email'] = '<strong>Ошибка:</strong> Введите валидный E-mail!';
+$language['builder_msg_email_error_required'] = '<strong>Ошибка:</strong> Заполните поле "E-mail"!';
+$language['builder_msg_password_error_required'] = '<strong>Ошибка:</strong> Заполните поле "Пароль"!';
+$language['builder_msg_confirm_password_error_required'] = '<strong>Ошибка:</strong> Заполните поле "Повторите пароль"!';
+$language['install_dbconnect_error'] = '<strong>Ошибка:</strong> Не удалось подключиться к Базе данных!';
+$language['install_password_not_match'] = '<strong>Ошибка:</strong> Введенные пароли не совпадают!';
+$language['install_password_too_short'] = '<strong>Ошибка:</strong> Пароль слишком короткий!';
 
 return $language;

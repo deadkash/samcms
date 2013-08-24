@@ -1,15 +1,15 @@
 <?php
-
 /**
- * Представление создания пользователя
+ * Представление редактирования параметров
  *
  * @project SamCMS
  * @package Install
  * @author Kash
- * @date 23.08.13
+ * @date 24.08.13
  * @copyright Copyright (c) 2013, Kash <deadkash@gmail.com>
  */
-class BuilderViewUser extends View {
+
+class BuilderViewParams extends View {
 
     /**
      * Конструктор
@@ -20,22 +20,19 @@ class BuilderViewUser extends View {
     }
 
     /**
-     * Отрисовка
+     * Отрисовка кода
      * @return string
      */
     public function display(){
 
-        $this->setTemplate('user.twig');
+        $this->setTemplate('params.twig');
         $this->setModel('Main');
 
-        if (isset($_SESSION['install_language']) &&
-            file_exists(ABS_PATH.'install/languages/'.$_SESSION['install_language'].'/'))  {
-            Language::setCustomDictionary(ABS_PATH.'install/languages/'.$_SESSION['install_language'].'/');
-        }
+        //Языковые переменные
         $this->setValue('ln', Language::getDictionary('custom'));
 
         //Поля формы
-        $fields = BuilderConsts::getUserFields();
+        $fields = BuilderConsts::getParamsFields();
         /** @var $field Field */
         foreach ($fields as &$field) {
             $field->setHtml();

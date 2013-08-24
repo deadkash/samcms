@@ -50,6 +50,9 @@ class Field {
     /** @var integer Размер  */
     public $size;
 
+    /** @var string Описание поля */
+    public $description;
+
     /**
      * Устанавливает css класс
      * @param string $class
@@ -160,5 +163,14 @@ class Field {
         $this->size = $size;
         return $this;
     }
-    
+
+    /**
+     * Установка описания поля
+     * @param $description
+     * @return $this
+     */
+    public function setDescription($description) {
+        $this->description = Language::translate($description);
+        return $this;
+    }
 }

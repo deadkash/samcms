@@ -25,12 +25,28 @@ class BuilderViewConfig extends View {
      */
     public function display(){
 
+        $installation = new Installation();
+        if ($installation->issetConfig()) {
+            Router::redirect('/install/?view=user');
+        }
+
         $this->setTemplate('config.twig');
         $this->setModel('Main');
-        $installation = new Installation();
 
         //Языковые переменные
         $this->setValue('ln', Language::getDictionary('custom'));
+
+        //Поля формы
+        $dbFields = BuilderConsts::getDBFields();
+        /** @var $field Field */
+        foreach ($dbFields as &$field) {
+            $field->setHtml();
+        }
+        $this->setValue('dbFields', $dbFields);
+
+        //Контейнер сообщений
+        $message = new Message();
+        $this->setValue('messages', $message->render());
 
         $siteThemes = $installation->getSiteThemes();
         if (!empty($siteThemes)) $this->setValue('siteThemes', $siteThemes);

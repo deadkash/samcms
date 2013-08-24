@@ -11,12 +11,9 @@
 <div class="container">
     {{ messages }}
     <div class="page-header">
-        <h1>{{ ln.install_user_step2 }} <small>{{ ln.install_user_step2_desc }}</small></h1>
+        <h1>{{ ln.install_params_step3 }} <small>{{ ln.install_params_step3_desc }}</small></h1>
     </div>
     <form class="form-horizontal" action="/install/" method="GET">
-        <div class="control-group">
-            {{ ln.install_user_description }}
-        </div>
         {% for field in fields %}
             <div class="control-group{% if field.error %} error{% endif %}">
                 <label class="control-label" for="{{ field.name }}">{{ field.title }} {% if field.required %}<span class="red">*</span>{% endif %}</label>
@@ -28,8 +25,8 @@
         {% endfor %}
         <div class="control-group">
             <div class="controls">
-                <input type="hidden" name="task" value="setUser" />
-                <button type="submit" name="view" value="user" class="btn btn-info">{{ ln.install_user_continue }}</button>
+                <input type="hidden" name="task" value="setParams" />
+                <button type="submit" name="view" value="params" class="btn btn-info">{{ ln.install_params_continue }}</button>
             </div>
         </div>
     </form>

@@ -57,23 +57,6 @@ class AccessTest extends PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @covers Access::setDefaultPolicy
-     */
-    public function testSetDefaultPolicy(){
-
-        $policyId = 5;
-        $this->object->setDefaultPolicy($policyId);
-        $this->assertEquals($policyId, $this->object->getDefaultPolicy());
-    }
-
-    /**
-     * @covers Access::getDefaultPolicy
-     */
-    public function testGetDefaultPolicy() {
-        $this->assertEquals(4, $this->object->getDefaultPolicy());
-    }
-
-    /**
      * @covers Access::getAccess
      */
     public function testGetAccess(){

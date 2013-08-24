@@ -1,0 +1,8 @@
+{% if messages %}
+{% for message in messages %}
+<div class="alert fade in {{ message.type }}">
+    <button class="close" data-dismiss="alert">×</button>
+    {{ message.text }}
+</div>
+{% endfor %}
+{% endif %}

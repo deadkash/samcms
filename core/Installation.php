@@ -196,12 +196,21 @@ class Installation extends Core {
     }
 
     /**
-     * Генерирует файл конфигурации по параметрам
+     * Генерирует новый файл конфигурации
      * @return int
      */
     public function generateConfig() {
+        return $this->buildConfig($this->configParams);
+    }
 
-        $data['params'] = $this->configParams;
+    /**
+     * Генерирует файл конфигурации по параметрам
+     * @param $params
+     * @return int
+     */
+    private function buildConfig($params){
+
+        $data['params'] = $params;
         $tplPath = ABS_PATH.'install/templates/';
         $tplName = 'config.twig';
         $configPath = ABS_PATH.'config.php';
@@ -217,6 +226,27 @@ class Installation extends Core {
     }
 
     /**
+     * Перестраивает файл конфигурации
+     * @return bool|int
+     */
+    public function rebuildConfig(){
+
+        if (!$this->issetConfig()) return false;
+
+        $config = get_class_vars('Config');
+        $params = $this->configParams;
+        foreach ($config as $name => $value) {
+
+            $params[] = array(
+                'name' => $name,
+                'value' => $value
+            );
+        }
+
+        return $this->buildConfig($params);
+    }
+
+    /**
      * Добавление группы пользователей
      * @param string $title
      * @return bool
@@ -224,7 +254,7 @@ class Installation extends Core {
     public function addUserGroup($title) {
 
         $group = new stdClass();
-        $group->title = $title;
+        $group->name = $title;
 
         return $this->db->insert('users_policy', $group);
     }
@@ -246,6 +276,7 @@ class Installation extends Core {
         $user->active = 1;
         $user->password = $access->preparePassword($password, $login);
         $user->policy_id = $groupId;
+        $user->date = date('Y-m-d H:i:s');
 
         return $this->db->insert('users', $user);
     }
@@ -306,5 +337,42 @@ class Installation extends Core {
      */
     public function issetConfig(){
         return file_exists(ABS_PATH.'config.php');
+    }
+
+    /**
+     * Проверяет подключение к БД
+     * @param $dbConfig
+     * @return bool
+     */
+    public function checkDBConnect($dbConfig){
+        $result = @new mysqli($dbConfig->dbhost, $dbConfig->dbuser, $dbConfig->dbpass, $dbConfig->dbname);
+        return !$result->connect_error;
+    }
+
+    /**
+     * Обновляет параметры
+     * @param $params
+     */
+    public function updateParams($params){
+
+        foreach ($params as $name => $value) {
+            $this->updateParam($name, $value);
+        }
+    }
+
+    /**
+     * Обновлят параметра
+     * @param $name
+     * @param $value
+     * @return mixed
+     */
+    public function updateParam($name, $value){
+
+        $name = $this->db->escape($name);
+        $value = $this->db->escape($value);
+        $query = "UPDATE `parameters`
+                     SET `value`='".$value."'
+                   WHERE `name`='".$name."';";
+        return $this->db->query($query);
     }
 }

@@ -15,6 +15,7 @@ ini_set("error_reporting", E_ALL);
 session_start();
 require_once(__DIR__.'/../loader.php');
 require_once(ABS_PATH.'install/components/builder/Builder.php');
+require_once(ABS_PATH.'install/modules/message/Message.php');
 
 Autoloader::setAppPath(ABS_PATH.'install/');
 Templater::setUseLanguage(false);
