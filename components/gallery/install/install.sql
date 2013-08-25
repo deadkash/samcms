@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `gallery_image_sizes` (
   `size_id` int(11) DEFAULT NULL,
   `path` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT= ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -54,4 +54,4 @@ CREATE TABLE IF NOT EXISTS `gallery_sizes` (
   `width` int(11) DEFAULT NULL,
   `height` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT= ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

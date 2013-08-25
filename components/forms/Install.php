@@ -43,7 +43,7 @@ class FormsInstall extends Install {
      */
     public function execute(){
 
-        $installation = new Installation();
+        $installation = Installation::create();
         $installation->executeSQL(ABS_PATH.'components/forms/install/install.sql');
         return true;
     }

@@ -10,7 +10,7 @@
  * @copyright Copyright (c) 2013, Kash <deadkash@gmail.com>
  */
 
-class Installation extends Core {
+class Installation {
 
     /** @var string Разделитель sql запросов */
     private $sqlDelimiter = ';';
@@ -18,13 +18,71 @@ class Installation extends Core {
     /** @var array Параметры для файла конфигурации */
     private $configParams = array();
 
+    /** @var int ID верхнего меню в админке */
+    private $topAdminMenuId;
+
+    /** @var int ID левого меню в админке */
+    private $leftAdminMenuId;
+
+    /** @var Installation Экземпляр класса */
+    private static $installation;
+
+    /**
+     * Создание экземпляра класса
+     * @return Installation
+     */
+    public static function create() {
+
+        if (!self::$installation instanceof self) {
+            self::$installation = new self();
+        }
+        return self::$installation;
+    }
+
     /**
      * Конструктор
      */
-    public function __construct() {
+    private function __construct() {
         if ($this->issetConfig()) {
             $this->db = DB::create();
         }
+    }
+
+    /**
+     * Запрет клонирования
+     */
+    private function __clone(){}
+
+    /**
+     * Установка id левого меню в админке
+     * @param int $leftAdminMenuId
+     */
+    public function setLeftAdminMenuId($leftAdminMenuId) {
+        $this->leftAdminMenuId = $leftAdminMenuId;
+    }
+
+    /**
+     * Возвращает id левого меню в админке
+     * @return int
+     */
+    public function getLeftAdminMenuId() {
+        return $this->leftAdminMenuId;
+    }
+
+    /**
+     * Установка id верхнего меню в админке
+     * @param int $topAdminMenuId
+     */
+    public function setTopAdminMenuId($topAdminMenuId) {
+        $this->topAdminMenuId = $topAdminMenuId;
+    }
+
+    /**
+     * Возвращает id верхнего меню в админке
+     * @return int
+     */
+    public function getTopAdminMenuId() {
+        return $this->topAdminMenuId;
     }
 
     /**
@@ -296,6 +354,20 @@ class Installation extends Core {
     }
 
     /**
+     * Создает пользовательское меню
+     * @param $title
+     * @return bool
+     */
+    public function addUserMenu($title){
+
+        $menu = new stdClass();
+        $menu->title = $title;
+        $menu->hide = 0;
+
+        return $this->db->insert('menu', $menu);
+    }
+
+    /**
      * Добавляет главный раздел системы управления
      * @param $title
      * @param $menuId
@@ -327,6 +399,96 @@ class Installation extends Core {
         $componentParam->value = $content;
 
         $this->db->insert('components_parameters', $componentParam);
+
+        return $itemId;
+    }
+
+    /**
+     * Создает главную страницу
+     * @param $title
+     * @param $menuId
+     * @param $content
+     * @return bool
+     */
+    public function addUserMainSection($title, $menuId, $content){
+
+        $item = new stdClass();
+        $item->menu_id = $menuId;
+        $item->title = $title;
+        $item->component = 'Content';
+        $item->alias = '';
+        $item->active = 1;
+        $item->visible = 1;
+        $item->parent = 0;
+        $item->level = 0;
+        $item->ordering = 1;
+        $item->hide = 0;
+        $itemId = $this->db->insert('menu_items', $item);
+
+        $componentParam = new stdClass();
+        $componentParam->component = 'Content';
+        $componentParam->item_id = $itemId;
+        $componentParam->name = 'text';
+        $componentParam->type = 'editor';
+        $componentParam->title = 'content_code';
+        $componentParam->value = $content;
+        $this->db->insert('components_parameters', $componentParam);
+
+        $sectionParam = new stdClass();
+        $sectionParam->section_id = $itemId;
+        $sectionParam->name = 'title';
+        $sectionParam->type = 'text';
+        $sectionParam->title = 'menueditor_pagetitle';
+        $sectionParam->value = Parameters::getParameter('meta_title');
+        $this->db->insert('section_parameters', $sectionParam);
+
+        $sectionParam = new stdClass();
+        $sectionParam->section_id = $itemId;
+        $sectionParam->name = 'description';
+        $sectionParam->type = 'textarea';
+        $sectionParam->title = 'menueditor_pagedescription';
+        $sectionParam->value = Parameters::getParameter('meta_description');
+        $this->db->insert('section_parameters', $sectionParam);
+
+        $sectionParam = new stdClass();
+        $sectionParam->section_id = $itemId;
+        $sectionParam->name = 'keywords';
+        $sectionParam->type = 'textarea';
+        $sectionParam->title = 'menueditor_pagekeywords';
+        $sectionParam->value = Parameters::getParameter('meta_keywords');
+        $this->db->insert('section_parameters', $sectionParam);
+
+        $sectionParam = new stdClass();
+        $sectionParam->section_id = $itemId;
+        $sectionParam->name = 'seo_frequency';
+        $sectionParam->type = 'frequency';
+        $sectionParam->title = 'core_frequency';
+        $sectionParam->value = 'always';
+        $this->db->insert('section_parameters', $sectionParam);
+
+        $sectionParam = new stdClass();
+        $sectionParam->section_id = $itemId;
+        $sectionParam->name = 'seo_priority';
+        $sectionParam->type = 'priority';
+        $sectionParam->title = 'core_priority';
+        $sectionParam->value = '1.0';
+        $this->db->insert('section_parameters', $sectionParam);
+
+        $sectionParam = new stdClass();
+        $sectionParam->section_id = $itemId;
+        $sectionParam->name = 'template';
+        $sectionParam->type = 'text';
+        $sectionParam->title = 'menueditor_pagetemplate';
+        $sectionParam->value = 'index.twig';
+        $this->db->insert('section_parameters', $sectionParam);
+
+        $sectionParam = new stdClass();
+        $sectionParam->section_id = $itemId;
+        $sectionParam->name = 'titleh1';
+        $sectionParam->type = 'text';
+        $sectionParam->title = 'menueditor_titleh1';
+        $sectionParam->value = '';
+        $this->db->insert('section_parameters', $sectionParam);
 
         return $itemId;
     }
@@ -627,12 +789,12 @@ class Installation extends Core {
         return array(
             0 => array(
                 'title' => 'Русский',
-                'value' => 'ru',
+                'value' => 'russian',
                 'selected' => true
             ),
             1 => array(
                 'title' => 'English',
-                'value' => 'en'
+                'value' => 'english'
             )
         );
     }

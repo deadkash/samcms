@@ -144,7 +144,6 @@ class AccessTest extends PHPUnit_Framework_TestCase {
 
         $this->assertEquals($this->userId, $this->object->checkLogin($this->user->login, $this->user->password));
         $this->assertEquals(false, $this->object->checkLogin('blabla', 'passblaword'));
-        Debug::dump($this->user, $this->object);
     }
 
     /**

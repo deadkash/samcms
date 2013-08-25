@@ -28,7 +28,7 @@ class BuilderViewWelcome extends View {
         $this->setTemplate('welcome.twig');
 
         //Доступные языки
-        $installation = new Installation();
+        $installation = Installation::create();
         $languages = $installation->getLanguages();
         $this->setValue('languages', $languages);
 

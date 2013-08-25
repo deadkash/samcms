@@ -28,7 +28,7 @@ class MenueditorConsts {
 
         $description = new Field();
         $description->setName('description')
-                    ->setTitle('menueditor_pagetitle')
+                    ->setTitle('menueditor_pagedescription')
                     ->setType('textarea')
                     ->setClass('span4');
         $fields[] = $description;

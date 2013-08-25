@@ -25,7 +25,7 @@ class BuilderViewConfig extends View {
      */
     public function display(){
 
-        $installation = new Installation();
+        $installation = Installation::create();
         if ($installation->issetConfig()) {
             Router::redirect('/install/?view=user');
         }
