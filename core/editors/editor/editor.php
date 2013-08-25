@@ -32,8 +32,7 @@ class EditorEditor extends Editor {
     public function render($param) {
 
         $document = Document::get();
-        $document->addJS('/lib/tinymce4/tinymce.min.js');
-        $document->addJS('/lib/AjexFileManager/ajex.js');
+        $document->addJS('/lib/tinymce404/tinymce.min.js');
 
         return parent::render($param);
     }

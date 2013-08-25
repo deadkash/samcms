@@ -12,7 +12,7 @@
 $language = array();
 
 $language['menueditor_new_menu']                 = 'Новое меню';
-$language['menueditor_title']                    = 'Заголовок';
+$language['menueditor_title']                    = 'Имя';
 $language['menueditor_save']                     = 'Сохранить';
 $language['menueditor_cancel']                   = 'Отмена';
 $language['menueditor_newitem']                  = 'Новый пункт меню';
