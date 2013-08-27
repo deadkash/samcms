@@ -58,6 +58,7 @@ class MaterialsInstall extends Install {
 
         $installation = Installation::create();
         $installation->executeSQL(ABS_PATH.'components/materials/install/install.sql');
+        $installation->setupAdminComponent($this->name, $this->title);
         return true;
     }
 }

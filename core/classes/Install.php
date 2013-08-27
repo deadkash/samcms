@@ -28,6 +28,9 @@ abstract class Install {
     /** @var string Название компонента или модуля */
     protected $title = null;
 
+    /** @var bool Флаг регистрации компонента */
+    public $registerMe = true;
+
     /**
      * Конструктор
      */

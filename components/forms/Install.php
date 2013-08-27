@@ -31,13 +31,6 @@ class FormsInstall extends Install {
     protected $title = 'forms_forms';
 
     /**
-     * Конструктор
-     */
-    public function __construct(){
-        parent::__construct();
-    }
-
-    /**
      * Запуск установки
      * @return bool
      */
@@ -45,6 +38,7 @@ class FormsInstall extends Install {
 
         $installation = Installation::create();
         $installation->executeSQL(ABS_PATH.'components/forms/install/install.sql');
+        $installation->setupAdminComponent($this->name, $this->title);
         return true;
     }
 }

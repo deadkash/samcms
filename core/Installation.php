@@ -214,7 +214,7 @@ class Installation {
         $installClass = $this->getElementInstallObject($elementName, $elementPath);
         if (!$installClass) return false;
 
-        $this->register($installClass);
+        if ($installClass->registerMe) $this->register($installClass);
         return $installClass->execute();
     }
 
@@ -797,5 +797,18 @@ class Installation {
                 'value' => 'english'
             )
         );
+    }
+
+    public function setupAdminComponent($componentName, $sectionTitle){
+
+    }
+
+    public function setupSystemComponent($componentName, $sectionTitle, $order){
+
+        //Добавляем раздел в верхнее меню
+
+        //Добавляем параметр заголовок в параметры раздела
+
+        //Добавляем админские модули
     }
 }

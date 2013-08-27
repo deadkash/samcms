@@ -57,6 +57,7 @@ class GalleryInstall extends Install {
 
         $installation = Installation::create();
         $installation->executeSQL(ABS_PATH.'components/gallery/install/install.sql');
+        $installation->setupAdminComponent($this->name, $this->title);
         return true;
     }
 }
