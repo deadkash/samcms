@@ -382,6 +382,32 @@ class Installation {
     }
 
     /**
+     * Добавляет раздел системы управления
+     * @param $title
+     * @param $menuId
+     * @param $componentName
+     * @param $componentSectionAlias
+     * @return bool
+     */
+    public function addAdminSection($title, $menuId, $componentName, $componentSectionAlias) {
+
+        $item = new stdClass();
+        $item->menu_id = $menuId;
+        $item->title = $title;
+        $item->component = $componentName;
+        $item->alias = $componentSectionAlias;
+        $item->active = 0;
+        $item->visible = 0;
+        $item->parent = 0;
+        $item->level = 0;
+        $item->ordering = 0;
+        $item->hide = 1;
+        $itemId = $this->db->insert('menu_items', $item);
+
+        return $itemId;
+    }
+
+    /**
      * Добавляет главный раздел системы управления
      * @param $title
      * @param $menuId
@@ -390,19 +416,9 @@ class Installation {
      */
     public function addAdminMainSection($title, $menuId, $content){
 
-        $item = new stdClass();
-        $item->menu_id = $menuId;
-        $item->title = $title;
-        $item->component = 'Content';
-        $item->alias = '';
-        $item->active = 0;
-        $item->visible = 0;
-        $item->parent = 0;
-        $item->level = 0;
-        $item->ordering = 0;
-        $item->hide = 1;
-
-        $itemId = $this->db->insert('menu_items', $item);
+        $componentName = 'Content';
+        $sectionAlias = '';
+        $itemId = $this->addAdminSection($title, $menuId, $componentName, $sectionAlias);
 
         $componentParam = new stdClass();
         $componentParam->component = 'Content';
@@ -647,19 +663,10 @@ class Installation {
      */
     public function addRecoverSection($title, $menuId){
 
-        $item = new stdClass();
-        $item->menu_id = $menuId;
-        $item->title = $title;
-        $item->component = 'Auth';
-        $item->alias = 'recover';
-        $item->active = 0;
-        $item->visible = 0;
-        $item->parent = 0;
-        $item->level = 0;
-        $item->ordering = 0;
-        $item->hide = 1;
+        $componentName = 'Auth';
+        $componentSectionAlias = 'recover';
 
-        $itemId = $this->db->insert('menu_items', $item);
+        $itemId = $this->addAdminSection($title, $menuId, $componentName, $componentSectionAlias);
 
         $componentParam = new stdClass();
         $componentParam->component = 'Auth';
@@ -920,7 +927,7 @@ class Installation {
     }
 
     /**
-     * Устанавливает админский компонент в левое мею
+     * Устанавливает админский компонент в левое меню
      * @param $componentName
      * @param $sectionTitle
      * @param $alias
@@ -935,12 +942,18 @@ class Installation {
         $this->addSectionTitle($sectionId, $sectionTitle);
     }
 
-    public function setupSystemComponent($componentName, $sectionTitle, $order){
+    /**
+     * Устанавливает админский компонент в верхнее меню
+     * @param $componentName
+     * @param $sectionTitle
+     * @param $alias
+     * @param $order
+     */
+    public function setupSystemComponent($componentName, $sectionTitle, $alias, $order){
 
-        //Добавляем раздел в верхнее меню
-
-        //Добавляем параметр заголовок в параметры раздела
-
-        //Добавляем админские модули
+        $sectionId = $this->addComponentSection($componentName, $this->topAdminMenuId, $sectionTitle, $alias, $order);
+        $this->initAdminModulesOnSection($sectionId);
+        $this->setDenySection(Config::$defaultPolicy, $sectionId);
+        $this->addSectionTitle($sectionId, $sectionTitle);
     }
 }

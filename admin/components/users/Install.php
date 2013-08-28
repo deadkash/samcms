@@ -26,6 +26,9 @@ class UsersInstall extends Install {
     /** @var string Тип компонент */
     protected $type = 'component';
 
+    /** @var string Псевдоним */
+    protected $alias = 'users';
+
     /**
      * Запуск установки
      * @return bool
@@ -33,7 +36,7 @@ class UsersInstall extends Install {
     public function execute(){
 
         $installation = Installation::create();
-        $installation->setupSystemComponent($this->name, $this->title, $this->order);
+        $installation->setupSystemComponent($this->name, $this->title, $this->alias, $this->order);
 
         return true;
     }

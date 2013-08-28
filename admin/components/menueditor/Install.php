@@ -26,6 +26,9 @@ class MenueditorInstall extends Install {
     /** @var string Тип компонент */
     protected $type = 'component';
 
+    /** @var string Псевдоним раздела */
+    protected $alias = 'menu';
+
     /**
      * Запуск установки
      * @return bool
@@ -33,7 +36,7 @@ class MenueditorInstall extends Install {
     public function execute(){
 
         $installation = Installation::create();
-        $installation->setupSystemComponent($this->name, $this->title, $this->order);
+        $installation->setupSystemComponent($this->name, $this->title, $this->alias, $this->order);
 
         return true;
     }
