@@ -61,7 +61,7 @@ class Installation {
 
     /**
      * Установка id левого меню в админке
-     * @param int $leftAdminMenuId
+     * @param int $leftAdminMenuId ID меню
      */
     public function setLeftAdminMenuId($leftAdminMenuId) {
         $this->leftAdminMenuId = $leftAdminMenuId;
@@ -77,7 +77,7 @@ class Installation {
 
     /**
      * Установка id верхнего меню в админке
-     * @param int $topAdminMenuId
+     * @param int $topAdminMenuId ID меню
      */
     public function setTopAdminMenuId($topAdminMenuId) {
         $this->topAdminMenuId = $topAdminMenuId;
@@ -93,7 +93,7 @@ class Installation {
 
     /**
      * Устанавливает админский модуль
-     * @param $moduleId
+     * @param $moduleId int ID модуля
      */
     public function setAdminModule($moduleId){
         $this->adminModules[] = $moduleId;
@@ -101,8 +101,8 @@ class Installation {
 
     /**
      * Добавляет параметр в конфиг
-     * @param string $paramName
-     * @param mixed $paramValue
+     * @param string $paramName Имя параметра
+     * @param mixed $paramValue Значение параметра
      * @return void
      */
     public function setConfigParam($paramName, $paramValue) {
@@ -162,7 +162,7 @@ class Installation {
 
     /**
      * Возвращает массив компонентов или модулей из указанной папки
-     * @param $elementPath string путь к компонентам
+     * @param $elementPath string Путь к компонентам
      * @return array
      */
     private function getComponentsAndModules($elementPath) {
@@ -197,7 +197,7 @@ class Installation {
 
     /**
      * Выполняет sql запросы из файла
-     * @param $sqlPath
+     * @param $sqlPath string Путь к sql файлу
      * @return bool
      */
     public function executeSQL($sqlPath) {
@@ -234,8 +234,8 @@ class Installation {
 
     /**
      * Возвращает объект установщика компонента или модуля
-     * @param $elementName
-     * @param $elementPath
+     * @param $elementName string Имя компонента или модуля
+     * @param $elementPath string Путь к компоненту
      * @return mixed
      */
     private function getElementInstallObject($elementName, $elementPath) {
@@ -253,7 +253,7 @@ class Installation {
 
     /**
      * Регистрирует указанное расширение
-     * @param Install $install
+     * @param Install $install Класс установщика элемента
      * @return bool
      */
     public function register(Install $install){
@@ -277,7 +277,7 @@ class Installation {
 
     /**
      * Генерирует файл конфигурации по параметрам
-     * @param $params
+     * @param $params array Массив параметров
      * @return int
      */
     private function buildConfig($params){
@@ -320,7 +320,7 @@ class Installation {
 
     /**
      * Добавление группы пользователей
-     * @param string $title
+     * @param string $title Название группы
      * @return bool
      */
     public function addUserGroup($title) {
@@ -355,7 +355,7 @@ class Installation {
 
     /**
      * Создает меню системы управления
-     * @param $title
+     * @param $title Название меню
      * @return bool
      */
     public function addAdminMenu($title){
@@ -369,7 +369,7 @@ class Installation {
 
     /**
      * Создает пользовательское меню
-     * @param $title
+     * @param $title Название меню
      * @return bool
      */
     public function addUserMenu($title){
@@ -383,10 +383,10 @@ class Installation {
 
     /**
      * Добавляет раздел системы управления
-     * @param $title
-     * @param $menuId
-     * @param $componentName
-     * @param $sectionAlias
+     * @param $title string Название раздела
+     * @param $menuId int ID меню
+     * @param $componentName string Имя компонента
+     * @param $sectionAlias string Псевдоним раздела
      * @return bool
      */
     public function addAdminSection($title, $menuId, $componentName, $sectionAlias) {
@@ -409,9 +409,9 @@ class Installation {
 
     /**
      * Добавляет главный раздел системы управления
-     * @param $title
-     * @param $menuId
-     * @param $content
+     * @param $title string Название раздела
+     * @param $menuId int ID меню
+     * @param $content string Содержание раздела
      * @return bool
      */
     public function addAdminMainSection($title, $menuId, $content){
@@ -426,22 +426,19 @@ class Installation {
         $paramTitle = 'content_code';
         $this->addComponentParam($content, $componentName, $itemId, $paramName, $paramType, $paramTitle);
 
-        $sectionParam = new stdClass();
-        $sectionParam->section_id = $itemId;
-        $sectionParam->name = 'title';
-        $sectionParam->type = 'text';
-        $sectionParam->title = 'menueditor_pagetitle';
-        $sectionParam->value = $title;
-        $this->db->insert('section_parameters', $sectionParam);
+        $paramName = 'title';
+        $paramType = 'text';
+        $paramTitle = 'menueditor_pagetitle';
+        $this->addSectionParam($itemId, $paramName, $paramType, $paramTitle, $title);
 
         return $itemId;
     }
 
     /**
      * Создает главную страницу
-     * @param $title
-     * @param $menuId
-     * @param $content
+     * @param $title string Заголовок
+     * @param $menuId int ID меню
+     * @param $content string Содержание раздела
      * @return bool
      */
     public function addUserMainSection($title, $menuId, $content){
@@ -459,79 +456,25 @@ class Installation {
         $item->hide = 0;
         $itemId = $this->db->insert('menu_items', $item);
 
-        $componentParam = new stdClass();
-        $componentParam->component = 'Content';
-        $componentParam->item_id = $itemId;
-        $componentParam->name = 'text';
-        $componentParam->type = 'editor';
-        $componentParam->title = 'content_code';
-        $componentParam->value = $content;
-        $this->db->insert('components_parameters', $componentParam);
-
-        $sectionParam = new stdClass();
-        $sectionParam->section_id = $itemId;
-        $sectionParam->name = 'title';
-        $sectionParam->type = 'text';
-        $sectionParam->title = 'menueditor_pagetitle';
-        $sectionParam->value = Parameters::getParameter('meta_title');
-        $this->db->insert('section_parameters', $sectionParam);
-
-        $sectionParam = new stdClass();
-        $sectionParam->section_id = $itemId;
-        $sectionParam->name = 'description';
-        $sectionParam->type = 'textarea';
-        $sectionParam->title = 'menueditor_pagedescription';
-        $sectionParam->value = Parameters::getParameter('meta_description');
-        $this->db->insert('section_parameters', $sectionParam);
-
-        $sectionParam = new stdClass();
-        $sectionParam->section_id = $itemId;
-        $sectionParam->name = 'keywords';
-        $sectionParam->type = 'textarea';
-        $sectionParam->title = 'menueditor_pagekeywords';
-        $sectionParam->value = Parameters::getParameter('meta_keywords');
-        $this->db->insert('section_parameters', $sectionParam);
-
-        $sectionParam = new stdClass();
-        $sectionParam->section_id = $itemId;
-        $sectionParam->name = 'seo_frequency';
-        $sectionParam->type = 'frequency';
-        $sectionParam->title = 'core_frequency';
-        $sectionParam->value = 'always';
-        $this->db->insert('section_parameters', $sectionParam);
-
-        $sectionParam = new stdClass();
-        $sectionParam->section_id = $itemId;
-        $sectionParam->name = 'seo_priority';
-        $sectionParam->type = 'priority';
-        $sectionParam->title = 'core_priority';
-        $sectionParam->value = '1.0';
-        $this->db->insert('section_parameters', $sectionParam);
-
-        $sectionParam = new stdClass();
-        $sectionParam->section_id = $itemId;
-        $sectionParam->name = 'template';
-        $sectionParam->type = 'text';
-        $sectionParam->title = 'menueditor_pagetemplate';
-        $sectionParam->value = 'index.twig';
-        $this->db->insert('section_parameters', $sectionParam);
-
-        $sectionParam = new stdClass();
-        $sectionParam->section_id = $itemId;
-        $sectionParam->name = 'titleh1';
-        $sectionParam->type = 'text';
-        $sectionParam->title = 'menueditor_titleh1';
-        $sectionParam->value = '';
-        $this->db->insert('section_parameters', $sectionParam);
+        $this->addComponentParam($content, 'Content', $itemId, 'text', 'editor', 'content_code');
+        $this->addSectionParam($itemId, 'title', 'text', 'menueditor_pagetitle', Parameters::getParameter('meta_title'));
+        $this->addSectionParam($itemId, 'description', 'textarea', 'menueditor_pagedescription',
+            Parameters::getParameter('meta_description'));
+        $this->addSectionParam($itemId, 'keywords', 'textarea', 'menueditor_pagekeywords',
+            Parameters::getParameter('meta_keywords'));
+        $this->addSectionParam($itemId, 'seo_frequency', 'frequency', 'core_frequency', 'always');
+        $this->addSectionParam($itemId, 'seo_priority', 'priority', 'core_priority', '1.0');
+        $this->addSectionParam($itemId, 'template', 'text', 'menueditor_pagetemplate', 'index.twig');
+        $this->addSectionParam($itemId, 'titleh1', 'text', 'menueditor_titleh1', '');
 
         return $itemId;
     }
 
     /**
      * Добавляет 404 страницу в админку
-     * @param $title
-     * @param $menuId
-     * @param $content
+     * @param $title string Заголовок раздела
+     * @param $menuId int ID меню
+     * @param $content string Содержание раздела
      * @return bool
      */
     public function addAdmin404Section($title, $menuId, $content){
@@ -542,27 +485,24 @@ class Installation {
 
         //Добавление текста в компонент Content
         $paramName = 'text';
-        $paramType = 'editor';
+        $paramType = 'text';
         $paramTitle = 'content_code';
         $this->addComponentParam($content, $componentName, $itemId, $paramName, $paramType, $paramTitle);
 
         //Подмена шаблона вывода
-        $sectionParam = new stdClass();
-        $sectionParam->section_id = $itemId;
-        $sectionParam->name = 'template';
-        $sectionParam->type = 'text';
-        $sectionParam->title = 'menueditor_pagetemplate';
-        $sectionParam->value = '404.twig';
-        $this->db->insert('section_parameters', $sectionParam);
+        $paramName = 'template';
+        $paramTitle = 'menueditor_pagetemplate';
+        $paramValue = '404.twig';
+        $this->addSectionParam($itemId, $paramName, $paramType, $paramTitle, $paramValue);
 
         return $itemId;
     }
 
     /**
      * Добавляет 403 страницу в админку
-     * @param $title
-     * @param $menuId
-     * @param $content
+     * @param $title string Заголовок раздела
+     * @param $menuId int ID меню
+     * @param $content string Содержание раздела
      * @return bool
      */
     public function addAdmin403Section($title, $menuId, $content){
@@ -578,21 +518,19 @@ class Installation {
         $this->addComponentParam($content, $componentName, $itemId, $paramName, $paramType, $paramTitle);
 
         //Подмена шаблона вывода
-        $sectionParam = new stdClass();
-        $sectionParam->section_id = $itemId;
-        $sectionParam->name = 'template';
-        $sectionParam->type = 'text';
-        $sectionParam->title = 'menueditor_pagetemplate';
-        $sectionParam->value = '403.twig';
-        $this->db->insert('section_parameters', $sectionParam);
+        $paramName = 'template';
+        $paramType = 'text';
+        $paramTitle = 'menueditor_pagetemplate';
+        $paramValue = '403.twig';
+        $this->addSectionParam($itemId, $paramName, $paramType, $paramTitle, $paramValue);
 
         return $itemId;
     }
 
     /**
      * Добавляет страницу авторизации
-     * @param $title
-     * @param $menuId
+     * @param $title string Заголовок раздела
+     * @param $menuId int ID меню
      * @return bool
      */
     public function addAuthSection($title, $menuId){
@@ -608,21 +546,19 @@ class Installation {
         $this->addComponentParam($paramValue, $componentName, $itemId, $paramName, $paramType, $paramTitle);
 
         //Подмена шаблона вывода
-        $sectionParam = new stdClass();
-        $sectionParam->section_id = $itemId;
-        $sectionParam->name = 'template';
-        $sectionParam->type = 'text';
-        $sectionParam->title = 'menueditor_pagetemplate';
-        $sectionParam->value = 'auth.twig';
-        $this->db->insert('section_parameters', $sectionParam);
+        $paramName = 'template';
+        $paramType = 'text';
+        $paramTitle = 'menueditor_pagetemplate';
+        $paramValue = 'auth.twig';
+        $this->addSectionParam($itemId, $paramName, $paramType, $paramTitle, $paramValue);
 
         return $itemId;
     }
 
     /**
      * Создает страницу восстановления пароля
-     * @param $title
-     * @param $menuId
+     * @param $title string Заголовок раздела
+     * @param $menuId int ID меню
      * @return bool
      */
     public function addRecoverSection($title, $menuId){
@@ -638,13 +574,11 @@ class Installation {
         $this->addComponentParam($paramValue, $componentName, $itemId, $paramName, $paramType, $paramTitle);
 
         //Подмена шаблона вывода
-        $sectionParam = new stdClass();
-        $sectionParam->section_id = $itemId;
-        $sectionParam->name = 'template';
-        $sectionParam->type = 'text';
-        $sectionParam->title = 'menueditor_pagetemplate';
-        $sectionParam->value = 'auth.twig';
-        $this->db->insert('section_parameters', $sectionParam);
+        $paramName = 'template';
+        $paramType = 'text';
+        $paramTitle = 'menueditor_pagetemplate';
+        $paramValue = 'auth.twig';
+        $this->addSectionParam($itemId, $paramName, $paramType, $paramTitle, $paramValue);
 
         return $itemId;
     }
@@ -681,7 +615,7 @@ class Installation {
 
     /**
      * Возвращает текст для раздела админки
-     * @param $tplName
+     * @param $tplName string Шаблон
      * @return string
      */
     public function getAdminSectionContent($tplName) {
@@ -694,7 +628,7 @@ class Installation {
 
     /**
      * Возвращает темы по пути
-     * @param $path
+     * @param $path string Путь к шаблонам
      * @return array
      */
     private function getThemes($path){
@@ -738,7 +672,7 @@ class Installation {
 
     /**
      * Проверяет подключение к БД
-     * @param $dbConfig
+     * @param $dbConfig stdClass Объект конфигурации доступа к БД
      * @return bool
      */
     public function checkDBConnect($dbConfig){
@@ -748,10 +682,9 @@ class Installation {
 
     /**
      * Обновляет параметры
-     * @param $params
+     * @param $params array Параметры
      */
     public function updateParams($params){
-
         foreach ($params as $name => $value) {
             $this->updateParam($name, $value);
         }
@@ -759,8 +692,8 @@ class Installation {
 
     /**
      * Обновлят параметра
-     * @param $name
-     * @param $value
+     * @param $name string Имя параметра
+     * @param $value string Значение параметра
      * @return mixed
      */
     public function updateParam($name, $value){
@@ -792,8 +725,8 @@ class Installation {
 
     /**
      * Запрещает доступ к разделу
-     * @param $policyId
-     * @param $itemId
+     * @param $policyId int ID политики доступа
+     * @param $itemId int ID раздела
      * @return bool
      */
     public function setDenySection($policyId, $itemId) {
@@ -807,10 +740,10 @@ class Installation {
 
     /**
      * Добавляет админский модуль
-     * @param $name
-     * @param $label
-     * @param $title
-     * @param $parameters
+     * @param $name string Имя модуля
+     * @param $label string Метка модуля
+     * @param $title string Заголовок модуля
+     * @param $parameters array Массив параметров
      * @return bool
      */
     public function addAdminModule($name, $label, $title, $parameters){
@@ -838,7 +771,8 @@ class Installation {
 
     /**
      * Устанавливает админские модули в раздел
-     * @param $sectionId
+     * @param $sectionId int ID раздела
+     * @return void
      */
     public function initAdminModulesOnSection($sectionId){
 
@@ -855,11 +789,11 @@ class Installation {
 
     /**
      * Добавляет раздел компонента в системе управления
-     * @param $componentName
-     * @param $menuId
-     * @param $title
-     * @param $alias
-     * @param $ordering
+     * @param $componentName string Имя компонента
+     * @param $menuId int ID меню
+     * @param $title string Заголовок раздела
+     * @param $alias string Псевдоним раздела
+     * @param $ordering int Порядок раздела
      * @return bool
      */
     public function addComponentSection($componentName, $menuId, $title, $alias, $ordering){
@@ -902,26 +836,41 @@ class Installation {
     }
 
     /**
-     * Добавляет заголовок страницы
-     * @param $itemId
-     * @param $title
+     * Добавляет параметр раздела
+     * @param $itemId int ID раздела
+     * @param $paramName string Имя параметра
+     * @param $paramType string Тип параметра
+     * @param $paramTitle string Заголовок параметра
+     * @param $paramValue string Значение параметра
+     * @return mixed
      */
-    public function addSectionTitle($itemId, $title) {
+    public function addSectionParam($itemId, $paramName, $paramType, $paramTitle, $paramValue) {
 
         $sectionParam = new stdClass();
         $sectionParam->section_id = $itemId;
-        $sectionParam->name = 'title';
-        $sectionParam->type = 'text';
-        $sectionParam->title = 'menueditor_pagetitle';
-        $sectionParam->value = $title;
-        $this->db->insert('section_parameters', $sectionParam);
+        $sectionParam->name = $paramName;
+        $sectionParam->type = $paramType;
+        $sectionParam->title = $paramTitle;
+        $sectionParam->value = $paramValue;
+        return $this->db->insert('section_parameters', $sectionParam);
+    }
+
+    /**
+     * Добавляет заголовок страницы
+     * @param $itemId int ID раздела
+     * @param $title string Заголовок страницы
+     * @return mixed
+     */
+    public function addSectionTitle($itemId, $title) {
+        return $this->addSectionParam($itemId, 'title', 'text', 'menueditor_pagetitle', $title);
     }
 
     /**
      * Устанавливает админский компонент в левое меню
-     * @param $componentName
-     * @param $sectionTitle
-     * @param $alias
+     * @param $componentName string Имя компонента
+     * @param $sectionTitle string Заголовок раздела
+     * @param $alias string Псевдоним раздела
+     * @return void
      */
     public function setupAdminComponent($componentName, $sectionTitle, $alias){
 
@@ -935,10 +884,11 @@ class Installation {
 
     /**
      * Устанавливает админский компонент в верхнее меню
-     * @param $componentName
-     * @param $sectionTitle
-     * @param $alias
-     * @param $order
+     * @param $componentName string Имя компонента
+     * @param $sectionTitle string Заголовок раздела
+     * @param $alias string Псевдоним раздела
+     * @param $order int Порядок раздела
+     * @return void
      */
     public function setupSystemComponent($componentName, $sectionTitle, $alias, $order){
 
