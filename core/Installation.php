@@ -471,6 +471,42 @@ class Installation {
     }
 
     /**
+     * Добавляет 404 страницу
+     * @param $title string Заголовок раздела
+     * @param $menuId int ID меню
+     * @param $content string Содержание раздела
+     * @return bool
+     */
+    public function addUser404Section($title, $menuId, $content){
+
+        $item = new stdClass();
+        $item->menu_id = $menuId;
+        $item->title = $title;
+        $item->component = 'Content';
+        $item->alias = '404';
+        $item->active = 1;
+        $item->visible = 1;
+        $item->parent = 0;
+        $item->level = 0;
+        $item->ordering = 1;
+        $item->hide = 0;
+        $itemId = $this->db->insert('menu_items', $item);
+
+        $this->addComponentParam($content, 'Content', $itemId, 'text', 'editor', 'content_code');
+        $this->addSectionParam($itemId, 'title', 'text', 'menueditor_pagetitle', $title);
+        $this->addSectionParam($itemId, 'description', 'textarea', 'menueditor_pagedescription',
+            Parameters::getParameter('meta_description'));
+        $this->addSectionParam($itemId, 'keywords', 'textarea', 'menueditor_pagekeywords',
+            Parameters::getParameter('meta_keywords'));
+        $this->addSectionParam($itemId, 'seo_frequency', 'frequency', 'core_frequency', 'newer');
+        $this->addSectionParam($itemId, 'seo_priority', 'priority', 'core_priority', '1.0');
+        $this->addSectionParam($itemId, 'template', 'text', 'menueditor_pagetemplate', 'index.twig');
+        $this->addSectionParam($itemId, 'titleh1', 'text', 'menueditor_titleh1', '');
+
+        return $itemId;
+    }
+
+    /**
      * Добавляет 404 страницу в админку
      * @param $title string Заголовок раздела
      * @param $menuId int ID меню
