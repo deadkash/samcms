@@ -30,6 +30,9 @@ class FormsInstall extends Install {
     /** @var string Заголовок */
     protected $title = 'forms_forms';
 
+    /** @var string Псевдоним для разделы в админке */
+    protected $alias = 'forms';
+
     /**
      * Запуск установки
      * @return bool
@@ -38,7 +41,7 @@ class FormsInstall extends Install {
 
         $installation = Installation::create();
         $installation->executeSQL(ABS_PATH.'components/forms/install/install.sql');
-        $installation->setupAdminComponent($this->name, $this->title);
+        $installation->setupAdminComponent($this->name, $this->title, $this->alias);
         return true;
     }
 }

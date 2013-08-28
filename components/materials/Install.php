@@ -50,6 +50,9 @@ class MaterialsInstall extends Install {
     /** @var string Заголовок */
     protected $title = 'materials';
 
+    /** @var string Псевдоним для разделы в админке */
+    protected $alias = 'materials';
+
     /**
      * Запуск установки
      * @return bool
@@ -58,7 +61,7 @@ class MaterialsInstall extends Install {
 
         $installation = Installation::create();
         $installation->executeSQL(ABS_PATH.'components/materials/install/install.sql');
-        $installation->setupAdminComponent($this->name, $this->title);
+        $installation->setupAdminComponent($this->name, $this->title, $this->alias);
         return true;
     }
 }

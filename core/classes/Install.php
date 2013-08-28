@@ -31,6 +31,9 @@ abstract class Install {
     /** @var bool Флаг регистрации компонента */
     public $registerMe = true;
 
+    /** @var string Псевдоним для разделы в админке */
+    protected $alias = null;
+
     /**
      * Конструктор
      */

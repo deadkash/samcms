@@ -24,6 +24,12 @@ class Installation {
     /** @var int ID левого меню в админке */
     private $leftAdminMenuId;
 
+    /** @var int Порядок компонентов в левом меню */
+    private $leftComponentOrdering = 0;
+
+    /** @var array Массив id админских модулей */
+    private $adminModules;
+
     /** @var Installation Экземпляр класса */
     private static $installation;
 
@@ -83,6 +89,14 @@ class Installation {
      */
     public function getTopAdminMenuId() {
         return $this->topAdminMenuId;
+    }
+
+    /**
+     * Устанавливает админский модуль
+     * @param $moduleId
+     */
+    public function setAdminModule($moduleId){
+        $this->adminModules[] = $moduleId;
     }
 
     /**
@@ -381,7 +395,7 @@ class Installation {
         $item->title = $title;
         $item->component = 'Content';
         $item->alias = '';
-        $item->active = 1;
+        $item->active = 0;
         $item->visible = 0;
         $item->parent = 0;
         $item->level = 0;
@@ -508,7 +522,7 @@ class Installation {
         $item->title = $title;
         $item->component = 'Content';
         $item->alias = '404';
-        $item->active = 1;
+        $item->active = 0;
         $item->visible = 0;
         $item->parent = 0;
         $item->level = 0;
@@ -553,7 +567,7 @@ class Installation {
         $item->title = $title;
         $item->component = 'Content';
         $item->alias = '403';
-        $item->active = 1;
+        $item->active = 0;
         $item->visible = 0;
         $item->parent = 0;
         $item->level = 0;
@@ -596,7 +610,7 @@ class Installation {
         $item->title = $title;
         $item->component = 'Auth';
         $item->alias = 'auth';
-        $item->active = 1;
+        $item->active = 0;
         $item->visible = 0;
         $item->parent = 0;
         $item->level = 0;
@@ -638,7 +652,7 @@ class Installation {
         $item->title = $title;
         $item->component = 'Auth';
         $item->alias = 'recover';
-        $item->active = 1;
+        $item->active = 0;
         $item->visible = 0;
         $item->parent = 0;
         $item->level = 0;
@@ -799,8 +813,126 @@ class Installation {
         );
     }
 
-    public function setupAdminComponent($componentName, $sectionTitle){
+    /**
+     * Запрещает доступ к разделу
+     * @param $policyId
+     * @param $itemId
+     * @return bool
+     */
+    public function setDenySection($policyId, $itemId) {
 
+        $policyDeny = new stdClass();
+        $policyDeny->policy_id = $policyId;
+        $policyDeny->section_id = $itemId;
+
+        return $this->db->insert('users_policy_deny', $policyDeny);
+    }
+
+    /**
+     * Добавляет админский модуль
+     * @param $name
+     * @param $label
+     * @param $title
+     * @param $parameters
+     * @return bool
+     */
+    public function addAdminModule($name, $label, $title, $parameters){
+
+        $module = new stdClass();
+        $module->name = $name;
+        $module->label = $label;
+        $module->title = $title;
+        $module->active = 1;
+        $module->hide = 1;
+
+        $moduleId = $this->db->insert('modules', $module);
+
+        if (!empty($parameters)) {
+
+            foreach ($parameters as $parameter) {
+                $moduleParam = (object) $parameter;
+                $moduleParam->module_id = $moduleId;
+                $this->db->insert('modules_parameters', $moduleParam);
+            }
+        }
+
+        return $moduleId;
+    }
+
+    /**
+     * Устанавливает админские модули в раздел
+     * @param $sectionId
+     */
+    public function initAdminModulesOnSection($sectionId){
+
+        if (!empty($this->adminModules)) {
+            foreach ($this->adminModules as $moduleId) {
+
+                $sectionModule = new stdClass();
+                $sectionModule->module_id = $moduleId;
+                $sectionModule->item_id = $sectionId;
+                $this->db->insert('section_modules', $sectionModule);
+            }
+        }
+    }
+
+    /**
+     * Добавляет раздел компонента в системе управления
+     * @param $componentName
+     * @param $menuId
+     * @param $title
+     * @param $alias
+     * @param $ordering
+     * @return bool
+     */
+    public function addComponentSection($componentName, $menuId, $title, $alias, $ordering){
+
+        $item = new stdClass();
+        $item->menu_id = $menuId;
+        $item->title = $title;
+        $item->component = $componentName;
+        $item->alias = $alias;
+        $item->active = 1;
+        $item->visible = 1;
+        $item->parent = 0;
+        $item->level = 0;
+        $item->ordering = $ordering;
+        $item->hide = 1;
+        $itemId = $this->db->insert('menu_items', $item);
+
+        return $itemId;
+    }
+
+    /**
+     * Добавляет заголовок страницы
+     * @param $itemId
+     * @param $title
+     */
+    public function addSectionTitle($itemId, $title) {
+
+        $sectionParam = new stdClass();
+        $sectionParam->section_id = $itemId;
+        $sectionParam->name = 'title';
+        $sectionParam->type = 'text';
+        $sectionParam->title = 'menueditor_pagetitle';
+        $sectionParam->value = $title;
+        $this->db->insert('section_parameters', $sectionParam);
+    }
+
+    /**
+     * Устанавливает админский компонент в левое мею
+     * @param $componentName
+     * @param $sectionTitle
+     * @param $alias
+     */
+    public function setupAdminComponent($componentName, $sectionTitle, $alias){
+
+        $this->leftComponentOrdering++;
+        $sectionId = $this->addComponentSection($componentName, $this->leftAdminMenuId, $sectionTitle, $alias,
+            $this->leftComponentOrdering);
+        $this->initAdminModulesOnSection($sectionId);
+        $this->setDenySection(Config::$defaultPolicy, $sectionId);
+        $this->addSectionTitle($sectionId, $sectionTitle);
     }
 
     public function setupSystemComponent($componentName, $sectionTitle, $order){

@@ -200,6 +200,8 @@ class BuilderControllerMain extends Controller {
             $installation->executeSQL(ABS_PATH.'install/sql/parameters.sql');
             $installation->updateParams($params);
 
+            $this->setAdminMenus();
+            $this->setAdminModules();
             $this->setAdminValues();
             $this->setFrontValues();
             $this->setElements();
@@ -215,10 +217,10 @@ class BuilderControllerMain extends Controller {
     }
 
     /**
-     * Установка админских переменных и разделов
+     * Создает админские меню
      * @return void
      */
-    private function setAdminValues() {
+    private function setAdminMenus() {
 
         $installation = Installation::create();
 
@@ -227,38 +229,66 @@ class BuilderControllerMain extends Controller {
         $installation->setTopAdminMenuId($topAdminMenuId);
         $leftAdminMenuId = $installation->addAdminMenu('admin_left_menu');
         $installation->setLeftAdminMenuId($leftAdminMenuId);
+    }
+
+    /**
+     * Установка админских модулей
+     * @return void
+     */
+    private function setAdminModules() {
+
+        $installation = Installation::create();
+
+        $upMenuModuleId = $installation->addAdminModule('Menu', 'upmenu', 'admin_upmenu_module',
+            BuilderConsts::getAdminLeftMenuParams($installation->getTopAdminMenuId(), 'upmenu.html'));
+        $leftMenuModuleId = $installation->addAdminModule('Menu', 'leftmenu', 'admin_leftmenu_module',
+            BuilderConsts::getAdminLeftMenuParams($installation->getLeftAdminMenuId(), 'leftmenu.html'));
+        $userModuleId = $installation->addAdminModule('User', 'user', 'admin_user_module', array());
+
+        $installation->setAdminModule($upMenuModuleId);
+        $installation->setAdminModule($leftMenuModuleId);
+        $installation->setAdminModule($userModuleId);
+    }
+
+    /**
+     * Установка админских переменных и разделов
+     * @return void
+     */
+    private function setAdminValues() {
+
+        $installation = Installation::create();
 
         //Создаем стартовый раздел системы управления
         $adminMainContent = $installation->getAdminMainContent();
-        $adminMainSectionId = $installation->addAdminMainSection('core_admin_main_title', $topAdminMenuId,
-            $adminMainContent);
+        $adminMainSectionId = $installation->addAdminMainSection('core_admin_main_title',
+            $installation->getTopAdminMenuId(), $adminMainContent);
         $installation->updateParam('default_admin_section', $adminMainSectionId);
+        $installation->setDenySection(Config::$defaultPolicy, $adminMainSectionId);
+        $installation->initAdminModulesOnSection($adminMainSectionId);
 
         //Создать страницу 404 ошибки системы управления
         $admin404Content = $installation->getAdmin404Content();
-        $admin404sectionId = $installation->addAdmin404Section('core_admin_404_title', $topAdminMenuId,
-            $admin404Content);
+        $admin404sectionId = $installation->addAdmin404Section('core_admin_404_title',
+            $installation->getTopAdminMenuId(), $admin404Content);
         $installation->updateParam('404_section_admin', $admin404sectionId);
 
         //Создаем страницу 403 ошибки системы управления
         $admin403Content = $installation->getAdmin403Content();
-        $admin403sectionId = $installation->addAdmin403Section('core_admin_404_title', $topAdminMenuId,
-            $admin403Content);
+        $admin403sectionId = $installation->addAdmin403Section('core_admin_403_title',
+            $installation->getTopAdminMenuId(), $admin403Content);
         $installation->updateParam('403_section', $admin403sectionId);
 
         //Создаем страницу авторизации
-        $authSectionId = $installation->addAuthSection('core_auth_title', $topAdminMenuId);
+        $authSectionId = $installation->addAuthSection('core_auth_title', $installation->getTopAdminMenuId());
         $installation->updateParam('auth_section', $authSectionId);
 
         //Создаем страницу восстановления пароля
-        $recoverSectionId = $installation->addRecoverSection('core_recover_title', $topAdminMenuId);
+        $recoverSectionId = $installation->addRecoverSection('core_recover_title', $installation->getTopAdminMenuId());
         $installation->updateParam('recover_section', $recoverSectionId);
 
         //Выбираем язык
         $language = (isset($_SESSION['install_language'])) ? $_SESSION['install_language'] : '';
         $installation->updateParam('language', $language);
-
-        
     }
 
     /**
@@ -276,8 +306,6 @@ class BuilderControllerMain extends Controller {
         $userMainSectionContent = Language::translate('install_main_title');
         $userMainSectionId = $installation->addUserMainSection(Language::translate('install_main_title'), $userMainMenuId,
             $userMainSectionContent);
-
-        //Сохраняем в параметрах
         $installation->updateParam('default_section', $userMainSectionId);
 
         //Добавляем 404 страницу
