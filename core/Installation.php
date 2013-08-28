@@ -485,7 +485,7 @@ class Installation {
         $item->component = 'Content';
         $item->alias = '404';
         $item->active = 1;
-        $item->visible = 1;
+        $item->visible = 0;
         $item->parent = 0;
         $item->level = 0;
         $item->ordering = 1;
@@ -587,6 +587,7 @@ class Installation {
         $paramTitle = 'menueditor_pagetemplate';
         $paramValue = 'auth.twig';
         $this->addSectionParam($itemId, $paramName, $paramType, $paramTitle, $paramValue);
+        $this->addSectionTitle($itemId, 'auth');
 
         return $itemId;
     }
@@ -615,6 +616,7 @@ class Installation {
         $paramTitle = 'menueditor_pagetemplate';
         $paramValue = 'auth.twig';
         $this->addSectionParam($itemId, $paramName, $paramType, $paramTitle, $paramValue);
+        $this->addSectionTitle($itemId, 'auth_recover');
 
         return $itemId;
     }

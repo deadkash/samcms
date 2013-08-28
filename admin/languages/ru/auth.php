@@ -10,6 +10,7 @@
  */
 $language = array();
 
+$language['auth']            = 'Авторизация';
 $language['auth_login']      = 'Логин';
 $language['auth_password']   = 'Пароль';
 $language['auth_enter']      = 'Войти';

@@ -310,7 +310,7 @@ class BuilderControllerMain extends Controller {
 
         //Добавляем 404 страницу
         $user404SectionContent = Language::translate('install_404_content');
-        $user404SectionId = $installation->addUser404Section(Language::translate('install_404_title'), $userMainMenuId,
+        $user404SectionId = $installation->addUser404Section(Language::translate('install_404_error'), $userMainMenuId,
             $user404SectionContent);
         $installation->updateParam('404_section', $user404SectionId);
     }

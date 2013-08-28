@@ -22,6 +22,7 @@ $language['install_403_error'] = 'Доступ запрещен';
 $language['install_403_error_text'] = 'Вы запросили страницу, доступ к которой вам запрещен!';
 $language['install_main_user_menu'] = 'Основное меню';
 $language['install_main_title'] = 'Главная';
+$language['install_404_content'] = '404 ошибка';
 
 $language['install_welcome'] = 'Добро пожаловать';
 $language['install_welcome_subtext'] = 'в мастер установки SamCMS';
