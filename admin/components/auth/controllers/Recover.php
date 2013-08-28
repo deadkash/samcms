@@ -173,10 +173,10 @@ class AuthControllerRecover extends Controller {
     private function sendMail($email, $userId) {
 
         $hash = $this->hash->createKey($userId, 1);
-        $data['url'] = 'http://'.$_SERVER['HTTP_HOST'].$this->router->rewriteUrl('/index.php?id='.$this->recoverSection.'&code='.$hash);
+        $data['url'] = $this->router->getUrl(array('id'=>$this->recoverSection,'code'=>$hash));
         $data['host'] = $_SERVER['HTTP_HOST'];
 
-        $body = Templater::render('modules', 'auth/views/recover/templates/letter.twig', $data);
+        $body = Templater::render('components', 'auth/views/recover/templates/letter.twig', $data);
 
         $subject = 'Восстановление пароля на '.$_SERVER['HTTP_HOST'];
         $mailFrom = 'noreply@'.$_SERVER['HTTP_HOST'];

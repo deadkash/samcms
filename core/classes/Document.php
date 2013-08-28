@@ -293,7 +293,7 @@ class Document {
      * @param $title
      */
     public function setTitle($title) {
-        $this->title = $title;
+        $this->title = Language::translate($title);
     }
 
     /**

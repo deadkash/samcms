@@ -386,16 +386,16 @@ class Installation {
      * @param $title
      * @param $menuId
      * @param $componentName
-     * @param $componentSectionAlias
+     * @param $sectionAlias
      * @return bool
      */
-    public function addAdminSection($title, $menuId, $componentName, $componentSectionAlias) {
+    public function addAdminSection($title, $menuId, $componentName, $sectionAlias) {
 
         $item = new stdClass();
         $item->menu_id = $menuId;
         $item->title = $title;
         $item->component = $componentName;
-        $item->alias = $componentSectionAlias;
+        $item->alias = $sectionAlias;
         $item->active = 0;
         $item->visible = 0;
         $item->parent = 0;
@@ -420,15 +420,19 @@ class Installation {
         $sectionAlias = '';
         $itemId = $this->addAdminSection($title, $menuId, $componentName, $sectionAlias);
 
-        $componentParam = new stdClass();
-        $componentParam->component = 'Content';
-        $componentParam->item_id = $itemId;
-        $componentParam->name = 'text';
-        $componentParam->type = 'editor';
-        $componentParam->title = 'content_code';
-        $componentParam->value = $content;
+        $componentName = 'Content';
+        $paramName = 'text';
+        $paramType = 'editor';
+        $paramTitle = 'content_code';
+        $this->addComponentParam($content, $componentName, $itemId, $paramName, $paramType, $paramTitle);
 
-        $this->db->insert('components_parameters', $componentParam);
+        $sectionParam = new stdClass();
+        $sectionParam->section_id = $itemId;
+        $sectionParam->name = 'title';
+        $sectionParam->type = 'text';
+        $sectionParam->title = 'menueditor_pagetitle';
+        $sectionParam->value = $title;
+        $this->db->insert('section_parameters', $sectionParam);
 
         return $itemId;
     }
@@ -532,29 +536,15 @@ class Installation {
      */
     public function addAdmin404Section($title, $menuId, $content){
 
-        //Создание пункта меню
-        $item = new stdClass();
-        $item->menu_id = $menuId;
-        $item->title = $title;
-        $item->component = 'Content';
-        $item->alias = '404';
-        $item->active = 0;
-        $item->visible = 0;
-        $item->parent = 0;
-        $item->level = 0;
-        $item->ordering = 0;
-        $item->hide = 1;
-        $itemId = $this->db->insert('menu_items', $item);
+        $componentName = 'Content';
+        $sectionAlias = '404';
+        $itemId = $this->addAdminSection($title, $menuId, $componentName, $sectionAlias);
 
         //Добавление текста в компонент Content
-        $componentParam = new stdClass();
-        $componentParam->component = 'Content';
-        $componentParam->item_id = $itemId;
-        $componentParam->name = 'text';
-        $componentParam->type = 'editor';
-        $componentParam->title = 'content_code';
-        $componentParam->value = $content;
-        $this->db->insert('components_parameters', $componentParam);
+        $paramName = 'text';
+        $paramType = 'editor';
+        $paramTitle = 'content_code';
+        $this->addComponentParam($content, $componentName, $itemId, $paramName, $paramType, $paramTitle);
 
         //Подмена шаблона вывода
         $sectionParam = new stdClass();
@@ -577,29 +567,15 @@ class Installation {
      */
     public function addAdmin403Section($title, $menuId, $content){
 
-        //Создание пункта меню
-        $item = new stdClass();
-        $item->menu_id = $menuId;
-        $item->title = $title;
-        $item->component = 'Content';
-        $item->alias = '403';
-        $item->active = 0;
-        $item->visible = 0;
-        $item->parent = 0;
-        $item->level = 0;
-        $item->ordering = 0;
-        $item->hide = 1;
-        $itemId = $this->db->insert('menu_items', $item);
+        $componentName = 'Content';
+        $sectionAlias = '403';
+        $itemId = $this->addAdminSection($title, $menuId, $componentName, $sectionAlias);
 
         //Добавление текста в компонент Content
-        $componentParam = new stdClass();
-        $componentParam->component = 'Content';
-        $componentParam->item_id = $itemId;
-        $componentParam->name = 'text';
-        $componentParam->type = 'editor';
-        $componentParam->title = 'content_code';
-        $componentParam->value = $content;
-        $this->db->insert('components_parameters', $componentParam);
+        $paramName = 'text';
+        $paramType = 'editor';
+        $paramTitle = 'content_code';
+        $this->addComponentParam($content, $componentName, $itemId, $paramName, $paramType, $paramTitle);
 
         //Подмена шаблона вывода
         $sectionParam = new stdClass();
@@ -621,27 +597,15 @@ class Installation {
      */
     public function addAuthSection($title, $menuId){
 
-        $item = new stdClass();
-        $item->menu_id = $menuId;
-        $item->title = $title;
-        $item->component = 'Auth';
-        $item->alias = 'auth';
-        $item->active = 0;
-        $item->visible = 0;
-        $item->parent = 0;
-        $item->level = 0;
-        $item->ordering = 0;
-        $item->hide = 1;
-        $itemId = $this->db->insert('menu_items', $item);
+        $componentName = 'Auth';
+        $componentSectionAlias = 'auth';
+        $itemId = $this->addAdminSection($title, $menuId, $componentName, $componentSectionAlias);
 
-        $componentParam = new stdClass();
-        $componentParam->component = 'Auth';
-        $componentParam->item_id = $itemId;
-        $componentParam->name = 'view';
-        $componentParam->type = 'text';
-        $componentParam->title = 'auth_view';
-        $componentParam->value = 'Login';
-        $this->db->insert('components_parameters', $componentParam);
+        $paramName = 'view';
+        $paramType = 'text';
+        $paramTitle = 'auth_view';
+        $paramValue = 'Login';
+        $this->addComponentParam($paramValue, $componentName, $itemId, $paramName, $paramType, $paramTitle);
 
         //Подмена шаблона вывода
         $sectionParam = new stdClass();
@@ -665,18 +629,22 @@ class Installation {
 
         $componentName = 'Auth';
         $componentSectionAlias = 'recover';
-
         $itemId = $this->addAdminSection($title, $menuId, $componentName, $componentSectionAlias);
 
-        $componentParam = new stdClass();
-        $componentParam->component = 'Auth';
-        $componentParam->item_id = $itemId;
-        $componentParam->name = 'view';
-        $componentParam->type = 'text';
-        $componentParam->title = 'auth_view';
-        $componentParam->value = 'Recover';
+        $paramName = 'view';
+        $paramType = 'text';
+        $paramTitle = 'auth_view';
+        $paramValue = 'Recover';
+        $this->addComponentParam($paramValue, $componentName, $itemId, $paramName, $paramType, $paramTitle);
 
-        $this->db->insert('components_parameters', $componentParam);
+        //Подмена шаблона вывода
+        $sectionParam = new stdClass();
+        $sectionParam->section_id = $itemId;
+        $sectionParam->name = 'template';
+        $sectionParam->type = 'text';
+        $sectionParam->title = 'menueditor_pagetemplate';
+        $sectionParam->value = 'auth.twig';
+        $this->db->insert('section_parameters', $sectionParam);
 
         return $itemId;
     }
@@ -687,11 +655,8 @@ class Installation {
      */
     public function getAdminMainContent(){
 
-        $tplPath = ABS_PATH.'install/templates/';
         $tplName = 'admin_content.twig';
-        $data['ln'] = Language::getDictionary('custom');
-
-        return Templater::render($tplPath, $tplName, $data);
+        return $this->getAdminSectionContent($tplName);
     }
 
     /**
@@ -700,11 +665,8 @@ class Installation {
      */
     public function getAdmin404Content(){
 
-        $tplPath = ABS_PATH.'install/templates/';
         $tplName = 'admin_404.twig';
-        $data['ln'] = Language::getDictionary('custom');
-
-        return Templater::render($tplPath, $tplName, $data);
+        return $this->getAdminSectionContent($tplName);
     }
 
     /**
@@ -713,8 +675,18 @@ class Installation {
      */
     public function getAdmin403Content(){
 
-        $tplPath = ABS_PATH.'install/templates/';
         $tplName = 'admin_403.twig';
+        return $this->getAdminSectionContent($tplName);
+    }
+
+    /**
+     * Возвращает текст для раздела админки
+     * @param $tplName
+     * @return string
+     */
+    public function getAdminSectionContent($tplName) {
+
+        $tplPath = ABS_PATH.'install/templates/';
         $data['ln'] = Language::getDictionary('custom');
 
         return Templater::render($tplPath, $tplName, $data);
@@ -793,12 +765,10 @@ class Installation {
      */
     public function updateParam($name, $value){
 
-        $name = $this->db->escape($name);
-        $value = $this->db->escape($value);
-        $query = "UPDATE `parameters`
-                     SET `value`='".$value."'
-                   WHERE `name`='".$name."';";
-        return $this->db->query($query);
+        $param = new stdClass();
+        $param->name = $name;
+        $param->value = $value;
+        return $this->db->save('parameters', $param, 'name');
     }
 
     /**
@@ -908,6 +878,27 @@ class Installation {
         $itemId = $this->db->insert('menu_items', $item);
 
         return $itemId;
+    }
+
+    /**
+     * Добавляет параметр компонента
+     * @param $value string Значение параметра
+     * @param $componentName string Компонент
+     * @param $itemId string Раздел
+     * @param $paramName string Имя параметра
+     * @param $paramType string Тип параметра
+     * @param $paramTitle string Заголовок параметра
+     */
+    public function addComponentParam($value, $componentName, $itemId, $paramName, $paramType, $paramTitle) {
+
+        $componentParam = new stdClass();
+        $componentParam->component = $componentName;
+        $componentParam->item_id = $itemId;
+        $componentParam->name = $paramName;
+        $componentParam->type = $paramType;
+        $componentParam->title = $paramTitle;
+        $componentParam->value = $value;
+        $this->db->insert('components_parameters', $componentParam);
     }
 
     /**

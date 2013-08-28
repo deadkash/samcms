@@ -11,6 +11,7 @@
 
 $language = array();
 
+$language['menueditor']                          = 'Редактор разделов';
 $language['menueditor_new_menu']                 = 'Новое меню';
 $language['menueditor_title']                    = 'Имя';
 $language['menueditor_save']                     = 'Сохранить';

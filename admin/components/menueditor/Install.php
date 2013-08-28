@@ -21,7 +21,7 @@ class MenueditorInstall extends Install {
     protected $name = 'Menueditor';
 
     /** @var string Название компонента */
-    protected $title = 'core_menueditor';
+    protected $title = 'menueditor';
 
     /** @var string Тип компонент */
     protected $type = 'component';

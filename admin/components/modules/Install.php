@@ -21,7 +21,7 @@ class ModulesInstall extends Install {
     protected $name = 'Modules';
 
     /** @var string Название компонента */
-    protected $title = 'core_modules';
+    protected $title = 'modules';
 
     /** @var string Тип компонент */
     protected $type = 'component';

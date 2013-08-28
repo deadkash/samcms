@@ -59,6 +59,7 @@ class SelectEditor extends Editor {
 
         $query = "SELECT `id`, `title`
                     FROM `".$table."`
+                   WHERE `hide`=0
                 ORDER BY `title`;";
         $db->setQuery($query);
 

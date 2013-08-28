@@ -21,7 +21,7 @@ class OptionsInstall extends Install {
     protected $name = 'Options';
 
     /** @var string Название компонента */
-    protected $title = 'core_options';
+    protected $title = 'options_options';
 
     /** @var string Тип компонент */
     protected $type = 'component';

@@ -21,7 +21,7 @@ class UsersInstall extends Install {
     protected $name = 'Users';
 
     /** @var string Название компонента */
-    protected $title = 'core_users';
+    protected $title = 'users';
 
     /** @var string Тип компонент */
     protected $type = 'component';
