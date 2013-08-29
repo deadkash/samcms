@@ -26,4 +26,6 @@ class InstallationTest extends PHPUnit_Framework_TestCase {
     public function testConstruct() {
         $this->assertTrue((get_class($this->object) == 'Installation'));
     }
+    
+    
 }

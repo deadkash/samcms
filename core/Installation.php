@@ -950,4 +950,13 @@ class Installation {
             exec($command);
         }
     }
+
+    /**
+     * Удаляет папку
+     * @param $dir string Путь к папке
+     */
+    public function removeDir($dir){
+        $comand = 'rm -rf '.$dir;
+        exec($comand);
+    }
 }

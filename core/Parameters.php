@@ -10,7 +10,8 @@
  * @copyright Copyright (c) 2013, Kash <deadkash@gmail.com>
  */
 
-class Parameters extends Core {
+class Parameters extends DB
+{
 
     /**
      * Таблица в базе данных

@@ -18,6 +18,7 @@ class BuilderViewDone extends View {
     public function display(){
 
         $this->setTemplate('done.twig');
+        $this->setValue('ln', Language::getDictionary('custom'));
 
         return $this->render();
     }
