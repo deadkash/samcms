@@ -136,7 +136,7 @@ class FormsControllerForms extends Controller {
     private function findEmail($fields) {
 
         foreach ($fields as $field) {
-            if ($field['validation'] == 'email') return $field['value'];
+            if ($field->validation == 'email') return $field->value;
         }
 
         return false;
