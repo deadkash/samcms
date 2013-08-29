@@ -60,6 +60,11 @@ $language['install_params_metatitle'] = 'Название сайта';
 $language['install_params_metakeywords'] = 'Ключевые слова сайта';
 $language['install_params_metadescription'] = 'Описание сайта';
 
+$language['install_done_congratulations'] = 'Поздравляем!';
+$language['install_done_finish'] = 'Установка SamCMS завершена!';
+$language['install_done_site'] = 'Сайт';
+$language['install_done_admin'] = 'Панель управления';
+
 //Сообщения
 $language['builder_msg_dbhost_error_required'] = '<strong>Ошибка:</strong> Заполните поле "Сервер"!';
 $language['builder_msg_dbuser_error_required'] = '<strong>Ошибка:</strong> Заполните поле "Пользователь"!';

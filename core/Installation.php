@@ -935,4 +935,19 @@ class Installation {
         $this->setDenySection(Config::$defaultPolicy, $sectionId);
         $this->addSectionTitle($sectionId, $sectionTitle);
     }
+
+    /**
+     * Установка прав на папку
+     * @param $dir string Путь к папке
+     * @param $rights string Права
+     * @param bool $recursive Флаг рекурсивности
+     */
+    public function chmod($dir, $rights, $recursive = true) {
+        if (file_exists($dir)) {
+
+            $recursiveFlag = $recursive ? ' -R ' : '';
+            $command = 'chmod'.$recursiveFlag.$rights.' '.$dir;
+            exec($command);
+        }
+    }
 }
