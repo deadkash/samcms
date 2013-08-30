@@ -720,7 +720,7 @@ class Installation {
 
     /**
      * Обновляет параметры
-     * @param $params array Параметры
+     * @param $params stdClass Параметры
      */
     public function updateParams($params){
         foreach ($params as $name => $value) {

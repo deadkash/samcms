@@ -205,6 +205,7 @@ class BuilderControllerMain extends Controller {
             $this->setAdminValues();
             $this->setFrontValues();
             $this->setElements();
+            $this->setChmod();
 
             Router::redirect('/install/?view=done');
         }
@@ -332,5 +333,28 @@ class BuilderControllerMain extends Controller {
         foreach ($modules as $module) {
             $installation->install($module['name'], $module['path']);
         }
+    }
+
+    /**
+     * Устанавливает права на папки
+     * @return void
+     */
+    private function setChmod() {
+
+        $installation = Installation::create();
+        $installation->chmod(ABS_PATH, '0755', true);
+        $installation->chmod(ABS_PATH.'uploads/', '0777', true);
+        $installation->chmod(ABS_PATH.'cache/', '0777', true);
+        $installation->chmod(ABS_PATH.'config.php', '0644', false);
+    }
+
+    /**
+     * Удаляет папку install
+     * @return void
+     */
+    private function deleteThis() {
+
+        $installation = Installation::create();
+        $installation->removeDir(ABS_PATH.'install/');
     }
 }
