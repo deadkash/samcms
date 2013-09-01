@@ -52,6 +52,11 @@ class BuilderControllerMain extends Controller {
         //Загружаем представление
         $viewName = Request::getStr('view', $this->defaultView);
         $view = $this->getView($viewName);
+
+        if ($viewName == 'done') {
+            $this->deleteThis();
+        }
+
         return $view->display();
     }
 

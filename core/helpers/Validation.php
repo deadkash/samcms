@@ -37,11 +37,4 @@ class ValidationHelper {
     public static function checkInteger($value) {
         return is_numeric($value);
     }
-}е числа
-     * @param $value
-     * @return bool
-     */
-    public static function checkInteger($value) {
-        return is_numeric($value);
-    }
 }
