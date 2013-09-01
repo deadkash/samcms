@@ -353,6 +353,7 @@ class BuilderControllerMain extends Controller {
         $installation->chmod(ABS_PATH.'uploads/', '0777', true);
         $installation->chmod(ABS_PATH.'cache/', '0777', true);
         $installation->chmod(ABS_PATH.'config.php', '0644', false);
+        $installation->chmod(ABS_PATH.'install/', '0777', true);
     }
 
     /**
