@@ -51,7 +51,7 @@ abstract class Install {
 
     /**
      * Возвращает тип элемента
-     * @return null|string
+     * @return string
      */
     public function getType(){
         return $this->type;
@@ -59,7 +59,7 @@ abstract class Install {
 
     /**
      * Возвращает имя элемента
-     * @return null|string
+     * @return string
      */
     public function getName(){
         return $this->name;
@@ -67,7 +67,7 @@ abstract class Install {
 
     /**
      * Возвращает параметры
-     * @return array|null
+     * @return array
      */
     public function getParams(){
         return $this->params;
@@ -75,7 +75,7 @@ abstract class Install {
 
     /**
      * Возвращает заголовок
-     * @return null|string
+     * @return string
      */
     public function getTitle(){
         return $this->title;

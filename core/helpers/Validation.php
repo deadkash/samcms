@@ -13,13 +13,7 @@ class ValidationHelper {
 
     /**
      * Проверяет правильность ввода электронной почты. Возвращает false если адрес неверный или правильный адрес.
-     *
-     * @assert ('deadkash@gmail.com') == 'deadkash@gmail.com'
-     * @assert ('test.test.ru') == false
-     * @assert ('test@test') == false
-     * @assert ('тест@тест.ру') == false
-     *
-     * @param $email
+     * @param $email string E-mail
      * @return mixed
      */
     public static function checkEmail($email) {
@@ -28,7 +22,7 @@ class ValidationHelper {
 
     /**
      * Проверка на латиницу и цифры
-     * @param $value
+     * @param $value string Строка
      * @return int
      */
     public static function checkLogin($value) {
@@ -37,6 +31,13 @@ class ValidationHelper {
 
     /**
      * Проверка на целые числа
+     * @param $value mixed Число
+     * @return bool
+     */
+    public static function checkInteger($value) {
+        return is_numeric($value);
+    }
+}е числа
      * @param $value
      * @return bool
      */

@@ -159,7 +159,7 @@ class Document {
 
     /**
      * Установка http-статуса
-     * @param $HTTPstatus
+     * @param $HTTPstatus string Код статуса HTTP
      */
     public function setHTTPStatus($HTTPstatus) {
         $this->HTTPstatus = $HTTPstatus;
@@ -175,7 +175,7 @@ class Document {
 
     /**
      * Установка редиректа
-     * @param $location
+     * @param $location string URL редиректа
      */
     public function setLocation($location){
         $this->location = $location;
@@ -191,7 +191,7 @@ class Document {
 
     /**
      * Установка типа документа
-     * @param $contentType
+     * @param $contentType string Тип контента
      */
     public function setContentType($contentType) {
         $this->contentType = $contentType;
@@ -207,7 +207,7 @@ class Document {
 
     /**
      * Установка кодировки документа
-     * @param $encoding
+     * @param $encoding string Кодировка
      */
     public function setEncoding($encoding) {
         $this->encoding = $encoding;
@@ -223,7 +223,7 @@ class Document {
 
     /**
      * Устанавливает дату последней модикации
-     * @param $lastModifiedDate
+     * @param $lastModifiedDate string Дата последней модификации
      */
     public function setLastModifiedDate($lastModifiedDate) {
         $this->lastModifiedDate = $lastModifiedDate;
@@ -239,7 +239,7 @@ class Document {
 
     /**
      * Установка пути к шаблонам
-     * @param $tplPath
+     * @param $tplPath string Путь к шаблонам
      */
     public function setTplPath($tplPath) {
         $this->tplPath = $tplPath;
@@ -255,7 +255,7 @@ class Document {
 
     /**
      * Устанавливает шаблон
-     * @param $template
+     * @param $template string Шаблон
      */
     public function setTemplate($template) {
         $this->template = $template;
@@ -271,8 +271,8 @@ class Document {
 
     /**
      * Устанавливает значение переменной
-     * @param $name
-     * @param $value
+     * @param $name string Имя переменной
+     * @param $value mixed Значение переменной
      */
     public function setValue($name, $value) {
         $this->data[$name] = $value;
@@ -280,8 +280,8 @@ class Document {
 
     /**
      * Возвращает значение переменной
-     * @param $name
-     * @return bool
+     * @param $name string Имя переменной
+     * @return mixed
      */
     public function getValue($name) {
         if (isset($this->data[$name])) return $this->data[$name];
@@ -290,7 +290,7 @@ class Document {
 
     /**
      * Установка заголовка документа
-     * @param $title
+     * @param $title string Заголовок документа
      */
     public function setTitle($title) {
         $this->title = Language::translate($title);
@@ -306,7 +306,7 @@ class Document {
 
     /**
      * Установка описания документа
-     * @param $description
+     * @param $description string Описание документа
      */
     public function setDescription($description) {
         $this->description = $description;
@@ -322,7 +322,7 @@ class Document {
 
     /**
      * Устанавливает ключевые слова документа
-     * @param $keywords
+     * @param $keywords string Ключевые слова документа
      */
     public function setKeywords($keywords){
         $this->keywords = $keywords;
@@ -338,7 +338,7 @@ class Document {
 
     /**
      * Добавляет css файл
-     * @param $css
+     * @param $css string Путь к css файлу
      */
     public function addCSS($css){
         if (!in_array($css, $this->css)) $this->css[] = $css;
@@ -354,7 +354,7 @@ class Document {
 
     /**
      * Добавляет js файл
-     * @param $js
+     * @param $js string Путь к js файлу
      */
     public function addJS($js){
         if (!in_array($js, $this->js)) $this->js[] = $js;
@@ -370,8 +370,8 @@ class Document {
 
     /**
      * Декларация ленты новостей
-     * @param $url
-     * @param $title
+     * @param $url string Путь к ленте
+     * @param $title string Заголовок ленты
      */
     public function addFeed($url, $title) {
         $this->feed['url'] = $url;

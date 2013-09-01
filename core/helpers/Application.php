@@ -9,15 +9,11 @@
  * @date 29.07.12
  * @copyright Copyright (c) 2013, Kash <deadkash@gmail.com>
  */
-
 class ApplicationHelper {
 
     /**
      * Возвращает путь к файлу модуля
-     *
-     * @static
-     * @param $moduleName
-     * @assert ('str') === '/home/kash/server/cinema/modules/str/str.php'
+     * @param $moduleName string Имя модуля
      * @return string
      */
     public static function getModulePath($moduleName) {
@@ -26,8 +22,7 @@ class ApplicationHelper {
 
     /**
      * Возвращает путь к файлу компонента
-     *
-     * @param $componentName
+     * @param $componentName string Имя компонента
      * @return string
      */
     public static function getComponentPath($componentName) {
@@ -36,7 +31,7 @@ class ApplicationHelper {
 
     /**
      * Показывает ошибку отсутствия расширения
-     * @param $path
+     * @param $path string Путь к расширению
      */
     public static function setExtensionNotExists($path) {
         Messages::addMessage('extension_not_exists', 'alert-danger', '<strong>Error:</strong> Extension "'.$path.'" not exists!');
@@ -44,7 +39,7 @@ class ApplicationHelper {
 
     /**
      * Показывает ошибку отсутствия шаблона
-     * @param $path
+     * @param $path string Путь к шаблону
      */
     public static function setTemplateNotExists($path) {
         Messages::addMessage('template_not_exists', 'alert-danger', '<strong>Error:</strong> Template "'.$path.'" not exists!');
@@ -52,7 +47,7 @@ class ApplicationHelper {
 
     /**
      * Возвращает компонент раздела
-     * @param $itemId
+     * @param $itemId int Элемент
      * @return bool
      */
     public static function getItemComponent($itemId) {
@@ -72,8 +67,7 @@ class ApplicationHelper {
 
     /**
      * Возвращает массив меток и модулей, привязанных пункту меню
-     *
-     * @param $itemId
+     * @param $itemId int Элемент
      * @return array|bool
      */
     public static function getSectionModules($itemId) {
@@ -91,5 +85,4 @@ class ApplicationHelper {
 
         return $db->getObjectList();
     }
-
 }

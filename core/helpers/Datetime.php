@@ -14,9 +14,7 @@ class DatetimeHelper {
 
     /**
      * Подготавливает дату
-     *
-     * @assert ('2012-09-12 12:34:00') == '12 сентября 2012 г.'
-     * @param $datetime
+     * @param $datetime string Дата и время
      * @return string
      */
     public static function prepareDate($datetime) {
@@ -31,7 +29,7 @@ class DatetimeHelper {
 
     /**
      * Возвращает дату для карты сайта
-     * @param $datetime
+     * @param $datetime string Дата и время
      * @return string
      */
     public static function getSitemapDate($datetime) {
@@ -40,5 +38,7 @@ class DatetimeHelper {
         list($hour, $min, $sec) = explode(':', $time);
 
         return $date.'T'.$hour.':'.$min.date('P');
+    }
+}n.date('P');
     }
 }

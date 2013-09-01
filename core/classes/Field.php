@@ -55,7 +55,7 @@ class Field {
 
     /**
      * Устанавливает css класс
-     * @param string $class
+     * @param $class string CSS файл
      * @return Field
      */
     public function setClass($class) {
@@ -65,7 +65,7 @@ class Field {
 
     /**
      * Устанавливает значение по умолчанию
-     * @param string $default
+     * @param $default string Значение по умолчанию
      * @return Field
      */
     public function setDefault($default) {
@@ -76,7 +76,7 @@ class Field {
 
     /**
      * Устанавливает название поля
-     * @param string $name
+     * @param string $name Название поля
      * @return Field
      */
     public function setName($name) {
@@ -86,7 +86,7 @@ class Field {
 
     /**
      * Устанавливает заголовок поля
-     * @param string $title
+     * @param string $title Заголовок поля
      * @return Field
      */
     public function setTitle($title) {
@@ -96,7 +96,7 @@ class Field {
 
     /**
      * Устанавливает тип редактора
-     * @param string $type
+     * @param string $type Тип редактора
      * @return Field
      */
     public function setType($type) {
@@ -106,8 +106,8 @@ class Field {
 
     /**
      * Устанавливает тип валидации
-     * @param $validation
-     * @return $this
+     * @param $validation string Тип валидации
+     * @return Field
      */
     public function setValidation($validation){
         $this->validation = $validation;
@@ -115,9 +115,9 @@ class Field {
     }
 
     /**
-     * Устанавливает обязательный
-     * @param $required bool
-     * @return $this Field
+     * Устанавливает обязательным
+     * @param $required bool Обязательное поле
+     * @return Field
      */
     public function setRequired($required){
         $this->required = $required;
@@ -126,8 +126,8 @@ class Field {
 
     /**
      * Устанавливает высоту поля
-     * @param $height
-     * @return $this
+     * @param $height int Высота
+     * @return Field
      */
     public function setHeight($height){
         $this->height = $height;
@@ -146,8 +146,8 @@ class Field {
 
     /**
      * Установка параметров
-     * @param $options
-     * @return $this
+     * @param $options mixed Параметры
+     * @return Field
      */
     public function setOptions($options){
         $this->options = $options;
@@ -156,8 +156,8 @@ class Field {
 
     /**
      * Установка размера
-     * @param $size
-     * @return $this
+     * @param $size mixed Размер
+     * @return Field
      */
     public function setSize($size){
         $this->size = $size;
@@ -166,8 +166,8 @@ class Field {
 
     /**
      * Установка описания поля
-     * @param $description
-     * @return $this
+     * @param $description string Описание
+     * @return Field
      */
     public function setDescription($description) {
         $this->description = Language::translate($description);

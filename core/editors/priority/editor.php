@@ -25,7 +25,7 @@ class PriorityEditor extends Editor {
 
     /**
      * Отрисовка html кода
-     * @param $param
+     * @param $param mixed Параметр
      * @return string
      */
     public function render($param) {

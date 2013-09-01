@@ -32,8 +32,7 @@ class LanguageEditor extends Editor {
 
     /**
      * Возвращает html код редактора
-     *
-     * @param string $param
+     * @param mixed $param Параметр
      * @return string
      */
     public function render($param) {
@@ -44,8 +43,7 @@ class LanguageEditor extends Editor {
 
     /**
      * Возвращает варианты параметра
-     *
-     * @param $param
+     * @param $param mixed Параметр
      * @return array|bool
      */
     private function getParamOptions($param) {

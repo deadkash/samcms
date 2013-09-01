@@ -13,7 +13,7 @@ class Fields extends Core {
 
     /**
      * Возвращает код редактора
-     * @param $param
+     * @param $param mixed Параметр
      * @return mixed
      */
     public static function getField($param) {
@@ -26,7 +26,7 @@ class Fields extends Core {
 
     /**
      * Обработка поля
-     * @param $field
+     * @param $field Field Поле
      */
     public static function setField(&$field) {
 
@@ -39,7 +39,7 @@ class Fields extends Core {
 
     /**
      * Возвращает редактор
-     * @param $editorName
+     * @param $editorName string Имя редактора
      * @return mixed
      */
     public static function getEditor($editorName) {
@@ -57,7 +57,7 @@ class Fields extends Core {
 
     /**
      * Валидация полей
-     * @param $fields
+     * @param $fields array Массив полей
      * @return bool|mixed
      */
     public static function validate(&$fields) {
@@ -75,7 +75,7 @@ class Fields extends Core {
 
     /**
      * Валидация обязательности
-     * @param $field
+     * @param $field Field Поле
      * @return bool
      */
     public static function validateRequired(&$field) {
@@ -99,7 +99,7 @@ class Fields extends Core {
 
     /**
      * Валидация поля
-     * @param $field
+     * @param $field Field Поле
      * @return bool|mixed
      */
     public static function validateField(&$field) {
@@ -166,7 +166,7 @@ class Fields extends Core {
 
     /**
      * Вываливает ошибки
-     * @param $fields
+     * @param $fields array Массив полей
      * @param $component
      */
     public static function setMessages($fields, $component) {
@@ -187,7 +187,7 @@ class Fields extends Core {
 
     /**
      * Устанавливает ошибки
-     * @param $fields
+     * @param $fields array Массив полей
      */
     public static function setErrors($fields) {
 

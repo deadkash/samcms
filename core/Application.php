@@ -51,8 +51,7 @@ class Application {
 
     /**
      * Возвращает объект модуля
-     *
-     * @param $moduleName
+     * @param $moduleName mixed Имя модуля
      * @return mixed
      */
     private function getModule($moduleName) {
@@ -73,8 +72,7 @@ class Application {
 
     /**
      * Возвращает объект компонента
-     *
-     * @param $componentName
+     * @param $componentName string Имя компонента
      * @return mixed
      */
     private function getComponent($componentName) {
@@ -195,7 +193,7 @@ class Application {
 
     /**
      * Регистрирует метки, привязанные к текущему пункту меню
-     * @param $itemId
+     * @param $itemId int Пункт меню
      */
     private function registerLabels($itemId) {
 

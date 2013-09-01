@@ -20,9 +20,8 @@ class Hash extends Core {
 
     /**
      * Создает новый ключ
-     *
-     * @param $uid уникальный идентификатор
-     * @param $interval количество дней
+     * @param $uid string Уникальный идентификатор
+     * @param $interval int Количество дней
      * @return string
      */
     public function createKey($uid, $interval) {
@@ -43,8 +42,7 @@ class Hash extends Core {
 
     /**
      * Возвращает уникальный идентификатор по ключу
-     *
-     * @param $hash
+     * @param $hash string Хэш
      * @return bool|stdClass
      */
     public function getIdByHash($hash) {
@@ -63,7 +61,7 @@ class Hash extends Core {
 
     /**
      * Удаляет хэш
-     * @param $hash
+     * @param $hash string Хэш
      */
     public function delHash($hash) {
 

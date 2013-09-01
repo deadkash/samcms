@@ -25,7 +25,7 @@ abstract class Editor {
 
     /**
      * Отрисовка кода
-     * @param $param
+     * @param $param mixed Параметр
      * @return string
      */
     public function render($param) {

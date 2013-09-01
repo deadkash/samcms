@@ -27,14 +27,12 @@ class Access extends Core {
 
     /**
      * Проверка доступа к разделу
-     *
-     * @param $itemId
+     * @param $itemId int Раздел
      * @return bool
      */
     public function getAccess($itemId) {
 
         if (!isset($_SESSION['_user_vars'])) {
-
             return $this->checkAccess($itemId, Config::$defaultPolicy);
         }
         else {
@@ -49,9 +47,8 @@ class Access extends Core {
 
     /**
      * Проверяет доступ к разделу группе пользователей
-     *
-     * @param $itemId
-     * @param $policyId
+     * @param $itemId int Раздел
+     * @param $policyId int Политика доступа
      * @return bool
      */
     public function checkAccess($itemId, $policyId) {
@@ -95,8 +92,7 @@ class Access extends Core {
 
     /**
      * Возвращает данные пользователя
-     *
-     * @param $userID
+     * @param $userID int ID пользователя
      * @return bool|stdClass
      */
     public function getUser($userID) {
@@ -130,9 +126,8 @@ class Access extends Core {
 
     /**
      * Проверяет логин и пароль пользователя
-     *
-     * @param $login
-     * @param $password
+     * @param $login string Логин
+     * @param $password string Пароль
      * @return bool
      */
     public function checkLogin($login, $password) {
@@ -155,10 +150,9 @@ class Access extends Core {
     }
 
     /**
-     * Делает md5 хэш пароля
-     *
-     * @param $password
-     * @param $login
+     * Возвращает md5 хэш пароля
+     * @param $password string Пароль
+     * @param $login string Логин
      * @return string
      */
     public function preparePassword($password, $login) {
@@ -167,8 +161,7 @@ class Access extends Core {
 
     /**
      * Авторизует пользователя
-     *
-     * @param $userID
+     * @param $userID int ID пользователя
      * @return bool
      */
     public function setUserLogIn($userID) {
@@ -190,7 +183,7 @@ class Access extends Core {
     }
 
     /**
-     * Разлогинивает пользователя
+     * Разлогинивает текущего пользователя
      * @return void
      */
     public function setUserLogOut() {
@@ -204,8 +197,7 @@ class Access extends Core {
 
     /**
      * Проверяет сущестование логина
-     *
-     * @param $login
+     * @param $login string Логин
      * @return bool
      */
     public function loginExists($login) {
@@ -222,8 +214,7 @@ class Access extends Core {
 
     /**
      * Создает нового пользователя
-     *
-     * @param $user
+     * @param $user stdClass Пользователь
      * @return bool
      */
     public function createUser($user) {
@@ -238,9 +229,8 @@ class Access extends Core {
 
     /**
      * Проверяет введенные пароли
-     *
-     * @param $pass1
-     * @param $pass2
+     * @param $pass1 string Пароль 1
+     * @param $pass2 string Пароль 2
      * @return bool
      */
     public function checkPasswords($pass1, $pass2) {
@@ -249,8 +239,7 @@ class Access extends Core {
 
     /**
      * Проверяет минимальную длину пароля
-     *
-     * @param $password
+     * @param $password string Пароль
      * @return bool
      */
     public function checkPassMinLength($password) {
@@ -259,7 +248,7 @@ class Access extends Core {
 
     /**
      * Активирует пользователя
-     * @param $userId
+     * @param $userId int ID пользователя
      */
     public function activateUser($userId) {
 
@@ -274,8 +263,7 @@ class Access extends Core {
 
     /**
      * Проверяет существование e-mail среди зарегистрированных пользователей
-     *
-     * @param $email
+     * @param $email string E-mail
      * @return bool
      */
     public function existEmail($email) {
@@ -294,9 +282,8 @@ class Access extends Core {
 
     /**
      * Изменяет пароль пользователю
-     *
-     * @param $userId
-     * @param $password
+     * @param $userId int ID пользователя
+     * @param $password string Пароль
      */
     public function changePassword($userId, $password) {
 

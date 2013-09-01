@@ -51,7 +51,7 @@ abstract class Controller {
 
     /**
      * Возвращает представление по имени
-     * @param $viewNeed
+     * @param $viewNeed string Имя представления
      * @return mixed
      */
     public function getView($viewNeed) {
@@ -72,7 +72,7 @@ abstract class Controller {
 
     /**
      * Возвращает модель по имени
-     * @param $modelNeed
+     * @param $modelNeed string Имя модели
      * @return mixed
      */
     public function getModel($modelNeed) {
@@ -93,7 +93,8 @@ abstract class Controller {
 
     /**
      * Устанавливает модель
-     * @param $modelName
+     * @param $modelName string Имя модели
+     * @return void
      */
     public function setModel($modelName) {
         $this->model = $this->getModel($modelName);

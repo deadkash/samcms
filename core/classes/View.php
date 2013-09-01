@@ -72,7 +72,7 @@ abstract class View {
 
     /**
      * Возвращает модель по имени
-     * @param $modelNeed
+     * @param $modelNeed string Имя модели
      * @return mixed
      */
     protected function getModel($modelNeed) {
@@ -93,7 +93,7 @@ abstract class View {
 
     /**
      * Возвращает путь к шаблону
-     * @param $templateName
+     * @param $templateName string Имя шаблона
      * @return string
      */
     protected function getTemplatePath($templateName) {
@@ -102,7 +102,7 @@ abstract class View {
 
     /**
      * Устанавливает путь к шаблону
-     * @param $templateName
+     * @param $templateName string Шаблон
      */
     protected function setTemplate($templateName) {
         $this->tplPath = $this->getTemplatePath($templateName);
@@ -110,8 +110,8 @@ abstract class View {
 
     /**
      * Устанавливает переменную шаблона
-     * @param $name
-     * @param $value
+     * @param $name string Имя переменной
+     * @param $value mixed Значение переменной
      */
     protected function setValue($name, $value) {
         $this->data[$name] = $value;
@@ -119,7 +119,7 @@ abstract class View {
 
     /**
      * Устанавливает модель
-     * @param $modelName
+     * @param $modelName string Имя модели
      */
     protected function setModel($modelName) {
         $this->model = $this->getModel($modelName);
