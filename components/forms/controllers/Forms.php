@@ -101,7 +101,7 @@ class FormsControllerForms extends Controller {
 
         //Убираем каптчу
         foreach ($fields as $key => $field) {
-            if ($field['validation'] == 'captcha') unset($fields[$key]);
+            if ($field->validation == 'captcha') unset($fields[$key]);
         }
 
         //Тело письма
