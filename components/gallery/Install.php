@@ -42,6 +42,9 @@ class GalleryInstall extends Install {
     /** @var string Заголовок */
     protected $title = 'gallery';
 
+    /** @var string Псевдоним для разделы в админке */
+    protected $alias = 'gallery';
+
     /**
      * Конструктор
      */
@@ -57,6 +60,7 @@ class GalleryInstall extends Install {
 
         $installation = Installation::create();
         $installation->executeSQL(ABS_PATH.'components/gallery/install/install.sql');
+        $installation->setupAdminComponent($this->name, $this->title, $this->alias);
         return true;
     }
 }

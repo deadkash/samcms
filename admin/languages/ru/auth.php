@@ -10,9 +10,11 @@
  */
 $language = array();
 
+$language['auth']            = 'Авторизация';
 $language['auth_login']      = 'Логин';
 $language['auth_password']   = 'Пароль';
 $language['auth_enter']      = 'Войти';
 $language['auth_invalid']    = 'Неверный логин или пароль!';
+$language['auth_recover']    = 'Восстановление пароля';
 
 return $language;

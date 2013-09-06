@@ -122,4 +122,32 @@ class BuilderConsts {
         return $fields;
     }
 
+    /**
+     * Возвращает параметры админских модулей меню
+     * @param $adminMenuId
+     * @param $template
+     * @return array
+     */
+    public static function getAdminLeftMenuParams($adminMenuId, $template){
+
+        $params = array();
+
+        $params[] = array(
+            'name' => 'menu_id',
+            'type' => 'text',
+            'title' => 'admin_menu_id',
+            'value' => $adminMenuId,
+            'options' => ''
+        );
+
+        $params[] = array(
+            'name' => 'template',
+            'type' => 'text',
+            'title' => 'admin_menu_template',
+            'value' => $template,
+            'options' => ''
+        );
+
+        return $params;
+    }
 }

@@ -27,14 +27,12 @@ class SectionEditor extends Editor {
      * Конструктор
      */
     public function __construct() {
-
         $this->db = DB::create();
     }
 
     /**
      * Возвращает html код редактора
-     *
-     * @param string $param
+     * @param mixed $param Параметр
      * @return string
      */
     public function render($param) {
@@ -45,8 +43,7 @@ class SectionEditor extends Editor {
 
     /**
      * Возвращает варианты параметра
-     *
-     * @param $param
+     * @param $param mixed Параметр
      * @return array|bool
      */
     private function getParamOptions($param) {
@@ -64,9 +61,8 @@ class SectionEditor extends Editor {
 
     /**
      * Возвращает пункты меню по его id
-     *
-     * @param $parentId
-     * @param $itemId
+     * @param $parentId int Родительский элемент
+     * @param $itemId mixed Текущий элемент
      * @return array|bool
      */
     public function getItemsByMenuId($parentId, $itemId = false) {
@@ -87,9 +83,8 @@ class SectionEditor extends Editor {
 
     /**
      * Возвращает разделы рекурсивно
-     *
-     * @param $parentId
-     * @param $itemId
+     * @param $parentId int Родительский элемент
+     * @param $itemId mixed Текущий элемент
      * @return array
      */
     public function getItems($parentId, $itemId = false) {

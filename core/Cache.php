@@ -19,20 +19,19 @@ class Cache extends Core {
 
     /**
      * Установка кэша модуля
-     * @param $html
-     * @param $module
+     * @param $html string Отрисованный код модуля
+     * @param $module mixed Объект модуля
      * @return int
      */
     public static function set($html, $module) {
-
         $name = self::getName($module);
         return @file_put_contents($name, $html);
     }
 
     /**
      * Возвращает кэш модуля
-     * @param $module
-     * @param $time
+     * @param $module mixed Объект модуля
+     * @param $time int Актуальное время кэша
      * @return bool|string
      */
     public static function get($module, $time) {
@@ -48,7 +47,7 @@ class Cache extends Core {
 
     /**
      * Генерация имени для кэша
-     * @param $module
+     * @param $module mixed Объект модуля
      * @return string
      */
     private static function getName($module) {

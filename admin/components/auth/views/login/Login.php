@@ -45,8 +45,8 @@ class AuthViewLogin extends View {
     public function display($result = 'success') {
 
         $this->data['result'] = $result;
-        $this->data['reg'] = $this->router->rewriteUrl('/index.php?id='.$this->regSection);
-        $this->data['recover'] = $this->router->rewriteUrl('/index.php?id='.$this->recSection);
+        $this->data['reg'] = $this->router->getUrl(array('id' => $this->regSection));
+        $this->data['recover'] = $this->router->getUrl(array('id' => $this->recSection));
 
         return parent::render($this->tplPath, $this->data);
     }

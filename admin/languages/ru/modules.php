@@ -11,6 +11,7 @@
 
 $language = array();
 
+$language['modules']                         = 'Модули';
 $language['modules_new_module']              = 'Новый модуль';
 $language['modules_module']                  = 'Модуль';
 $language['modules_title']                   = 'Заголовок';

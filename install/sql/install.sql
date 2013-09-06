@@ -56,6 +56,10 @@ CREATE TABLE IF NOT EXISTS `language` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+INSERT INTO `language` (`title`, `name`, `prefix`) VALUES
+('Русский', 'russian', 'ru'),
+('English', 'english', 'en');
+
 -- --------------------------------------------------------
 
 --

@@ -11,6 +11,7 @@
 
 $language = array();
 
+$language['users']                               = 'Пользователи';
 $language['users_new_group']                     = 'Новая группа';
 $language['users_title']                         = 'Заголовок';
 $language['users_save']                          = 'Сохранить';

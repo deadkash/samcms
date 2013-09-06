@@ -24,8 +24,7 @@ class ImageEditor extends Editor {
 
     /**
      * Возвращает html код редактора
-     *
-     * @param string $param
+     * @param mixed $param Параметр
      * @return string
      */
     public function render($param) {
