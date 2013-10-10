@@ -179,7 +179,14 @@ class MenueditorControllerMain extends Controller {
             $componentParameters = json_decode($component->params);
             if ($componentParameters) {
                 foreach ($componentParameters as &$param) {
-                    $param->value = Request::getStr('component_'.$param->name);
+                    if ($param->type == 'image') {
+                        if (Request::getFile('component_'.$param->name)) {
+                            $param->value = Image::upload(Request::getFile('component_'.$param->name),'content');
+                        }
+                    }
+                    else {
+                        $param->value = Request::getStr('component_'.$param->name);
+                    }
                 }
             }
         }
@@ -252,8 +259,19 @@ class MenueditorControllerMain extends Controller {
         if ($component) {
             $componentParameters = json_decode($component->params);
             if ($componentParameters) {
-                foreach ($componentParameters as &$param) {
-                    $param->value = Request::getStr('component_'.$param->name);
+                foreach ($componentParameters as $key=>&$param) {
+                    if ($param->type == 'image') {
+                        $image = Request::getFile('component_'.$param->name);
+                        if (!$image['error']) {
+                            $param->value = Image::upload($image,'content');
+                        }
+                        else {
+                            unset($componentParameters[$key]);
+                        }
+                    }
+                    else {
+                        $param->value = Request::getStr('component_'.$param->name);
+                    }
                 }
             }
         }

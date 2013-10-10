@@ -39,6 +39,4 @@ class DatetimeHelper {
 
         return $date.'T'.$hour.':'.$min.date('P');
     }
-}n.date('P');
-    }
 }

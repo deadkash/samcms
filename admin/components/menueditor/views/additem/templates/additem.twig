@@ -1,16 +1,16 @@
 <div class="menu-add">
     <h1>{{ ln.menueditor_newitem }}</h1>
-    <form action="{{ url }}" class="form-horizontal" method="POST">
+    <form action="{{ url }}" class="form-horizontal" method="POST" enctype="multipart/form-data">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#tab1" data-toggle="tab">{{ ln.menueditor_main_params }}</a></li>
             {% if sectionParameters %}
-            <li><a href="#tab2" data-toggle="tab">{{ ln.menueditor_section_params }}</a></li>
+                <li><a href="#tab2" data-toggle="tab">{{ ln.menueditor_section_params }}</a></li>
             {% endif %}
             {% if componentParameters %}
-            <li><a href="#tab3" data-toggle="tab">{{ ln.menueditor_component_params }}</a></li>
+                <li><a href="#tab3" data-toggle="tab">{{ ln.menueditor_component_params }}</a></li>
             {% endif %}
             {% if sectionModules %}
-            <li><a href="#tab4" data-toggle="tab">{{ ln.menueditor_section_modules }}</a></li>
+                <li><a href="#tab4" data-toggle="tab">{{ ln.menueditor_section_modules }}</a></li>
             {% endif %}
         </ul>
         <div class="itemedit-controls">
@@ -65,36 +65,36 @@
                 </div>
             </div>
             {% if sectionParameters %}
-            <div class="tab-pane" id="tab2">
-                {% for param in sectionParameters %}
-                    <div class="control-group">
-                        <label class="control-label" for="{{ param.name }}"><strong>{{ param.title }}</strong></label>
-                        <div class="controls">{{ param.html }}</div>
-                    </div>
-                {% endfor %}
-            </div>
+                <div class="tab-pane" id="tab2">
+                    {% for param in sectionParameters %}
+                        <div class="control-group">
+                            <label class="control-label" for="{{ param.name }}"><strong>{{ param.title }}</strong></label>
+                            <div class="controls">{{ param.html }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
             {% endif %}
             {% if componentParameters %}
-            <div class="tab-pane" id="tab3">
-                {% for param in componentParameters %}
-                    <div class="control-group">
-                        <label class="control-label" for="{{ param.name }}"><strong>{{ param.title }}</strong></label>
-                        <div class="controls">{{ param.html }}</div>
-                    </div>
-                {% endfor %}
-            </div>
+                <div class="tab-pane" id="tab3">
+                    {% for param in componentParameters %}
+                        <div class="control-group">
+                            <label class="control-label" for="{{ param.name }}"><strong>{{ param.title }}</strong></label>
+                            <div class="controls">{{ param.html }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
             {% endif %}
             {% if sectionModules %}
-            <div class="tab-pane" id="tab4">
-                {% for module in sectionModules %}
-                    <div class="control-group">
-                        <label class="control-label" for="mod{{ module.id }}">{{ module.title }}</label>
-                        <div class="controls">
-                            <input type="checkbox" name="modules[]" id="mod{{ module.id }}" value="{{ module.id }}" {% if module.selected %}checked="checked"{% endif %} />
+                <div class="tab-pane" id="tab4">
+                    {% for module in sectionModules %}
+                        <div class="control-group">
+                            <label class="control-label" for="mod{{ module.id }}">{{ module.title }}</label>
+                            <div class="controls">
+                                <input type="checkbox" name="modules[]" id="mod{{ module.id }}" value="{{ module.id }}" {% if module.selected %}checked="checked"{% endif %} />
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
-            </div>
+                    {% endfor %}
+                </div>
             {% endif %}
         </div>
     </form>
