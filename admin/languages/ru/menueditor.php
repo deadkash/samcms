@@ -46,6 +46,7 @@ $language['menueditor_menulist']                 = 'Список меню';
 $language['menueditor_open_all']                 = 'Показать все пункты меню';
 $language['menueditor_visible']                  = 'Показать в меню';
 $language['menueditor_titleh1']                  = 'Заголовок H1';
+$language['menueditor_link']                     = 'Внешняя ссылка';
 $language['menueditor_msg_menu_empty_title']     = '<strong>Ошибка:</strong> Заголовок не может быть пустым!';
 $language['menueditor_msg_menu_success_upd']     = '<strong>Успешно:</strong> Меню обновлено.';
 $language['menueditor_msg_menu_success_add']     = '<strong>Успешно:</strong> Меню добавлено.';

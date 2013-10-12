@@ -45,8 +45,7 @@ class Application {
         Parameters::getParameters();
         $this->router = Router::create();
 
-        if (defined('ADMIN')) $this->theme = Config::$adminTheme;
-        else $this->theme = Config::$theme;
+        $this->theme = (defined('ADMIN')) ? Config::$adminTheme : Config::$theme;
     }
 
     /**

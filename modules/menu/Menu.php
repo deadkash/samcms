@@ -91,7 +91,8 @@ class Menu extends Module {
         $parentId = (int) $parentId;
         $query = "SELECT `id`,
                          `menu_id`,
-                         `title`
+                         `title`,
+                         `link`
                     FROM `menu_items`
                    WHERE `menu_id`=".$menuId." AND `active`=1 AND `parent`=".$parentId." AND `visible`=1
                 ORDER BY `ordering`;";
@@ -101,7 +102,12 @@ class Menu extends Module {
 
         $currentId = Request::getInt('id');
         foreach ($items as $item) {
-            $item->url = $this->router->getUrl(array('id' => $item->id));
+            if ($item->link) {
+                $item->url = $item->link;
+            }
+            else {
+                $item->url = $this->router->getUrl(array('id' => $item->id));
+            }
             if ($item->id == $currentId) $item->current = true;
             if ($this->isActiveParent($item->id, $path)) $item->current = true;
         }

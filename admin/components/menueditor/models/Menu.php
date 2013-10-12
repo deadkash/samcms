@@ -205,6 +205,7 @@ class MenueditorModelMenu extends Model {
                          `m1`.`parent`,
                          `m1`.`ordering`,
                          `m1`.`level`,
+                         `m1`.`link`,
                          `m2`.`title` AS `parent_title`,
                          `c`.`title` AS `component_title`
                     FROM `".$this::ITEMS_TABLE."` AS `m1`
@@ -375,6 +376,7 @@ class MenueditorModelMenu extends Model {
                          `m`.`parent`,
                          `m`.`ordering`,
                          `m`.`level`,
+                         `m`.`link`,
                          `c`.`title` AS `component_title`
                     FROM `".$this::ITEMS_TABLE."` AS `m`
                LEFT JOIN `extensions` AS `c`

@@ -171,6 +171,7 @@ class MenueditorControllerMain extends Controller {
         $menuItem->visible = Request::getInt('visible', 0);
         $menuItem->parent = Request::getInt('main_parent_id');
         $menuItem->ordering = $this->model->getItemLastPosition($menuId, $menuItem->parent) + 1;
+        $menuItem->link = Request::getStr('link');
 
         //Принимаем параметры компонента
         $componentParameters = false;
@@ -250,6 +251,7 @@ class MenueditorControllerMain extends Controller {
         $menuItem->active   = Request::getInt('main_active', 0);
         $menuItem->visible  = Request::getInt('main_visible', 0);
         $menuItem->parent   = Request::getInt('main_parent_id');
+        $menuItem->link     = Request::getStr('main_link');
 
         //Принимаем параметры компонента
         $componentParameters = false;
