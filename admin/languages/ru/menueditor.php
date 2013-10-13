@@ -11,6 +11,7 @@
 
 $language = array();
 
+$language['menueditor']                          = 'Редактор разделов';
 $language['menueditor_new_menu']                 = 'Новое меню';
 $language['menueditor_title']                    = 'Имя';
 $language['menueditor_save']                     = 'Сохранить';
@@ -40,11 +41,12 @@ $language['menueditor_name']                     = 'Название';
 $language['menueditor_edit']                     = 'Редактировать';
 $language['menueditor_up']                       = 'Вверх';
 $language['menueditor_down']                     = 'Вниз';
-$language['menueditor_editmenuitem']             = 'Редактирование пункта меню';
+$language['menueditor_editmenuitem']             = 'Редактирование';
 $language['menueditor_menulist']                 = 'Список меню';
 $language['menueditor_open_all']                 = 'Показать все пункты меню';
 $language['menueditor_visible']                  = 'Показать в меню';
 $language['menueditor_titleh1']                  = 'Заголовок H1';
+$language['menueditor_link']                     = 'Внешняя ссылка';
 $language['menueditor_msg_menu_empty_title']     = '<strong>Ошибка:</strong> Заголовок не может быть пустым!';
 $language['menueditor_msg_menu_success_upd']     = '<strong>Успешно:</strong> Меню обновлено.';
 $language['menueditor_msg_menu_success_add']     = '<strong>Успешно:</strong> Меню добавлено.';

@@ -22,6 +22,7 @@ $language['install_403_error'] = 'Доступ запрещен';
 $language['install_403_error_text'] = 'Вы запросили страницу, доступ к которой вам запрещен!';
 $language['install_main_user_menu'] = 'Основное меню';
 $language['install_main_title'] = 'Главная';
+$language['install_404_content'] = '404 ошибка';
 
 $language['install_welcome'] = 'Добро пожаловать';
 $language['install_welcome_subtext'] = 'в мастер установки SamCMS';
@@ -58,6 +59,11 @@ $language['install_params_continue'] = 'Дальше';
 $language['install_params_metatitle'] = 'Название сайта';
 $language['install_params_metakeywords'] = 'Ключевые слова сайта';
 $language['install_params_metadescription'] = 'Описание сайта';
+
+$language['install_done_congratulations'] = 'Поздравляем!';
+$language['install_done_finish'] = 'Установка SamCMS завершена!';
+$language['install_done_site'] = 'Сайт';
+$language['install_done_admin'] = 'Панель управления';
 
 //Сообщения
 $language['builder_msg_dbhost_error_required'] = '<strong>Ошибка:</strong> Заполните поле "Сервер"!';

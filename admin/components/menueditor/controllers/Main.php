@@ -171,6 +171,7 @@ class MenueditorControllerMain extends Controller {
         $menuItem->visible = Request::getInt('visible', 0);
         $menuItem->parent = Request::getInt('main_parent_id');
         $menuItem->ordering = $this->model->getItemLastPosition($menuId, $menuItem->parent) + 1;
+        $menuItem->link = Request::getStr('link');
 
         //Принимаем параметры компонента
         $componentParameters = false;
@@ -179,7 +180,14 @@ class MenueditorControllerMain extends Controller {
             $componentParameters = json_decode($component->params);
             if ($componentParameters) {
                 foreach ($componentParameters as &$param) {
-                    $param->value = Request::getStr('component_'.$param->name);
+                    if ($param->type == 'image') {
+                        if (Request::getFile('component_'.$param->name)) {
+                            $param->value = Image::upload(Request::getFile('component_'.$param->name),'content');
+                        }
+                    }
+                    else {
+                        $param->value = Request::getStr('component_'.$param->name);
+                    }
                 }
             }
         }
@@ -243,6 +251,7 @@ class MenueditorControllerMain extends Controller {
         $menuItem->active   = Request::getInt('main_active', 0);
         $menuItem->visible  = Request::getInt('main_visible', 0);
         $menuItem->parent   = Request::getInt('main_parent_id');
+        $menuItem->link     = Request::getStr('main_link');
 
         //Принимаем параметры компонента
         $componentParameters = false;
@@ -252,8 +261,19 @@ class MenueditorControllerMain extends Controller {
         if ($component) {
             $componentParameters = json_decode($component->params);
             if ($componentParameters) {
-                foreach ($componentParameters as &$param) {
-                    $param->value = Request::getStr('component_'.$param->name);
+                foreach ($componentParameters as $key=>&$param) {
+                    if ($param->type == 'image') {
+                        $image = Request::getFile('component_'.$param->name);
+                        if (!$image['error']) {
+                            $param->value = Image::upload($image,'content');
+                        }
+                        else {
+                            unset($componentParameters[$key]);
+                        }
+                    }
+                    else {
+                        $param->value = Request::getStr('component_'.$param->name);
+                    }
                 }
             }
         }

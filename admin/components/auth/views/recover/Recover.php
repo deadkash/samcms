@@ -16,20 +16,20 @@ class AuthViewRecover extends View {
      * Путь к шаблону
      * @var string
      */
-    private $tpl;
+    protected $tplPath;
 
     /**
      * Данные для шаблонизатора
      * @var array
      */
-    private $data;
+    protected $data;
 
     /**
      * Конструктор
      */
     public function __construct() {
 
-        $this->tpl = 'auth/views/recover/templates/step1.twig';
+        $this->tplPath = 'auth/views/recover/templates/step1.twig';
         $this->data = array();
         $this->router = Router::create();
         $this->authSection = Parameters::getParameter('auth_section');
@@ -49,7 +49,7 @@ class AuthViewRecover extends View {
 
             case 'step1':
 
-                $this->tpl = 'auth/views/recover/templates/step1.twig';
+                $this->tplPath = 'auth/views/recover/templates/step1.twig';
                 $this->data['auth'] = $this->router->rewriteUrl('/index.php?id='.$this->authSection);
                 $this->data['reg'] = $this->router->rewriteUrl('/index.php?id='.$this->regSection);
                 $this->data['errors'] = $data;
@@ -57,28 +57,28 @@ class AuthViewRecover extends View {
 
             case 'step2':
 
-                $this->tpl = 'auth/views/recover/templates/step2.twig';
+                $this->tplPath = 'auth/views/recover/templates/step2.twig';
                 break;
 
             case 'step3':
 
-                $this->tpl = 'auth/views/recover/templates/step3.twig';
+                $this->tplPath = 'auth/views/recover/templates/step3.twig';
                 $this->data = $data;
                 break;
 
             case 'step4':
 
-                $this->tpl = 'auth/views/recover/templates/step4.twig';
+                $this->tplPath = 'auth/views/recover/templates/step4.twig';
                 $this->data['auth'] = $this->router->rewriteUrl('/index.php?id='.$this->authSection);
                 break;
 
             case 'error':
 
-                $this->tpl = 'auth/views/recover/templates/error.twig';
+                $this->tplPath = 'auth/views/recover/templates/error.twig';
                 $this->data = $data;
                 break;
         }
 
-        return parent::render($this->tpl, $this->data);
+        return parent::render();
     }
 }

@@ -105,7 +105,7 @@ class Captcha extends Core {
 
     /**
      * Переводит rgb в hex
-     * @param string $color
+     * @param string $color Цвет
      * @return mixed
      */
     private function rgb2hex($color){
@@ -122,7 +122,7 @@ class Captcha extends Core {
 
     /**
      * Добавляет размытие
-     * @param $image
+     * @param $image mixed Изображение
      */
     private function setBlur($image){
 
@@ -146,8 +146,8 @@ class Captcha extends Core {
 
     /**
      * Добавляет искажения
-     * @param $image
-     * @param $imageBg
+     * @param $image mixed Изображение
+     * @param $imageBg mixed Подложка
      * @return mixed
      */
     private function setDistortion($image, $imageBg) {
@@ -167,7 +167,7 @@ class Captcha extends Core {
 
     /**
      * Рисует рамку
-     * @param $image
+     * @param $image mixed Изображение
      */
     private function setBorder(&$image) {
 
@@ -233,7 +233,7 @@ class Captcha extends Core {
 
     /**
      * Запоминаем текст
-     * @param $text
+     * @param $text string Текст
      */
     private function setText($text) {
         $_SESSION['captcha']= $text;
@@ -241,7 +241,7 @@ class Captcha extends Core {
 
     /**
      * Установка шрифта
-     * @param $fontPath
+     * @param $fontPath string Путь к шрифту
      */
     public function setFont($fontPath) {
         $this->fontFile = $fontPath;
@@ -249,7 +249,7 @@ class Captcha extends Core {
 
     /**
      * Проверка кода
-     * @param $text
+     * @param $text string Код
      * @return bool
      */
     public static function check($text) {

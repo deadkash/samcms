@@ -56,6 +56,10 @@ CREATE TABLE IF NOT EXISTS `language` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+INSERT INTO `language` (`title`, `name`, `prefix`) VALUES
+('Русский', 'russian', 'ru'),
+('English', 'english', 'en');
+
 -- --------------------------------------------------------
 
 --
@@ -118,6 +122,7 @@ CREATE TABLE IF NOT EXISTS `menu_items` (
   `ordering` int(11) NOT NULL,
   `hide` int(1) NOT NULL,
   `modified` datetime NOT NULL,
+  `link` varchar(512) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 

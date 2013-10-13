@@ -25,7 +25,7 @@ class SelectEditor extends Editor {
 
     /**
      * Отрисовка html кода
-     * @param string $param
+     * @param mixed $param Параметр
      * @return string
      */
     public function render($param) {
@@ -45,8 +45,7 @@ class SelectEditor extends Editor {
 
     /**
      * Возвращает варианты параметра
-     *
-     * @param $param
+     * @param $param mixed Параметр
      * @return array|bool
      */
     private function getParamOptions($param) {
@@ -59,6 +58,7 @@ class SelectEditor extends Editor {
 
         $query = "SELECT `id`, `title`
                     FROM `".$table."`
+                   WHERE `hide`=0
                 ORDER BY `title`;";
         $db->setQuery($query);
 

@@ -15,7 +15,7 @@ class Materials extends Component {
      * Контроллер по умолчанию
      * @var string
      */
-    private $defaultController = 'Categories';
+    private $defaultController = 'Materials';
 
     /**
      * Название компонента

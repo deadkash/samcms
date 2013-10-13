@@ -1,41 +1,41 @@
 <div class="menu-add">
     <h1>{{ ln.users_new_user }}</h1>
-    <form action="{{ url }}" class="form-horizontal" method="POST">
-        <div class="control-group{% if errors.login_error %} error{% endif %}">
-            <label class="control-label" for="login">{{ ln.users_login }}</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="login" name="login" value="{{ user.login }}">
+    <form action="{{ url }}" class="form-horizontal" method="POST" role="form">
+        <div class="form-group{% if errors.login_error %} has-error{% endif %}">
+            <label class="col-lg-2 control-label" for="login">{{ ln.users_login }}</label>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" id="login" name="login" value="{{ user.login }}">
             </div>
         </div>
-        <div class="control-group{% if errors.email_error %} error{% endif %}">
-            <label class="control-label" for="email">{{ ln.users_email }}</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="email" name="email" value="{{ user.email }}">
+        <div class="form-group{% if errors.email_error %} has-error{% endif %}">
+            <label class="col-lg-2 control-label" for="email">{{ ln.users_email }}</label>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" id="email" name="email" value="{{ user.email }}">
             </div>
         </div>
-        <div class="control-group{% if errors.password_error %} error{% endif %}">
-            <label class="control-label" for="password">{{ ln.users_password }}</label>
-            <div class="controls">
-                <input type="password" class="input-xlarge" id="password" name="password" value="">
+        <div class="form-group{% if errors.password_error %} has-error{% endif %}">
+            <label class="col-lg-2 control-label" for="password">{{ ln.users_password }}</label>
+            <div class="col-lg-6">
+                <input type="password" class="form-control" id="password" name="password" value="">
             </div>
         </div>
-        <div class="control-group{% if errors.password_error %} error{% endif %}">
-            <label class="control-label" for="password_confirmed">{{ ln.users_password_confirm }}</label>
-            <div class="controls">
-                <input type="password" class="input-xlarge" id="password_confirmed" name="password_confirmed" value="">
+        <div class="form-group{% if errors.password_error %} has-error{% endif %}">
+            <label class="col-lg-2 control-label" for="password_confirmed">{{ ln.users_password_confirm }}</label>
+            <div class="col-lg-6">
+                <input type="password" class="form-control" id="password_confirmed" name="password_confirmed" value="">
             </div>
         </div>
-        <div class="control-group">
-            <label class="control-label" for="active">{{ ln.users_active }}</label>
-            <div class="controls">
+        <div class="form-group">
+            <label class="col-lg-2 control-label" for="active">{{ ln.users_active }}</label>
+            <div class="col-lg-6">
                 <input type="checkbox" id="active" name="active" value="1" {% if user.active %}checked="checked"{% endif %}>
             </div>
         </div>
-        <div class="control-group{% if errors.policy_error %} error{% endif %}">
-            <label class="control-label" for="policy_id">{{ ln.users_group }}</label>
-            <div class="controls">
+        <div class="form-group{% if errors.policy_error %} has-error{% endif %}">
+            <label class="col-lg-2 control-label" for="policy_id">{{ ln.users_group }}</label>
+            <div class="col-lg-6">
                 {% if groups %}
-                <select name="policy_id" id="policy_id">
+                <select name="policy_id" id="policy_id" class="form-control">
                     <option value="0">-- {{ ln.core_not_selected }} --</option>
                     {% for group in groups %}
                     <option value="{{ group.id }}" {% if group.id == user.policy_id %}selected="selected"{% endif %}>{{ group.name }}</option>
@@ -44,11 +44,11 @@
                 {% endif %}
             </div>
         </div>
-        <div class="control-group">
-            <div class="controls">
+        <div class="form-group">
+            <div class="col-lg-6">
                 <input type="hidden" name="task" value="save" />
-                <button class="btn" type="submit">{{ ln.users_save }}</button>
-                <button class="btn" type="button" onclick="history.back();">{{ ln.users_cancel }}</button>
+                <button class="btn btn-default" type="submit">{{ ln.users_save }}</button>
+                <button class="btn btn-default" type="button" onclick="history.back();">{{ ln.users_cancel }}</button>
             </div>
         </div>
     </form>

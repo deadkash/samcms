@@ -45,14 +45,12 @@ class Application {
         Parameters::getParameters();
         $this->router = Router::create();
 
-        if (defined('ADMIN')) $this->theme = Config::$adminTheme;
-        else $this->theme = Config::$theme;
+        $this->theme = (defined('ADMIN')) ? Config::$adminTheme : Config::$theme;
     }
 
     /**
      * Возвращает объект модуля
-     *
-     * @param $moduleName
+     * @param $moduleName mixed Имя модуля
      * @return mixed
      */
     private function getModule($moduleName) {
@@ -73,8 +71,7 @@ class Application {
 
     /**
      * Возвращает объект компонента
-     *
-     * @param $componentName
+     * @param $componentName string Имя компонента
      * @return mixed
      */
     private function getComponent($componentName) {
@@ -195,7 +192,7 @@ class Application {
 
     /**
      * Регистрирует метки, привязанные к текущему пункту меню
-     * @param $itemId
+     * @param $itemId int Пункт меню
      */
     private function registerLabels($itemId) {
 

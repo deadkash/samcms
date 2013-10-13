@@ -73,7 +73,7 @@ abstract class Component {
 
     /**
      * Возвращает контроллер по имени
-     * @param $controllerNeed
+     * @param $controllerNeed string Имя контроллера
      * @return mixed
      */
     public function getController($controllerNeed) {

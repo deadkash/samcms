@@ -18,10 +18,10 @@ class Image extends Core {
 
     /**
      * Подгоняет размер изображения
-     * @param $image
-     * @param $size
-     * @param $sessionId
-     * @param $sizeName
+     * @param $image mixed Объект изображения
+     * @param $size mixed Объект размера
+     * @param $sessionId int ID фотосессии
+     * @param $sizeName string Имя размера
      * @return bool|string
      */
     public static function resize($image, $size, $sessionId, $sizeName) {
@@ -109,8 +109,8 @@ class Image extends Core {
 
     /**
      * Добавляет прозрачность
-     * @param $dst
-     * @param $src
+     * @param $dst mixed Изображение назначения
+     * @param $src mixed Изображение исходника
      */
     private static function addTransparency($dst, $src) {
 
@@ -135,8 +135,8 @@ class Image extends Core {
 
     /**
      * Загрузка изображения
-     * @param $image
-     * @param $sessionId
+     * @param $image mixed Объект изображения
+     * @param $sessionId int ID фотосессии
      * @return bool|string
      */
     public static function upload($image, $sessionId) {

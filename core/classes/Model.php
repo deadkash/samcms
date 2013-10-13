@@ -40,10 +40,10 @@ abstract class Model {
     /**
      * Возвращает массив страниц
      *
-     * @param $page
-     * @param $count
-     * @param $onPage
-     * @param $params
+     * @param $page int Текущая страница
+     * @param $count int Количество элементов всего
+     * @param $onPage int Количество на странице
+     * @param $params array Дополнительные параметры
      * @return float
      */
     public function getPageLine($page, $count, $onPage, $params = array()) {

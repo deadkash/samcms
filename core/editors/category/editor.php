@@ -25,7 +25,7 @@ class CategoryEditor extends Editor {
 
     /**
      * Отрисовка html кода
-     * @param string $param
+     * @param mixed $param Параметр
      * @return string
      */
     public function render($param) {
@@ -36,8 +36,7 @@ class CategoryEditor extends Editor {
 
     /**
      * Возвращает варианты параметра
-     *
-     * @param $param
+     * @param $param mixed Параметр
      * @return array|bool
      */
     private function getParamOptions($param) {

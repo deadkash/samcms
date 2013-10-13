@@ -1,5 +1,5 @@
 <div class="menu-add">
-    <h1>Политики доступа "{{ group.name }}"</h1>
+    <h1>Политики доступа <small>{{ group.name }}</small></h1>
     {% if menus %}
     <form action="{{ url }}" method="POST">
         {% for menu in menus %}
@@ -20,8 +20,8 @@
         {% endfor %}
         <input type="hidden" name="task" value="policy"/>
         <input type="hidden" name="policy_id" value="{{ policy_id }}"/>
-        <button class="btn" type="submit">{{ ln.core_save }}</button>
-        <button class="btn" type="button" onclick="history.back();">{{ ln.core_cancel }}</button>
+        <button class="btn btn-default" type="submit">{{ ln.core_save }}</button>
+        <button class="btn btn-default" type="button" onclick="history.back();">{{ ln.core_cancel }}</button>
     </form>
     {% endif %}
 </div>

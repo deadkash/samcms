@@ -1,21 +1,20 @@
-<div class="b-formbox">
+<div class="container">
     {% if errors %}
-    <div class="alert fade in alert-danger">
-        <button class="close" data-dismiss="alert">×</button>
-        {% for error in errors %}
-        {% if error == 'invalid_email' %}Пожалуйста, введите корректный e-mail<br>{% endif %}
-        {% if error == 'mail_not_send' %}При отправке письма произошла ошибка!<br>{% endif %}
-        {% if error == 'mail_not_exists' %}Указанный вами e-mail не существует.<br>{% endif %}
-        {% endfor %}
-    </div>
+        <div class="alert fade in alert-danger">
+            <button class="close" data-dismiss="alert">×</button>
+            {% for error in errors %}
+                {% if error == 'invalid_email' %}Пожалуйста, введите корректный e-mail<br>{% endif %}
+                {% if error == 'mail_not_send' %}При отправке письма произошла ошибка!<br>{% endif %}
+                {% if error == 'mail_not_exists' %}Указанный вами e-mail не существует.<br>{% endif %}
+            {% endfor %}
+        </div>
     {% endif %}
-    <p>Введите e-mail, указанный Вами при регистрации.</p>
-    <form class="well form-inline" method="POST" action="">
-        <input name="email" type="text" class="input-xlarge" placeholder="E-mail">
-        <button type="submit" name="step" value="2" class="btn">Отправить</button>
+    <form class="form-signin" method="POST" action="">
+        <h3 class="form-signin-heading">Введите e-mail, указанный Вами при регистрации</h3>
+        <input name="email" type="text" class="form-control" placeholder="E-mail">
+        <button type="submit" name="step" value="2" class="btn btn-lg btn-primary btn-block">Отправить</button>
+        <div class="login-links">
+            <a href="{{ auth }}">Я вспомнил пароль!</a>
+        </div>
     </form>
-    <div class="login-links">
-        <a href="{{ reg }}">Регистрация</a>
-        <a href="{{ auth }}">Я вспомнил пароль!</a>
-    </div>
 </div>

@@ -12,16 +12,14 @@ abstract class Route {
 
     /**
      * Возвращает ЧПУ строку адреса
-     *
-     * @param $params array
+     * @param $params array Массив параметров
      * @return string
      */
     public static function rewriteParams($params) {}
 
     /**
      * Восстанавливает параметры из ЧПУ
-     *
-     * @param $params array
+     * @param $params array Массив параметров
      * @return void
      */
     public static function recoverParams($params) {}

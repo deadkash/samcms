@@ -117,7 +117,7 @@ class DB {
 
     /**
      * Установить текущий запрос
-     * @param $query
+     * @param $query string Запрос
      */
     public function setQuery($query = '') {
 
@@ -154,8 +154,7 @@ class DB {
 
     /**
      * Выполняет запрос
-     *
-     * @param $query
+     * @param $query string Запрос
      * @return mixed
      */
     public function query($query = '') {
@@ -238,8 +237,7 @@ class DB {
 
     /**
      * Возращает строку после real_escape
-     *
-     * @param $value
+     * @param $value string Строка
      * @return string
      */
     public function escape($value) {
@@ -248,9 +246,8 @@ class DB {
 
     /**
      * Производит вставку нового элемента
-     *
-     * @param $table
-     * @param $item
+     * @param $table string Таблица
+     * @param $item mixed Элемент для вставки
      * @return bool
      */
     public function insert($table, $item) {
@@ -276,10 +273,9 @@ class DB {
 
     /**
      * Сохраняет запись в базу
-     *
-     * @param $table название таблицы
-     * @param $item запись stdClass
-     * @param $key ключ, который идет в where
+     * @param $table string Таблица
+     * @param $item mixed Элемент для сохранения
+     * @param $key string Уникальный ключ
      * @return bool
      */
     public function save($table, $item, $key) {
@@ -304,11 +300,10 @@ class DB {
 
     /**
      * Удаляет запись из таблицы
-     *
-     * @param $table таблица
-     * @param $key ключ, по которому происходит удаление
-     * @param $value string|array значение ключа
-     * @param $mode режим
+     * @param $table string Таблица
+     * @param $key string Имя уникального ключа
+     * @param $value string|array Значение ключа
+     * @param $mode mixed Режим
      * @return bool
      */
     public function delete($table, $key, $value, $mode = false) {

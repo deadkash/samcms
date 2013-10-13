@@ -2,10 +2,15 @@
 <html lang="ru-RU">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ ln.install_title }}</title>
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap-responsive.css"/>
     <link rel="stylesheet" href="/install/components/builder/assets/css/main.css"/>
+    <style type="text/css">
+        body { padding-top: 40px; }
+        .red { color: red; }
+    </style>
     <script type="text/javascript" src="/lib/jquery/jquery.js"></script>
     <script type="text/javascript" src="/lib/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-alert.js"></script>
@@ -65,7 +70,7 @@
             <div class="controls">
                 <a href="/install/" class="btn">{{ ln.install_config_back }}</a>
                 <input type="hidden" name="task" value="setConfig" />
-                <button type="submit" name="view" value="config" class="btn btn-info">{{ ln.install_config_continue }} <i class="icon icon-arrow-right icon-white"></i></button>
+                <button type="submit" name="view" value="config" class="btn btn-info">{{ ln.install_config_continue }}</button>
             </div>
         </div>
     </form>
