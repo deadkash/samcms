@@ -142,13 +142,13 @@ class Fields extends Core {
 
                 case 'image':
 
-                    if ($fieldValue->error) {
+                    if ($fieldValue['error']) {
                         $valid = false;
                         $fieldError = 'not_uploaded';
                     }
 
                     if (isset($field->size)) {
-                        if ($fieldValue->size > $field->size) {
+                        if ($fieldValue['size'] > $field->size) {
                             $valid = false;
                             $fieldError = 'max_size';
                         }

@@ -1,18 +1,19 @@
-<div class="b-formbox">
+<div class="container">
     {% if result %}
-    {% if result == 'error' %}
-    <div class="alert fade in alert-danger">
-        <button class="close" data-dismiss="alert">×</button>
-        {{ ln.auth_invalid }}
-    </div>
+        {% if result == 'error' %}
+            <div class="alert fade in alert-danger">
+                <button class="close" data-dismiss="alert">×</button>
+                {{ ln.auth_invalid }}
+            </div>
+        {% endif %}
     {% endif %}
-    {% endif %}
-    <form class="well form-inline" method="POST" action="">
-        <input name="login" type="text" class="input-medium" placeholder="{{ ln.auth_login }}">
-        <input name="password" type="password" class="input-medium" placeholder="{{ ln.auth_password }}">
-        <button type="submit" name="action" value="login" class="btn">{{ ln.auth_enter }}</button>
+    <form class="form-signin" method="POST" action="">
+        <h2 class="form-signin-heading">{{ ln.auth }}</h2>
+        <input name="login" type="text" class="form-control" placeholder="{{ ln.auth_login }}" autofocus>
+        <input type="password" class="form-control" placeholder="{{ ln.auth_password }}" name="password" >
+        <button class="btn btn-lg btn-primary btn-block" name="action" value="login" type="submit">{{ ln.auth_enter }}</button>
+        <div>
+            <a href="{{ recover }}">{{ ln.auth_recover }}</a>
+        </div>
     </form>
-    <div>
-        <a href="{{ recover }}">{{ ln.auth_recover }}</a>
-    </div>
 </div>

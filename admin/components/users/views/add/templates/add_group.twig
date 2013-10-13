@@ -1,17 +1,17 @@
 <div class="menu-add">
     <h1>{{ ln.users_new_group }}</h1>
     <form action="{{ url }}" class="form-horizontal" method="POST">
-        <div class="control-group{% if messages.group_add %} error{% endif %}">
-            <label class="control-label" for="name">{{ ln.users_title }}</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="name" name="name" value="">
+        <div class="form-group{% if messages.group_add %} has-error{% endif %}">
+            <label class="col-lg-2 control-label" for="name">{{ ln.users_title }}</label>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" id="name" name="name" value="">
             </div>
         </div>
-        <div class="control-group">
-            <div class="controls">
+        <div class="form-group">
+            <div class="col-lg-6">
                 <input type="hidden" name="task" value="save" />
-                <button class="btn" type="submit">{{ ln.users_save }}</button>
-                <button class="btn" type="button" onclick="history.back();">{{ ln.users_cancel }}</button>
+                <button class="btn btn-default" type="submit">{{ ln.users_save }}</button>
+                <button class="btn btn-default" type="button" onclick="history.back();">{{ ln.users_cancel }}</button>
             </div>
         </div>
     </form>

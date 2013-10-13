@@ -1,45 +1,45 @@
 <div class="menu-add">
-    <h1>{{ ln.modules_edit_module }} "{{ module.title }}"</h1>
-    <form action="{{ url }}" class="form-horizontal" method="POST">
-        <div class="control-group">
-            <label class="control-label">{{ ln.modules_module }}</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ module.module }}</span>
+    <h1>{{ ln.modules_edit_module }} <small>{{ module.title }}</small></h1>
+    <form action="{{ url }}" class="form-horizontal" method="POST" role="form">
+        <div class="form-group">
+            <label class="col-lg-2 control-label">{{ ln.modules_module }}</label>
+            <div class="col-lg-6">
+                <span class="form-control uneditable-input">{{ module.module }}</span>
             </div>
         </div>
-        <div class="control-group{% if messages.empty_title %} error{% endif %}">
-            <label class="control-label" for="title">{{ ln.modules_title }}</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="title" name="title" value="{{ module.title }}">
+        <div class="form-group{% if messages.empty_title %} has-error{% endif %}">
+            <label class="col-lg-2 control-label" for="title">{{ ln.modules_title }}</label>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" id="title" name="title" value="{{ module.title }}">
             </div>
         </div>
-        <div class="control-group{% if messages.empty_label %} error{% endif %}{% if messages.label_exists %} error{% endif %}">
-            <label class="control-label" for="label">{{ ln.modules_label }}</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="label" name="label" value="{{ module.label }}">
+        <div class="form-group{% if messages.empty_label %} has-error{% endif %}{% if messages.label_exists %} error{% endif %}">
+            <label class="col-lg-2 control-label" for="label">{{ ln.modules_label }}</label>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" id="label" name="label" value="{{ module.label }}">
             </div>
         </div>
-        <div class="control-group">
-            <label class="control-label" for="active">{{ ln.modules_active }}</label>
-            <div class="controls">
-                <input type="checkbox" class="input-xlarge" id="active" name="active" value="1" {% if module.active %}checked="checked"{% endif %} />
+        <div class="form-group">
+            <label class="col-lg-2 control-label" for="active">{{ ln.modules_active }}</label>
+            <div class="col-lg-6">
+                <input type="checkbox" id="active" name="active" value="1" {% if module.active %}checked="checked"{% endif %} />
             </div>
         </div>
         {% if moduleParameters %}
         <h3 class="page-header">{{ ln.modules_module_params }}</h3>
         {% for param in moduleParameters %}
-        <div class="control-group">
-            <label class="control-label" for="{{ param.name }}">{{ param.title }}</label>
-            <div class="controls">{{ param.html }}</div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label" for="{{ param.name }}">{{ param.title }}</label>
+            <div class="col-lg-10">{{ param.html }}</div>
         </div>
         {% endfor %}
         {% endif %}
-        <div class="control-group">
-            <div class="controls">
+        <div class="form-group">
+            <div class="col-lg-6">
                 <input type="hidden" name="task" value="edit" />
                 <input type="hidden" name="module_id" value="{{ module.id }}" />
-                <button class="btn" type="submit">{{ ln.modules_save }}</button>
-                <a class="btn" type="button" href="{{ back }}">{{ ln.modules_cancel }}</a>
+                <button class="btn btn-default" type="submit">{{ ln.modules_save }}</button>
+                <a class="btn btn-default" type="button" href="{{ back }}">{{ ln.modules_cancel }}</a>
             </div>
         </div>
     </form>

@@ -1,24 +1,24 @@
 <div class="menu-add">
     <h1>Редактирование группы</h1>
     <form action="{{ url }}" class="form-horizontal" method="POST">
-        <div class="control-group">
-            <label class="control-label">ID</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ group.id }}</span>
+        <div class="form-group">
+            <label class="col-lg-2 control-label">ID</label>
+            <div class="col-lg-6">
+                <span class="form-control uneditable-input">{{ group.id }}</span>
             </div>
         </div>
-        <div class="control-group{% if errors.group_upd %} error{% endif %}">
-            <label class="control-label" for="name">Заголовок</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="name" name="name" value="{{ group.name }}">
+        <div class="form-group{% if errors.group_upd %} has-error{% endif %}">
+            <label class="col-lg-2 control-label" for="name">Заголовок</label>
+            <div class="col-lg-6">
+                <input type="text" class="form-control" id="name" name="name" value="{{ group.name }}">
             </div>
         </div>
-        <div class="control-group">
-            <div class="controls">
+        <div class="form-group">
+            <div class="col-lg-6">
                 <input type="hidden" name="task" value="update" />
                 <input type="hidden" name="group_id" value="{{ group.id }}" />
-                <button class="btn" type="submit">Сохранить</button>
-                <button class="btn" type="button" onclick="history.back();">Отмена</button>
+                <button class="btn btn-default" type="submit">Сохранить</button>
+                <button class="btn btn-default" type="button" onclick="history.back();">Отмена</button>
             </div>
         </div>
     </form>

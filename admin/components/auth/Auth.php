@@ -45,6 +45,8 @@ class Auth extends Component {
 
         $this->setSEOParams();
         $action = Request::getStr('action', $this->getView());
+        $document = Document::get();
+        $document->addCSS('/admin/components/auth/assets/style.css');
 
         /** @var $controller Controller */
         $controller = $this->getController($action);

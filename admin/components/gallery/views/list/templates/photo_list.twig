@@ -3,31 +3,29 @@
     <form action="{{ url }}" method="POST">
         <div class="buttons">
             <div class="btn-group">
-                <a href="{{ back }}" class="btn"><i class="icon-chevron-left"></i>&nbsp;{{ ln.gallery_back }}</a>
-                <a href="{{ add }}" class="btn"><i class="icon-plus"></i>&nbsp;{{ ln.gallery_add }}</a>
+                <a href="{{ back }}" class="btn btn-default"><i class="glyphicon glyphicon-chevron-left"></i>&nbsp;{{ ln.gallery_back }}</a>
+                <a href="{{ add }}" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i>&nbsp;{{ ln.gallery_add }}</a>
             </div>
             <div style="clear: both;"></div>
         </div>
-        <div>
+        <div class="row">
             {% if images %}
-            <ul class="thumbnails">
                 {% for image in images %}
-                <li class="span2">
+                <div class="col-sm-6 col-md-3 image">
                     <div class="thumbnail">
                         <img src="{{ image.path }}" alt=""/>
                         <div class="caption">
                             <h5 style="margin-bottom: 5px; height: 50px; overflow: hidden;">{{ image.title }}</h5>
                             <div class="btn-group">
-                                <a href="{{ image.edit }}" title="{{ ln.gallery_edit }}" type="button" class="btn"><i class="icon-pencil"></i></a>
-                                <button class="btn" type="submit" name="delete" value="{{ image.id }}" title="{{ ln.gallery_delete }}"><i class="icon-trash"></i></button>
-                                <button title="{{ ln.gallery_move_left }}" type="submit" class="btn {% if image.disabledUp %}disabled{% endif %}" {% if image.disabledUp %}disabled="disabled"{% endif %} name="moveLeft" value="{{ image.id }}"><i class="icon-chevron-left"></i></button>
-                                <button title="{{ ln.gallery_move_right }}" type="submit" class="btn {% if image.disabledDown %}disabled{% endif %}" {% if image.disabledDown %}disabled="disabled"{% endif %} name="moveRight" value="{{ image.id }}"><i class="icon-chevron-right"></i></button>
+                                <a href="{{ image.edit }}" title="{{ ln.gallery_edit }}" type="button" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i></a>
+                                <button class="btn btn-default" type="submit" name="delete" value="{{ image.id }}" title="{{ ln.gallery_delete }}"><i class="glyphicon glyphicon-trash"></i></button>
+                                <button title="{{ ln.gallery_move_left }}" type="submit" class="btn btn-default {% if image.disabledUp %}disabled{% endif %}" {% if image.disabledUp %}disabled="disabled"{% endif %} name="moveLeft" value="{{ image.id }}"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                                <button title="{{ ln.gallery_move_right }}" type="submit" class="btn btn-default {% if image.disabledDown %}disabled{% endif %}" {% if image.disabledDown %}disabled="disabled"{% endif %} name="moveRight" value="{{ image.id }}"><i class="glyphicon glyphicon-chevron-right"></i></button>
                             </div>
                         </div>
                     </div>
-                </li>
+                </div>
                 {% endfor %}
-            </ul>
             {% else %}
             <p>{{ ln.gallery_no_images }}</p>
             {% endif %}

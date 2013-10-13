@@ -1,23 +1,24 @@
 <div class="menu-add">
-    <h1>{{ ln.menueditor_editmenu }} "{{ menu.title }}"</h1>
+    <h1>{{ ln.menueditor_editmenu }} <small>{{ menu.title }}</small></h1>
     <form action="{{ url }}" class="form-horizontal" method="POST">
-        <div class="control-group">
-            <label class="control-label" for="title">ID</label>
-            <div class="controls">
-                <span class="input-xlarge uneditable-input">{{ menu.id }}</span>
-            </div>
-        </div><div class="control-group{% if menu_empty_title %} error{% endif %}">
-            <label class="control-label" for="title">{{ ln.menueditor_title }}</label>
-            <div class="controls">
-                <input type="text" class="input-xlarge" id="title" name="title" value="{{ menu.title }}">
+        <div class="form-group">
+            <label class="col-lg-2 control-label" for="title">ID</label>
+            <div class="col-lg-4">
+                <span class="form-control uneditable-input">{{ menu.id }}</span>
             </div>
         </div>
-        <div class="control-group">
+        <div class="form-group{% if menu_empty_title %} error{% endif %}">
+            <label class="col-lg-2 control-label" for="title">{{ ln.menueditor_title }}</label>
+            <div class="col-lg-4">
+                <input type="text" class="form-control" id="title" name="title" value="{{ menu.title }}">
+            </div>
+        </div>
+        <div class="form-group">
             <div class="controls">
                 <input type="hidden" name="menu_id" value="{{ menu.id }}">
                 <input type="hidden" name="task" value="save" />
-                <button class="btn" type="submit">{{ ln.menueditor_save }}</button>
-                <button class="btn" type="button" onclick="history.back();">{{ ln.menueditor_cancel }}</button>
+                <button class="btn btn-default" type="submit">{{ ln.menueditor_save }}</button>
+                <button class="btn btn-default" type="button" onclick="history.back();">{{ ln.menueditor_cancel }}</button>
             </div>
         </div>
     </form>

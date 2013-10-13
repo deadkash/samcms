@@ -1,14 +1,14 @@
 <div class="menu-add">
     <h1>{{ ln.materials }}</h1>
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#">{{ ln.materials_categories }}</a></li>
         <li><a href="{{ materials }}">{{ ln.materials }}</a></li>
+        <li class="active"><a href="#">{{ ln.materials_categories }}</a></li>
     </ul>
     <form action="{{ url }}" method="POST">
         <div class="buttons">
             <div class="btn-group">
-                <a href="{{ add }}" class="btn"><i class="icon-plus"></i>&nbsp;{{ ln.materials_add }}</a>
-                <button name="task" value="delete" type="submit" class="btn"><i class="icon-trash"></i>&nbsp;{{ ln.materials_delete }}</button>
+                <a href="{{ add }}" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i>&nbsp;{{ ln.materials_add }}</a>
+                <button name="task" value="delete" type="submit" class="btn btn-default"><i class="glyphicon glyphicon-trash"></i>&nbsp;{{ ln.materials_delete }}</button>
             </div>
             <div style="clear: both;"></div>
         </div>
@@ -26,7 +26,7 @@
                         <td>{{ category.id }}</td>
                         <td><a href="{{ category.edit }}">{{ category.title }}</a></td>
                         <td class="btnset">
-                            <a href="{{ category.edit }}" title="Редактировать" type="button" class="btn"><i class="icon-pencil"></i></a>
+                            <a href="{{ category.edit }}" title="Редактировать" type="button" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>
                         </td>
                     </tr>
                 {% endfor %}

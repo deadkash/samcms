@@ -4,10 +4,6 @@ strong, label, a, select, textarea, input {
 .btn {
     font-size: 13px !important;
 }
-.main {
-    padding-top: 60px;
-}
-
 .clear {
     clear: both;
 }
@@ -41,7 +37,7 @@ strong, label, a, select, textarea, input {
 
 .login-links {
     text-align: right;
-    margin-top: -10px;
+    margin-top: 10px;
 }
 
 .profile-tabs {
@@ -140,6 +136,7 @@ div.menus td.btnset {
 .itemedit-controls {
     text-align: right;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 table.policy {
     width: 50%;
@@ -149,4 +146,29 @@ table.policy td.title {
 }
 .red {
     color: red;
+}
+.nav > li.disabled.nav-header > a {
+    cursor: default;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+ul.left-menu li a {
+    padding: 5px 15px;
+}
+table tr,
+table th {
+    font-size: 13px;
+}
+.menu-add {
+    margin-bottom: 40px;
+}
+.materials {
+    padding: 5px 15px;
+}
+#date_datepicker {
+    padding: 0;
+}
+.image {
+    margin-bottom: 30px;
 }

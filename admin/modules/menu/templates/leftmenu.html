@@ -1,5 +1,5 @@
-<ul class="nav nav-list">
-    <li class="nav-header">{{ ln.core_components }}</li>
+<ul class="nav left-menu">
+    <li class="nav-header disabled"><a>{{ ln.core_components }}</a></li>
     {% for item in items %}
     <li {% if item.current %}class="active"{% endif %}><a href="{{ item.url }}">{{ item.title }}</a></li>
     {% endfor %}
