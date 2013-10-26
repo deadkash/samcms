@@ -4,16 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ ln.install_title }}</title>
-    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" href="/lib/bootstrap3/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/install/components/builder/assets/css/main.css"/>
-    <style type="text/css">
-        body { padding-top: 40px; }
-        .red { color: red; }
-    </style>
     <script type="text/javascript" src="/lib/jquery/jquery.js"></script>
-    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-alert.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap3/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             $('.alert').alert();
@@ -33,19 +27,19 @@
         <fieldset>
             <legend>{{ ln.install_config_db }}</legend>
             {% for field in dbFields %}
-                <div class="control-group{% if field.error %} error{% endif %}">
-                    <label class="control-label" for="{{ field.name }}">{{ field.title }} {% if field.required %}<span class="red">*</span>{% endif %}</label>
-                    <div class="controls">{{ field.html }}</div>
+                <div class="form-group{% if field.error %} error{% endif %}">
+                    <label class="col-lg-2 control-label" for="{{ field.name }}">{{ field.title }} {% if field.required %}<span class="red">*</span>{% endif %}</label>
+                    <div class="col-lg-4">{{ field.html }}</div>
                 </div>
             {% endfor %}
         </fieldset>
         <fieldset>
             <legend>{{ ln.install_config_theme }}</legend>
-            <div class="control-group">
-                <label class="control-label" for="theme">{{ ln.install_config_theme_site }}</label>
-                <div class="controls">
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="theme">{{ ln.install_config_theme_site }}</label>
+                <div class="col-lg-4">
                     {% if siteThemes %}
-                    <select name="theme" id="theme">
+                    <select name="theme" id="theme" class="form-control">
                         {% for theme in siteThemes %}
                         <option value="{{ theme }}">{{ theme }}</option>
                         {% endfor %}
@@ -53,11 +47,11 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="admintheme">{{ ln.install_config_theme_admin }}</label>
-                <div class="controls">
+            <div class="form-group">
+                <label class="col-lg-2 control-label" for="admintheme">{{ ln.install_config_theme_admin }}</label>
+                <div class="col-lg-4">
                     {% if adminThemes %}
-                    <select name="admintheme" id="admintheme">
+                    <select name="admintheme" id="admintheme" class="form-control">
                         {% for theme in adminThemes %}
                         <option value="{{ theme }}">{{ theme }}</option>
                         {% endfor %}
@@ -66,8 +60,8 @@
                 </div>
             </div>
         </fieldset>
-        <div class="control-group">
-            <div class="controls">
+        <div class="form-group">
+            <div class="col-lg-4">
                 <a href="/install/" class="btn">{{ ln.install_config_back }}</a>
                 <input type="hidden" name="task" value="setConfig" />
                 <button type="submit" name="view" value="config" class="btn btn-info">{{ ln.install_config_continue }}</button>
