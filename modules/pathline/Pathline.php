@@ -79,12 +79,15 @@ class Pathline extends Module {
             if ($item) $items[] = $item;
         }
 
-        $query = "SELECT `id`,`title`
+        $defaultId = Parameters::getParameter('default_section');
+        if ($defaultId != $this->itemId) {
+            $query = "SELECT `id`,`title`
                     FROM `menu_items`
-                   WHERE `id`=".Parameters::getParameter('default_section').";";
-        $db = DB::create();
-        $db->setQuery($query);
-        $items[] = $db->getObject();
+                   WHERE `id`=".$defaultId.";";
+            $db = DB::create();
+            $db->setQuery($query);
+            $items[] = $db->getObject();
+        }
 
         $items = array_reverse($items);
 

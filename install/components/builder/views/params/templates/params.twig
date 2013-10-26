@@ -4,14 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ ln.install_title }}</title>
-    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" href="/lib/bootstrap3/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/install/components/builder/assets/css/main.css"/>
-    <style type="text/css">
-        <style type="text/css">
-        body { padding-top: 40px; }
-    </style>
-    </style>
 </head>
 <body>
 <div class="container">
@@ -21,16 +15,16 @@
     </div>
     <form class="form-horizontal" action="/install/" method="GET">
         {% for field in fields %}
-            <div class="control-group{% if field.error %} error{% endif %}">
-                <label class="control-label" for="{{ field.name }}">{{ field.title }} {% if field.required %}<span class="red">*</span>{% endif %}</label>
-                <div class="controls">
+            <div class="form-group{% if field.error %} error{% endif %}">
+                <label class="col-lg-2 control-label" for="{{ field.name }}">{{ field.title }} {% if field.required %}<span class="red">*</span>{% endif %}</label>
+                <div class="col-lg-4">
                     {{ field.html }}
-                    <p class="muted"><small>{{ field.description }}</small></p>
+                    <p class="text-muted"><small>{{ field.description }}</small></p>
                 </div>
             </div>
         {% endfor %}
-        <div class="control-group">
-            <div class="controls">
+        <div class="form-group">
+            <div class="col-lg-4 col-lg-offset-2">
                 <input type="hidden" name="task" value="setParams" />
                 <button type="submit" name="view" value="params" class="btn btn-info">{{ ln.install_params_continue }}</button>
             </div>

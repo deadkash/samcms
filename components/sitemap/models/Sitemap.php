@@ -94,7 +94,12 @@ class SitemapModelSitemap extends Model {
                          `title`,
                          `component`
                     FROM `menu_items`
-                   WHERE `menu_id`=".$menuId." AND `active`=1 AND `parent`=".$parentId." AND `hide`=0 AND `visible`=1
+                   WHERE `menu_id`=".$menuId." AND
+                         `active`=1 AND
+                         `parent`=".$parentId." AND
+                         `hide`=0 AND
+                         `visible`=1 AND
+                         `link`=''
                 ORDER BY `ordering`;";
 
         $this->db->setQuery($query);
@@ -129,7 +134,7 @@ class SitemapModelSitemap extends Model {
                       ON (`m`.`id`=`s1`.`section_id` AND `s1`.`name`='seo_frequency')
                LEFT JOIN `section_parameters` AS `s2`
                       ON (`m`.`id`=`s2`.`section_id` AND `s2`.`name`='seo_priority')
-                   WHERE `m`.`menu_id`=".$menuId." AND `m`.`active`=1 AND `m`.`hide`=0;";
+                   WHERE `m`.`menu_id`=".$menuId." AND `m`.`active`=1 AND `m`.`hide`=0 AND `m`.`link`='';";
         $this->db->setQuery($query);
         $items = $this->db->getObjectList();
         $componentItems = array();

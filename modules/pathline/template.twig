@@ -1,13 +1,13 @@
 {% if items %}
-    <ul class="breadcrumb">
+    <ol class="breadcrumb">
         {% for item in items %}
             <li>
                 {% if not item.default %}
-                    <a href="{{ item.href }}">{{ item.title }}</a> <span class="divider">/</span>
+                    <a href="{{ item.href }}">{{ item.title }}</a>
                 {% else %}
                     <span>{{ item.title }}</span>
                 {% endif %}
             </li>
         {% endfor %}
-    </ul>
+    </ol>
 {% endif %}

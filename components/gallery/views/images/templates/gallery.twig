@@ -1,19 +1,16 @@
 {% if session.description %}{{ session.description }}{% endif %}
-<div class="">
-    <ul class="thumbnails">
-        {% for image in images %}
-        <li class="span2">
-            <div class="thumbnail">
-                <a href="{{ image.max }}" class="fancy" rel="group" title="{{ image.title }}">
-                    <img src="{{ image.min }}" alt="{{ image.title }}"/>
-                </a>
-                <div class="caption">
-                    <h4>{{ image.title }}</h4>
-                    {{ image.description }}
-                </div>
+<div class="row">
+    {% for image in images %}
+    <div class="col-sm-6 col-md-6">
+        <div class="thumbnail">
+            <a href="{{ image.max }}" class="fancy" rel="group" title="{{ image.title }}">
+                <img src="{{ image.min }}" alt="{{ image.title }}" style="width: 200px;"/>
+            </a>
+            <div class="caption">
+                <h4>{{ image.title }}</h4>
+                {{ image.description }}
             </div>
-
-        </li>
-        {% endfor %}
-    </ul>
+        </div>
+    </div>
+    {% endfor %}
 </div>

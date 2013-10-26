@@ -46,7 +46,7 @@ abstract class Module {
      * Время кэширования в секундах
      * @var int
      */
-    protected $cacheTime = 120;
+    protected $cacheTime = 0;
 
     /**
      * Отрисовка шаблонов

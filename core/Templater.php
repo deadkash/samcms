@@ -58,7 +58,7 @@ class Templater extends Core {
         else {
 
             $loader = new Twig_Loader_Filesystem($path);
-            $twig = new Twig_Environment($loader, array( 'cache' => ABS_PATH.'cache/twig/', 'debug' => true, 'autoescape' => false));
+            $twig = new Twig_Environment($loader, array( 'cache' => ABS_PATH.'cache/twig', 'debug' => true, 'autoescape' => false));
             self::$templaters[$path] = $twig;
         }
 

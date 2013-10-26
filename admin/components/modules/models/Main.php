@@ -95,7 +95,7 @@ class ModulesModelMain extends Model {
         $label = $this->db->escape($label);
         $query = "SELECT `id`
                     FROM `modules`
-                   WHERE `label`='".$label."'";
+                   WHERE `label`='".$label."' AND `hide`=0";
 
         if ($moduleId) {
             $query .= " AND `id`!=".$moduleId;
