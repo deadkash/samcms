@@ -4,31 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ ln.install_title }}</title>
-    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap-responsive.css"/>
+    <link rel="stylesheet" href="/lib/bootstrap3/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/install/components/builder/assets/css/main.css"/>
-    <style type="text/css">
-        body { padding-top: 40px; }
-    </style>
 </head>
 <body>
     <div class="container">
-        <div class="hero-unit text-center">
-            <h1>{{ ln.install_welcome }}</h1>
-            <p>{{ ln.install_welcome_subtext }}</p>
-
+        <div class="jumbotron text-center">
+            <div class="container">
+                <h1>{{ ln.install_welcome }}</h1>
+                <p>{{ ln.install_welcome_subtext }}</p>
+            </div>
         </div>
         <form action="/install/" method="GET">
             <div class="row">
-                <div class="span5 offset2">
+                <div class="col-md-5 col-md-offset-2">
                     <p>{{ ln.install_welcome_description1 }}</p>
                     <p>{{ ln.install_welcome_description2 }}</p>
                 </div>
                 {% if languages %}
-                <div class="span5">
+                <div class="col-md-3">
                     <p>
                         <label for="language">{{ ln.install_welcome_select_language }}:</label>
-                        <select name="language" id="language" multiple>
+                        <select name="language" id="language" multiple class="form-control">
                             {% for language in languages %}
                             <option value="{{ language.value }}" {% if language.selected %}selected="selected"{% endif %}>{{ language.title }}</option>
                             {% endfor %}
@@ -40,7 +37,7 @@
             <div class="row text-center">
                 <input type="hidden" name="view" value="config" />
                 <input type="hidden" name="task" value="setLanguage" />
-                <p><button class="btn btn-large btn-primary">{{ ln.install_welcome_continue }}</button></p>
+                <p><button class="btn btn-lg btn-primary">{{ ln.install_welcome_continue }}</button></p>
             </div>
         </form>
     </div>
