@@ -1,18 +1,20 @@
 <div class="well">
     <form class="form form-horizontal" action="{{ action }}" method="POST" {% if form.name %}id="{{ form.name }}"{% endif %}>
         {% for field in fields %}
-            <div class="control-group{% if field.error %} error{% endif %}">
-                <label class="control-label" for="{{ field.name }}">{{ field.title }}{% if field.required %} <span class="red">*</span>{% endif %}</label>
-                <div class="controls">{{ field.html }}</div>
-                {% if field.description %}<p><small>{{ field.description }}</small></p>{% endif %}
-                {% if field.error %}{% if field.error_text %}<label class="error">{{ field.error_text }}</label>{% endif %}{% endif %}
+            <div class="form-group{% if field.error %} has-error{% endif %}">
+                <label class="col-lg-2 control-label" for="{{ field.name }}">{{ field.title }}{% if field.required %} <span class="red">*</span>{% endif %}</label>
+                <div class="col-lg-8">
+                    {{ field.html }}
+                    {% if field.description %}<p class="help-block"><small>{{ field.description }}</small></p>{% endif %}
+                    {% if field.error %}{% if field.error_text %}<label class="error">{{ field.error_text }}</label>{% endif %}{% endif %}
+                </div>
             </div>
         {% endfor %}
-        <div class="control-group">
-            <div class="controls">
+        <div class="form-group">
+            <div class="col-lg-8 col-lg-offset-2">
                 <input type="hidden" name="task" value="send"/>
                 <input type="hidden" name="form_id" value="{{ form.id }}"/>
-                <button class="btn" type="submit">{{ ln.forms_send }}</button>
+                <button class="btn btn-default" type="submit">{{ ln.forms_send }}</button>
             </div>
         </div>
         <p><span class="red">*</span> - {{ ln.forms_required_fields }}</p>

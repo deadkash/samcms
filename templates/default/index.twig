@@ -6,17 +6,11 @@
     <meta name="description" content="{{ documentDescription }}">
     <meta name="keywords" content="{{ documentKeywords }}">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link type="text/css" rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css" />
-    <link type="text/css" rel="stylesheet" href="/lib/bootstrap/css/bootstrap-responsive.css" />
+    <link type="text/css" rel="stylesheet" href="/lib/bootstrap3/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="/templates/default/css/main.css" />
     {% for c in css %}<link rel="stylesheet" href="{{ c }}"/>{% endfor %}
     <script type="text/javascript" src="/lib/jquery/jquery.js"></script>
-    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-alert.js"></script>
-    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-tab.js"></script>
-    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap-modal.js"></script>
-    <script type="text/javascript" src="/admin/templates/default/js/popup-message.js"></script>
-    <script type="text/javascript" src="/admin/templates/default/js/list.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap3/js/bootstrap.min.js"></script>
     {% for j in js %}<script type="text/javascript" src="{{ j }}"></script>{% endfor %}
 </head>
 <body>
@@ -26,17 +20,17 @@
             {{ upmenu }}
         </div>
         {{ slider }}
-        <div class="span12">{{ title }}</div>
-        <div class="span3">
+        <div class="col-md-12">{{ title }}</div>
+        <div class="col-md-3">
             {{ leftmenu }}
             {{ search }}
         </div>
-        <div class="span6">
+        <div class="col-md-6">
             {{ pathline }}
             {{ component }}
             {{ social }}
         </div>
-        <div class="span3">
+        <div class="col-md-3">
             {{ right }}
         </div>
     </div>

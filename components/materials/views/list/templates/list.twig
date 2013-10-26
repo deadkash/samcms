@@ -1,17 +1,15 @@
 {% for material in materials %}
 <div class="post">
     <h3><a href="{{ material.href }}">{{ material.title }}</a></h3>
-    <p><small class="muted">{{ material.date }}</small></p>
+    <p><small class="text-muted">{{ material.date }}</small></p>
     {{ material.preview }}
     <div style="clear: both;"></div>
 </div>
 {% endfor %}
 {% if pageline %}
-<div class="pagination">
-    <ul>
-        {% for page in pageline %}
-            <li{% if page.disabled %} class="disabled"{% endif %}{% if page.selected %} class="active"{% endif %}><a href="{{ page.href }}">{{ page.title }}</a></li>
-        {% endfor %}
-    </ul>
-</div>
+<ul class="pagination">
+    {% for page in pageline %}
+        <li{% if page.disabled %} class="disabled"{% endif %}{% if page.selected %} class="active"{% endif %}><a href="{{ page.href }}">{{ page.title }}</a></li>
+    {% endfor %}
+</ul>
 {% endif %}
